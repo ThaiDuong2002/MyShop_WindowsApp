@@ -9,13 +9,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\logo\logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="InteractiveDataDisplay.WPF" Version="1.0.0" />
+    <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="4.11.0" />
     <PackageReference Include="MaterialDesignThemes" Version="4.8" />
     <PackageReference Include="PropertyChanged.Fody" Version="4.1.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Model\" />
-    <Folder Include="Images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\logo\logo.png" />
   </ItemGroup>
 
 </Project>

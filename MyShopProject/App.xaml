@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:MyShopProject"
-             StartupUri="View/MainView.xaml">
+             xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:views="clr-namespace:MyShopProject.View"
+             StartupUri="Dashboard.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -14,6 +16,70 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
                 <ResourceDictionary Source="/ResourceXAML/MainResource.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <Style x:Key="menuButton" TargetType="Button">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Foreground" Value="#ffffff"/>
+                <Setter Property="Height" Value="40"/>
+                <Setter Property="Width" Value="250"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="20">
+                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Tag" Value="Hidden"/>
+                        <Setter Property="Background" Value="#FF5AA9F0"/>
+                        <Setter Property="Foreground" Value="#ffffff"/>
+                    </Trigger>
+
+                    <Trigger Property="IsMouseOver" Value="False">
+                        <Setter Property="Tag" Value="Hidden"/>
+                    </Trigger>
+
+                    <!--<Trigger Property="IsFocused" Value="True">
+            <Setter Property="Tag" Value="Visible"/>
+            <Setter Property="Background" Value="#FFFFFF"/>
+            <Setter Property="Foreground" Value="#348F6C"/>
+        </Trigger>-->
+
+                    <DataTrigger Binding="{Binding ElementName=menuButton, Path=isActive}" Value="True">
+                        <Setter Property="Tag" Value="Visible"/>
+                        <Setter Property="Background" Value="#FFFFFF"/>
+                        <Setter Property="Foreground" Value="#348F6C"/>
+                    </DataTrigger>
+
+                    <!--<DataTrigger Binding="{Binding ElementName=menuButton, Path=isActive}" Value="False">
+            <Setter Property="Tag" Value="Hidden"/>
+            <Setter Property="Background" Value="#489A7A"/>
+            <Setter Property="Foreground" Value="#ffffff"/>
+        </DataTrigger>-->
+
+                </Style.Triggers>
+            </Style>
+
+            <Style x:Key="menuButtonIcon" TargetType="Icon:PackIconMaterial">
+                <Setter Property="Margin" Value="10 0 0 0"/>
+                <Setter Property="Width" Value="25"/>
+                <Setter Property="Height" Value="18"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType=Button}}"/>
+            </Style>
+
+            <Style x:Key="menuButtonText" TargetType="TextBlock">
+                <Setter Property="Margin" Value="5 0 0 0"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType=Button}}"/>
+            </Style>
+
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>
