@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MyShopProject"
+        xmlns:local="clr-namespace:MyShopProject.View"
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:uc="clr-namespace:MyShopProject.UserControls"
         mc:Ignorable="d"
@@ -21,13 +21,13 @@ Title="Dashboard" Height="750" Width="1350">
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Border Grid.Column="0" CornerRadius="0 30 0 0" Background="#FF267ECC" BorderThickness="0">
+        <Border Grid.Column="0" CornerRadius="0 30 0 0" Background="BlueViolet" BorderThickness="0">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,10,0">
                 <Image Source="/Images/logo/logo.png" Width="50" Height="50" Margin="10 10 0 10"/>
-                <TextBlock Text="My Shop" Foreground="Yellow" FontSize="25" Margin="10 10 0 10"/>
+                <TextBlock Text="My Shop" Foreground="White" FontSize="25" Margin="10 10 0 10"/>
             </StackPanel>
         </Border>
-        <Border Background="#FF267ECC" Grid.Column="0" Grid.Row="1" BorderThickness="0">
+        <Border Background="BlueViolet" Grid.Column="0" Grid.Row="1" BorderThickness="0">
             <StackPanel Margin="0 0 0 0" Name="menu">
                 <uc:MenuButton Margin="5,10,0,0" Title="Dashboard" Icon="ViewDashboard" NameView="Dashboard"  Height="40" Loaded="MenuButton_Loaded"/>
                 <uc:MenuButton Margin="5,10,0,0" Title="Danh Sách Khách Hàng" Icon="AccountGroup" NameView="QLKH"  Height="40" Loaded="MenuButton_Loaded"/>
@@ -55,7 +55,7 @@ Title="Dashboard" Height="750" Width="1350">
             <ContentControl Content="{Binding SelectedViewModel}"/>
         </Border>
         
-        <Border Grid.Column="0" Grid.Row="2" CornerRadius="0 0 30 0" Background="#FF267ECC" BorderThickness="0">
+        <Border Grid.Column="0" Grid.Row="2" CornerRadius="0 0 30 0" Background="BlueViolet" BorderThickness="0">
             <uc:MenuButton Margin="5,5,0,0" Title="Đăng Xuất" Icon="Logout" NameView="dang_xuat" Height="40" Loaded="MenuButton_Loaded"></uc:MenuButton>
         </Border>
     </Grid>
