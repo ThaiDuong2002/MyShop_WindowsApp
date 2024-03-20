@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyShopProject.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,12 @@ namespace MyShopProject.UserControls
     /// </summary>
     public partial class MenuButton : UserControl
     {
+        public ICommand updateViewCommand { get;set; }
         public MenuButton()
         {
             InitializeComponent();
+
+            updateViewCommand = new RelayCommand<UserControl>((p) => { return true; }, (p) => {  });
         }
 
         public string Title
@@ -56,5 +60,14 @@ namespace MyShopProject.UserControls
         }
 
         public static readonly DependencyProperty NameViewProperty = DependencyProperty.Register("NameView", typeof(string), typeof(MenuButton));
+
+
+        public Uri Navlink
+        {
+            get { return (Uri)GetValue(NavlinkProperty); }
+            set { SetValue(NavlinkProperty, value); }
+        }
+
+        public static readonly DependencyProperty NavlinkProperty = DependencyProperty.Register("Navlink", typeof(Uri), typeof(MenuButton));
     }
 }

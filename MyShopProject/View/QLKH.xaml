@@ -1,0 +1,50 @@
+﻿<Page x:Class="MyShopProject.View.QLKH"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MyShopProject.View"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      DataContext="{StaticResource QLKHVM}"
+      Title="QLKH">
+
+    <Grid>
+        <StackPanel Background="White">
+            <TextBlock TextAlignment="Center" FontSize="30" FontWeight="Bold" Foreground="BlueViolet" Margin="0 20 0 0"> DANH SÁCH KHÁCH HÀNG</TextBlock>
+
+            <StackPanel Orientation="Horizontal" Margin="20 30 15 10" HorizontalAlignment="Left" Width="1025">
+                <StackPanel Width="200" VerticalAlignment="Bottom" >
+                    <TextBox  Name="searchCustomerInput" materialDesign:HintAssist.Hint="Tìm kiếm tên khách hàng" BorderBrush="{DynamicResource MaterialDesignDivider}" Height="25" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="200" />
+                </StackPanel>
+                <Button Margin="20 10 20 0" Content="Tìm kiếm" x:Name="searchCustomertButton" Background="BlueViolet" BorderThickness="0" Focusable="False"/>
+                <TextBlock Width="617"></TextBlock>
+                <Button Margin="10 10 0 0" Content="Thêm" x:Name="addCustomerButton" Background="BlueViolet" BorderThickness="0"/>
+
+            </StackPanel>
+
+            <materialDesign:Card Margin="10" Padding="10">
+                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Products}" CanUserAddRows="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
+                        <DataGridTextColumn Header="Họ và tên" Binding="{Binding Name}"/>
+                        <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
+                        <DataGridTextColumn Header="Số điện thoại" Binding="{Binding Phone}"/>
+                        <DataGridTextColumn Header="Địa chỉ" Binding="{Binding Address}"/>
+                        <DataGridTemplateColumn Header="Hành động">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Content="Sửa" Background="BlueViolet" BorderThickness="0" Margin="0 0 10 0"/>
+                                        <Button Content="Xóa" Background="BlueViolet" BorderThickness="0"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </materialDesign:Card>
+        </StackPanel>
+    </Grid>
+</Page>

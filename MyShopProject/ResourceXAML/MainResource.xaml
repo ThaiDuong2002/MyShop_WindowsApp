@@ -3,4 +3,7 @@
                     xmlns:viewmodel="clr-namespace:MyShopProject.ViewModel">
     <viewmodel:MainViewModel x:Key="MainVM"></viewmodel:MainViewModel>
     <viewmodel:LoginViewModel x:Key="LoginVM"></viewmodel:LoginViewModel>
+    <viewmodel:DashboardViewModel x:Key="DashboardVM"></viewmodel:DashboardViewModel>
+    <viewmodel:QLKHViewModel x:Key="QLKHVM"></viewmodel:QLKHViewModel>
+
 </ResourceDictionary>
