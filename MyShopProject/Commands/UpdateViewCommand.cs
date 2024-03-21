@@ -1,12 +1,5 @@
-﻿using Microsoft.Maps.MapControl.WPF.Overlays;
-using MyShopProject.View;
-using MyShopProject.ViewModel;
-using System;
-using System.Collections.Generic;
+﻿using MyShopProject.ViewModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -46,7 +39,7 @@ namespace MyShopProject.Commands
             {
                 viewModel.SelectedViewModel = new QLKHViewModel();
             }
-        
+
         }
     }
 }
