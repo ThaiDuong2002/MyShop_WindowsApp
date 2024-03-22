@@ -1,5 +1,8 @@
-﻿using System;
+﻿using MyShopProject.Model;
+using MyShopProject.ViewModel;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +23,13 @@ namespace MyShopProject.View
     /// </summary>
     public partial class QLKH : Page
     {
+        private QLKHViewModel _viewModel;
         public QLKH()
         {
             InitializeComponent();
+            _viewModel = new QLKHViewModel();
+            DataContext = _viewModel;
+            allUser.ItemsSource = _viewModel.Users;
         }
     }
 }

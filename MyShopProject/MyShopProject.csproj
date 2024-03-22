@@ -9,6 +9,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\laptop\laptop1.jpg" />
+    <None Remove="Images\laptop\laptop2.jpg" />
+    <None Remove="Images\laptop\laptop3.jpg" />
+    <None Remove="Images\laptop\laptop4.jpg" />
+    <None Remove="Images\laptop\laptop5.jpg" />
+    <None Remove="Images\laptop\laptop6.jpg" />
+    <None Remove="Images\laptop\laptop7.jpg" />
+    <None Remove="Images\laptop\laptop8.jpg" />
     <None Remove="Images\logo\logo.png" />
   </ItemGroup>
 
@@ -27,6 +35,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\laptop\laptop1.jpg" />
+    <Resource Include="Images\laptop\laptop2.jpg" />
+    <Resource Include="Images\laptop\laptop3.jpg" />
+    <Resource Include="Images\laptop\laptop4.jpg" />
+    <Resource Include="Images\laptop\laptop5.jpg" />
+    <Resource Include="Images\laptop\laptop6.jpg" />
+    <Resource Include="Images\laptop\laptop7.jpg" />
+    <Resource Include="Images\laptop\laptop8.jpg" />
     <Resource Include="Images\logo\logo.png" />
   </ItemGroup>
 

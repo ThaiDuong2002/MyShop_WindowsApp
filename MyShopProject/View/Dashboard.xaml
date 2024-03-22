@@ -52,7 +52,7 @@ Title="Dashboard" Height="750" Width="1350">
         </Border>
         
         <Border Background="#ffffff" Grid.Column="1" Grid.RowSpan="3" MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_MouseLeftButtonDown">
-            <Frame Content="{Binding SelectedViewModel}"/>
+            <Frame NavigationUIVisibility="Hidden" Content="{Binding SelectedViewModel}"/>
         </Border>
         
         <Border Grid.Column="0" Grid.Row="2" CornerRadius="0 0 30 0" Background="BlueViolet" BorderThickness="0">

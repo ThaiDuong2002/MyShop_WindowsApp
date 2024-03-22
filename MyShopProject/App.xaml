@@ -6,7 +6,7 @@
              xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:views="clr-namespace:MyShopProject.View"
              xmlns:viewmodels="clr-namespace:MyShopProject.ViewModel"
-             StartupUri="/View/MainView.xaml">
+             StartupUri="/View/Dashboard.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -36,7 +36,7 @@
                 <Style.Triggers>
                     <Trigger Property="IsMouseOver" Value="True">
                         <Setter Property="Tag" Value="Hidden"/>
-                        <Setter Property="Background" Value="#FF5AA9F0"/>
+                        <Setter Property="Background" Value="#BC73FF"/>
                         <Setter Property="Foreground" Value="#ffffff"/>
                     </Trigger>
 
@@ -75,6 +75,22 @@
                 <Setter Property="FontSize" Value="16"/>
                 <Setter Property="VerticalAlignment" Value="Center"/>
                 <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType=Button}}"/>
+            </Style>
+
+
+            <Style x:Key="iconBtn" TargetType="Icon:PackIconMaterial">
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="Foreground" Value="BlueViolet"/>
+
+                <Style.Triggers>
+
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Tag" Value="Hidden"/>
+                        <Setter Property="Foreground" Value="#BC73FF"/>
+                    </Trigger>
+                </Style.Triggers>
+
             </Style>
 
 

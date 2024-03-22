@@ -1,4 +1,5 @@
-﻿using MyShopProject.ViewModel;
+﻿using MyShopProject.Model;
+using MyShopProject.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,9 @@ namespace MyShopProject.View
         public DashboardView()
         {
             InitializeComponent();
+            DashboardViewModel current = new DashboardViewModel();
+            quantityProductAvailable.Text = current._quantityProductAvailable.ToString();
+            top5Product.ItemsSource = current._top5ProductSoldList;
         }
     }
 }
