@@ -7,61 +7,60 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
       DataContext="{StaticResource QLKHVM}"
+      VerticalAlignment="Center"
+      HorizontalAlignment="Stretch"
+      Name="Page"
       Title="QLKH">
-  
 
-    <Grid>
+
+    <Grid VerticalAlignment="Center">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="3*"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Background="White">
-            <TextBlock TextAlignment="Center" FontSize="30" FontWeight="Bold" Foreground="BlueViolet" Margin="0 20 0 0"> DANH SÁCH KHÁCH HÀNG</TextBlock>
-
-            <StackPanel Orientation="Horizontal" Margin="20 30 15 10">
-                <StackPanel VerticalAlignment="Bottom" >
-                    <TextBox Text="{Binding SearchCustomerText, UpdateSourceTrigger=PropertyChanged}" Name="searchCustomerInput" materialDesign:HintAssist.Hint="Tìm kiếm tên khách hàng" BorderBrush="{DynamicResource MaterialDesignDivider}" Height="25" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="200" />
-                </StackPanel>
-                <Button Command="{Binding searchBtn}" Margin="20 10 20 0" Content="Tìm kiếm" x:Name="searchCustomertButton" Background="BlueViolet" BorderThickness="0" Focusable="False"/>
-                <Button Margin="10 10 0 0" Content="Thêm" x:Name="addCustomerButton" Background="BlueViolet" BorderThickness="0"/>
-
+        <TextBlock Grid.Row="0" Padding="20,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" TextAlignment="Left" FontSize="24" FontWeight="Bold"  Margin="0 20 0 0"> DANH SÁCH KHÁCH HÀNG</TextBlock>
+        <Button Command="{Binding ShowWindowCommand}" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 20 20 0" Content="Thêm khách hàng" x:Name="addCustomerButton" Background="BlueViolet" BorderThickness="0"/>
+        <TextBlock Name="amountCustomerText" Grid.Row="1" Text="{Binding AmountProduct}" Padding="20,40,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" TextAlignment="Left" FontSize="18" FontWeight="Bold"  Margin="0 20 0 0"/>
+        <StackPanel Grid.Row="1" HorizontalAlignment="Right" Orientation="Horizontal" Margin="0 10 20 0">
+            <StackPanel VerticalAlignment="Bottom" >
+                <TextBox Text="{Binding SearchCustomerText, UpdateSourceTrigger=PropertyChanged}" Name="searchCustomerInput" materialDesign:HintAssist.Hint="Tìm kiếm tên khách hàng" BorderBrush="{DynamicResource MaterialDesignDivider}" Height="25" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="200" />
             </StackPanel>
+            <Button Command="{Binding searchBtn}" Margin="20 40 0 0" Content="Tìm kiếm" x:Name="searchCustomertButton" Background="BlueViolet" BorderThickness="0" Focusable="False"/>
         </StackPanel>
 
-        <materialDesign:Card Margin="10" Padding="10" Grid.Row="1" >
-            <DataGrid IsReadOnly="True" x:Name="allUser" AutoGenerateColumns="False"  CanUserAddRows="False" >
+        <materialDesign:Card MinHeight="500" VerticalAlignment="Stretch" Name="cardTable"  Margin="20" Padding="5" Grid.Row="2" >
+            <DataGrid ItemsSource="{Binding Users}" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto" IsReadOnly="True" x:Name="allUser" AutoGenerateColumns="False"  CanUserAddRows="False" >
                 <DataGrid.Columns>
-                        <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
-                        <DataGridTextColumn Header="Họ và tên" Binding="{Binding Name}"/>
-                        <DataGridTextColumn Header="Email" Binding="{Binding Birthday}"/>
-                        <DataGridTextColumn Header="Số điện thoại" Binding="{Binding Phone}"/>
-                        <DataGridTextColumn Header="Địa chỉ" Binding="{Binding Address}"/>
-                        <DataGridTemplateColumn Header="Hành động">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Button Command="{Binding editBtn}"  Background="Transparent" BorderThickness="0">
-                                            <Icon:PackIconMaterial Style="{StaticResource iconBtn}" Kind="SquareEditOutline" Height="20" Width="20" Margin="0 0 10 0"/>
-                                        </Button>
-                                        <Button Command="{Binding deleteBtn}" Background="Transparent" BorderThickness="0">
-                                            <Icon:PackIconMaterial Style="{StaticResource iconBtn}" Kind="Delete" Height="20" Width="20" Margin="0 0 10 0"/>
-                                        </Button>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-           
+                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
+                    <DataGridTextColumn Header="Họ và tên" Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="Email" Binding="{Binding Birthday}" />
+                    <DataGridTextColumn Header="Số điện thoại" Binding="{Binding Phone}" />
+                    <DataGridTextColumn Header="Địa chỉ" Binding="{Binding Address}" />
+                    <DataGridTemplateColumn Header="Hành động">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Click="editCustomerBtn"  Background="Transparent" BorderThickness="0">
+                                        <Icon:PackIconMaterial Style="{StaticResource iconBtn}" Kind="SquareEditOutline" Height="20" Width="20" Margin="0 0 10 0"/>
+                                    </Button>
+                                    <Button Click="deleteCustomerBtn" Background="Transparent" BorderThickness="0">
+                                        <Icon:PackIconMaterial Style="{StaticResource iconBtn}" Kind="Delete" Height="20" Width="20" Margin="0 0 10 0"/>
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+
             </DataGrid>
         </materialDesign:Card>
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+        <StackPanel Name="pagination" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Command="{Binding prevBtn}" Content="Trang trước" Background="BlueViolet" BorderThickness="0" Margin="10"/>
             <Label x:Name="contentPage" Content="{Binding PageInfo}" FontSize="16" BorderThickness="0" Margin="10"/>
             <Button Command="{Binding nextBtn}" Content="Trang sau" Background="BlueViolet" BorderThickness="0" Margin="10"/>
         </StackPanel>
-        
     </Grid>
 </Page>

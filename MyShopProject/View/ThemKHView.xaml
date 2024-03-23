@@ -1,0 +1,84 @@
+﻿<Window x:Class="MyShopProject.View.ThemKHView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyShopProject.View"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        DataContext="{StaticResource ThemKHVM}"
+        Title="ThemKHView" Height="450" Width="600">
+    <Grid Background="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Thêm khách hàng" Margin="10" FontSize="25" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Vertical">
+
+                <Ellipse Grid.Row="1" Width="200" Height="200" >
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="{Binding Image}" d:ImageSource="/Images/user/default.jpg" Stretch="UniformToFill"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Button Content="Chọn ảnh" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 20 0 0" Command="{Binding ChooseImageCommand}"/>
+            </StackPanel>
+
+            <Grid Grid.Column="1" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBox Grid.Row="0" VerticalAlignment="Center"
+                     materialDesign:HintAssist.Hint="Họ và tên"
+                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                     Width="300"
+                     Text="{Binding Name}"
+                     Margin="0 0 0 30">
+
+                </TextBox>
+                <DatePicker Grid.Row="1" VerticalAlignment="Center"
+                     materialDesign:HintAssist.Hint="Ngày sinh"
+                     Style="{StaticResource MaterialDesignDatePicker}"
+                     Width="300"
+                     SelectedDate="{Binding Birthday}"
+                     Margin="10 0 10 30">
+                    
+                </DatePicker>
+
+                <TextBox Grid.Row="2" VerticalAlignment="Center"
+                     materialDesign:HintAssist.Hint="Số điện thoại"
+                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                     Width="300"
+                      Margin="0 0 0 30"
+                     Text="{Binding Phone}">
+
+                </TextBox>
+                <TextBox Grid.Row="3" VerticalAlignment="Center"
+                     materialDesign:HintAssist.Hint="Địa chỉ"
+                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                     Width="300"
+                     Margin="0 0 0 30">
+                    <TextBox.Text>
+                        <Binding Path="Address"
+                UpdateSourceTrigger="PropertyChanged">
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </Grid>
+        </Grid>
+        <Button Grid.Row="2" Content="Lưu" Command="{Binding AddCustomerCommand}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Height="30" Margin="0 0 10 0"/>
+    </Grid>
+</Window>

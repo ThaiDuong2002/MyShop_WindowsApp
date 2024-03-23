@@ -101,6 +101,10 @@
             <DataTemplate DataType="{x:Type viewmodels:QLKHViewModel}">
                 <views:QLKH />
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:ThemKHViewModel}">
+                <views:ThemKHView/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

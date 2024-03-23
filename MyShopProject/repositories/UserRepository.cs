@@ -46,6 +46,41 @@ namespace MyShopProject.repositories
             }
             return users;
         }
+        public User GetUserByID(int id)
+        {
+            User user = new User();
+            using (var context = new MyShopContext())
+            {
+                user = context.Users.Where(u => u.Id == id).FirstOrDefault();
+            }
+            return user;
+        }
+        public bool AddUser(User user)
+        {
+            using (var context = new MyShopContext())
+            {
+                context.Users.Add(user);
+                context.SaveChanges();
+                return true;
+            }
+        }
+        public bool updateUser(User user,int Id)
+        {
+            using (var context = new MyShopContext())
+            {
+                var userToUpdate = context.Users.Where(u => u.Id == Id).FirstOrDefault();
+                if (userToUpdate != null)
+                {
+                    userToUpdate.Name = user.Name;
+                    userToUpdate.Birthday = user.Birthday;
+                    userToUpdate.Phone = user.Phone;
+                    userToUpdate.Address = user.Address;
+                    context.SaveChanges();
+                    return true;
+                }
+            }
+            return false;
+        }
         public bool deleteUser(User user)
         {
             using (var context = new MyShopContext())

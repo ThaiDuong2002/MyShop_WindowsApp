@@ -31,5 +31,24 @@ namespace MyShopProject.View
             DataContext = _viewModel;
             allUser.ItemsSource = _viewModel.Users;
         }
+
+        private void editCustomerBtn(object sender, RoutedEventArgs e)
+        {
+            var user = (sender as Button).DataContext as User;
+            ChinhSuaKHView chinhSuaKHView = new ChinhSuaKHView(user.Id);
+            if(chinhSuaKHView.ShowDialog() == true)
+            {
+                _viewModel.LoadData();
+            }   
+        }
+
+        private void deleteCustomerBtn(object sender, RoutedEventArgs e)
+        {
+            var user = (sender as Button).DataContext as User;
+            if (MessageBox.Show("Bạn có chắc chắn muốn xóa khách hàng này?", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                _viewModel.DeleteUser(user);
+            }
+        }
     }
 }
