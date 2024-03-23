@@ -1,9 +1,8 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using MyShopProject.Model;
-using MyShopProject.repositories;
+using MyShopProject.Repositories;
 using MyShopProject.View;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 
@@ -94,7 +93,7 @@ namespace MyShopProject.ViewModel
                 _totalPage = numOfUsers / 10 + (numOfUsers % 10 == 0 ? 0 : 1); // Tính toán số trang
 
             }
-            AmountProduct = _userRepository.getNumOfUsers()+" khách hàng";
+            AmountProduct = _userRepository.getNumOfUsers() + " khách hàng";
             PageInfo = $"Trang {_currentPage}/{_totalPage}";
         }
 
@@ -120,15 +119,15 @@ namespace MyShopProject.ViewModel
             }
             int numOfUsers = Users.Count;// Lấy số lượng người dùng
             _totalPage = numOfUsers / 10 + (numOfUsers % 10 == 0 ? 0 : 1); // Tính toán số trang
-            PageInfo = $"Trang {_currentPage}/{_totalPage}";   
+            PageInfo = $"Trang {_currentPage}/{_totalPage}";
         }
 
         public void ShowWindow()
         {
             ThemKHView themKHView = new ThemKHView();
-            if(themKHView.ShowDialog() == true)
+            if (themKHView.ShowDialog() == true)
             {
-               LoadData();
+                LoadData();
             }
         }
 
@@ -144,7 +143,7 @@ namespace MyShopProject.ViewModel
                 MessageBox.Show("Xóa khách hàng thất bại");
             }
         }
-       
+
     }
 }
 

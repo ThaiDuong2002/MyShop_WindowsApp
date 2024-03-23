@@ -1,8 +1,8 @@
 ﻿using MyShopProject.Model;
-using MyShopProject.repositories;
+using MyShopProject.Repositories;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
-using System.Windows;
 
 namespace MyShopProject.ViewModel
 {
@@ -49,7 +49,7 @@ namespace MyShopProject.ViewModel
                 Address = Address,
                 Birthday = DateOnly.FromDateTime(Birthday)
             };
-            if (new UserRepository().updateUser(user,Id))
+            if (new UserRepository().updateUser(user, Id))
             {
 
                 System.Windows.MessageBox.Show("Cập nhật thông tin khách hàng thành công");

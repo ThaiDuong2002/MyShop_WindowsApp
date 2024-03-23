@@ -1,5 +1,5 @@
 ﻿using MyShopProject.Model;
-using MyShopProject.repositories;
+using MyShopProject.Repositories;
 using System.Collections.ObjectModel;
 
 namespace MyShopProject.ViewModel

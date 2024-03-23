@@ -1,13 +1,6 @@
 ﻿using Microsoft.Win32;
 using MyShopProject.Model;
-using MyShopProject.repositories;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+using MyShopProject.Repositories;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
@@ -29,10 +22,10 @@ namespace MyShopProject.ViewModel
         private BitmapImage _image { get; set; }
         public BitmapImage Image { get => _image; set { _image = value; OnPropertyChanged(); } }
 
-        
 
 
-        
+
+
         public UserRepository userRepository = new UserRepository();
         public ICommand AddCustomerCommand { get; set; }
         public ICommand ChooseImageCommand { get; set; }
