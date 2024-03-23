@@ -29,6 +29,8 @@ namespace MyShopProject.ViewModel
         public LoginViewModel()
         {
             IsLogin = false;
+            _UserName = "";
+            _Password = "";
             CloseCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { p.Close(); });
             LoginCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { Login(p); });
         }
@@ -37,6 +39,8 @@ namespace MyShopProject.ViewModel
         {
             if (p == null)
                 return;
+            MessageBox.Show("Login successfully");
+            MessageBox.Show(_UserName + _Password);
             IsLogin = true;
             p.Close();
         }

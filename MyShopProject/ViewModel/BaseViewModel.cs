@@ -33,7 +33,7 @@ namespace MyShopProject.ViewModel
             {
                 return _canExecute == null ? true : _canExecute((T)parameter);
             }
-            catch (Exception e)
+            catch
             {
                 return true;
             }
