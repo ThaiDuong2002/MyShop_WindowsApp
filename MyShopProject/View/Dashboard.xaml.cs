@@ -18,23 +18,6 @@ namespace MyShopProject.View
         public static StackPanel subMenuBTN = null;
         public Dashboard()
         {
-            this.Hide();
-            LoginView loginView = new LoginView();
-            loginView.ShowDialog();
-
-            if (loginView.DataContext == null)
-                return;
-
-            var loginVM = loginView.DataContext as LoginViewModel;
-            if (loginVM == null)
-                return;
-            if (loginVM.IsLogin == false)
-            {
-                return;
-            }
-
-            this.Show();
-
             MainViewModel current = new MainViewModel();
             DataContext = current;
             InitializeComponent();

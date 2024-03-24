@@ -4,6 +4,30 @@ namespace MyShopProject.Model;
 
 public partial class MyShopContext : DbContext
 {
+    private static string _serverName;
+    private static string _databaseName;
+    private static string _userName;
+    private static string _password;
+    public static string ServerName
+    {
+        get => _serverName;
+        set { _serverName = value; }
+    }
+    public static string DatabaseName
+    {
+        get => _databaseName;
+        set { _databaseName = value; }
+    }
+    public static string UserName
+    {
+        get => _userName;
+        set { _userName = value; }
+    }
+    public static string Password
+    {
+        get => _password;
+        set { _password = value; }
+    }
     public MyShopContext()
     {
     }
@@ -41,7 +65,7 @@ public partial class MyShopContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=localhost; Trusted_Connection=Yes; Initial Catalog=MyShop; TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer($"Data Source={_serverName}; Initial Catalog={_databaseName}; TrustServerCertificate=True; User Id={_userName}; Password={_password}");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace MyShopProject.View
 {
     /// <summary>
-    /// Interaction logic for ConfigView.xaml
+    /// Interaction logic for ProductManagementView.xaml
     /// </summary>
-    public partial class ConfigView : Window
+    public partial class ProductManagementView : Page
     {
-        public ConfigView()
+        public ProductManagementView()
         {
             InitializeComponent();
         }

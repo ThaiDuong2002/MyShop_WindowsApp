@@ -41,8 +41,8 @@
                                        HorizontalAlignment="Center"
                                        Margin="0,0,0,40"/>
                             <TextBox VerticalAlignment="Center"
-                                     x:Name="emailTextBox"
-                                     materialDesign:HintAssist.Hint="Địa chỉ email"
+                                     x:Name="usernameTextBox"
+                                     materialDesign:HintAssist.Hint="Tên đăng nhập"
                                      Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                      Width="300"
                                      Margin="0 0 0 30">
@@ -50,7 +50,7 @@
                                     <Binding Path="UserName"
                                              UpdateSourceTrigger="PropertyChanged">
                                         <Binding.ValidationRules>
-                                            <validate:EmailValidationRule ValidatesOnTargetUpdated="True" />
+                                            <validate:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
                                         </Binding.ValidationRules>
                                     </Binding>
                                 </TextBox.Text>
