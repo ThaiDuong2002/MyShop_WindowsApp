@@ -9,5 +9,7 @@
     <viewmodel:ChinhSuaKHViewModel x:Key="ChinhSuaKHVM"></viewmodel:ChinhSuaKHViewModel>
     <viewmodel:ProductCategoryManagementViewModel x:Key="ProductCategoryManagementVM"></viewmodel:ProductCategoryManagementViewModel>
     <viewmodel:ConnectConfigViewModel x:Key="ConnectConfigVM"></viewmodel:ConnectConfigViewModel>
+    <viewmodel:AddBrandViewModel x:Key="AddBrandVM"></viewmodel:AddBrandViewModel>
+    <viewmodel:EditBrandViewModel x:Key="EditBrandVM"></viewmodel:EditBrandViewModel>
 
 </ResourceDictionary>
