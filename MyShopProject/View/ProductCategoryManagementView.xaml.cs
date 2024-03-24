@@ -32,5 +32,10 @@ namespace MyShopProject.View
             Global.GetActiveButton();
             Global.SaveScreen("QLLOAISP");
         }
+
+        private void addCustomerButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

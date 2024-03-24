@@ -9,7 +9,7 @@
         DataContext="{StaticResource AddBrandVM}"
         Title="AddBrandView" Height="450" Width="500">
     <Grid>
-        <local:BrandUserControl/>
-        <Button Content="Thêm nhãn hàng" HorizontalAlignment="Center" Margin="10,30,0,10" VerticalAlignment="Bottom" Height="30" Command="{Binding AddBrandCommand}"/>
+        <local:BrandUserControl x:Name="addBrand"/>
+        <Button Click="Button_Click" Command="{Binding AddCommand}" Content="Thêm nhãn hàng" HorizontalAlignment="Center" Margin="10,30,0,10" VerticalAlignment="Bottom" Height="30" />
     </Grid>
 </Window>

@@ -1,4 +1,5 @@
 ﻿using MyShopProject.Model;
+using MyShopProject.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,12 +22,14 @@ namespace MyShopProject.View
     public partial class EditBrandView : Window
     {
         public Brand brand { get; set; }
+        public EditBrandViewModel _viewmodel;
         public EditBrandView(Brand editBrand)
         {
             InitializeComponent();
+            _viewmodel = new EditBrandViewModel();
 
-            brand =(Brand) editBrand;
-            DataContext = brand;
+            _viewmodel.LoadData(editBrand);
+            DataContext = _viewmodel;
         }
     }
 }

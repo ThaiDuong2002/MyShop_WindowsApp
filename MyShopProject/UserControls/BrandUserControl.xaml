@@ -24,15 +24,17 @@
             VerticalAlignment="Center"
             materialDesign:ShadowAssist.ShadowDepth="Depth5">
 
-                <Image Source="{Binding Image}" d:Source="/Images/brand/brand1.jpg" Width="200" Height="200" />
+                <Image Name="image" Source="{Binding Logo}" d:Source="/Images/brand/brand1.jpg" Width="200" Height="200" />
             </materialDesign:Card>
-            <Button Content="Chọn ảnh" Width="100" />
+            <Button Click="Button_Click" Content="Chọn ảnh" Width="100" />
+            <TextBlock Name="fileName" Text="{Binding FileName}" Visibility="Collapsed" />
         </StackPanel>
         <TextBox Grid.Row="1" VerticalAlignment="Center"
          materialDesign:HintAssist.Hint="Tên nhãn hàng"
          Style="{StaticResource MaterialDesignOutlinedTextBox}"
          Width="300"
-         Text="{Binding Name}"
+         Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}"
+         Name="brandName"
          Margin="0 0 0 30">
 
         </TextBox>

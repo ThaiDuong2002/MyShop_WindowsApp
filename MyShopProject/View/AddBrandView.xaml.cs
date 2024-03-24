@@ -1,5 +1,8 @@
-﻿using System;
+﻿using MyShopProject.Model;
+using MyShopProject.ViewModel;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,9 +22,24 @@ namespace MyShopProject.View
     /// </summary>
     public partial class AddBrandView : Window
     {
+        public AddBrandViewModel _viewModel;
         public AddBrandView()
         {
             InitializeComponent();
+            _viewModel = new AddBrandViewModel();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var brand = new Brand()
+            {
+                Name = addBrand.brandName.Text,
+                Logo = File.ReadAllBytes(addBrand.fileName.Text)
+            };
+            _viewModel.AddBrand(brand);
+            addBrand.brandName.Text = "";
+
+
         }
     }
 }
