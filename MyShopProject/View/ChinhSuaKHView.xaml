@@ -8,8 +8,12 @@
         mc:Ignorable="d"
         DataContext="{StaticResource ChinhSuaKHVM}"
         WindowStartupLocation="CenterScreen"
+        xmlns:Converter="clr-namespace:MyShopProject.Converters"
         Title="ChinhSuaKHView" Height="450" Width="800">
 
+    <Window.Resources>
+        <Converter:ImgUserConverter x:Key="imgUserConverter"/>
+    </Window.Resources>
     <Grid Background="White" HorizontalAlignment="Center" VerticalAlignment="Center">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -28,10 +32,10 @@
 
                 <Ellipse Grid.Row="1" Width="200" Height="200" >
                     <Ellipse.Fill>
-                        <ImageBrush ImageSource="{Binding Image}" Stretch="UniformToFill"/>
+                        <ImageBrush ImageSource="{Binding Image,Converter={StaticResource imgUserConverter}}" d:ImageSource="/Images/user/default.jpg" Stretch="UniformToFill"/>
                     </Ellipse.Fill>
                 </Ellipse>
-                <Button Content="Chọn ảnh" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 20 0 0" />
+                <Button Command="{Binding ChooseImageCommand}" Content="Chọn ảnh" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 20 0 0" />
             </StackPanel>
 
             <Grid Grid.Column="1" Grid.Row="1">
@@ -55,6 +59,7 @@
                   Style="{StaticResource MaterialDesignDatePicker}"
                   Width="300"
                   SelectedDate="{Binding Birthday}"
+                  Name="date"
                   Margin="10 0 10 30">
 
                 </DatePicker>

@@ -7,6 +7,10 @@
     <viewmodel:QLKHViewModel x:Key="QLKHVM"></viewmodel:QLKHViewModel>
     <viewmodel:ThemKHViewModel x:Key="ThemKHVM"></viewmodel:ThemKHViewModel>
     <viewmodel:ChinhSuaKHViewModel x:Key="ChinhSuaKHVM"></viewmodel:ChinhSuaKHViewModel>
+    <viewmodel:ProductCategoryManagementViewModel x:Key="ProductCategoryManagementVM">
+    </viewmodel:ProductCategoryManagementViewModel>
+    <viewmodel:AddBrandViewModel x:Key="AddBrandVM"></viewmodel:AddBrandViewModel>
+    <viewmodel:EditBrandViewModel x:Key="EditBrandVM"></viewmodel:EditBrandViewModel>
 
 
 </ResourceDictionary>

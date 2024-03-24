@@ -1,5 +1,4 @@
-﻿using MyShopProject.Model;
-using MyShopProject.ViewModel;
+﻿using MyShopProject.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,18 +17,20 @@ using System.Windows.Shapes;
 namespace MyShopProject.View
 {
     /// <summary>
-    /// Interaction logic for DashboardView.xaml
+    /// Interaction logic for ProductCategoryManagementView.xaml
     /// </summary>
-    public partial class DashboardView : Page
+    public partial class ProductCategoryManagementView : Page
     {
-        public DashboardView()
+        public ProductCategoryManagementViewModel _viewModel;
+        public ProductCategoryManagementView()
         {
             InitializeComponent();
-            DashboardViewModel current = new DashboardViewModel();
-            quantityProductAvailable.Text = current._quantityProductAvailable.ToString();
-            top5Product.ItemsSource = current._top5ProductSoldList;
-            Global.GetActiveButton();
+            _viewModel = new ProductCategoryManagementViewModel();
+            DataContext = _viewModel;
+            listView.ItemsSource = _viewModel.Brands;
 
+            Global.GetActiveButton();
+            Global.SaveScreen("QLLOAISP");
         }
     }
 }

@@ -70,6 +70,7 @@ namespace MyShopProject.Repositories
                     userToUpdate.Birthday = user.Birthday;
                     userToUpdate.Phone = user.Phone;
                     userToUpdate.Address = user.Address;
+                    userToUpdate.Avatar = user.Avatar;
                     context.SaveChanges();
                     return true;
                 }

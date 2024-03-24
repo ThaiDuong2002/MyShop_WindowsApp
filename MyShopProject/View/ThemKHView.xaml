@@ -8,7 +8,12 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         DataContext="{StaticResource ThemKHVM}"
+              xmlns:Converter="clr-namespace:MyShopProject.Converters"
         Title="ThemKHView" Height="450" Width="600">
+
+    <Window.Resources>
+        <Converter:ImgUserConverter x:Key="imgUserConverter"/>
+    </Window.Resources>
     <Grid Background="White" HorizontalAlignment="Center" VerticalAlignment="Center">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -27,7 +32,7 @@
 
                 <Ellipse Grid.Row="1" Width="200" Height="200" >
                     <Ellipse.Fill>
-                        <ImageBrush ImageSource="{Binding Image}" d:ImageSource="/Images/user/default.jpg" Stretch="UniformToFill"/>
+                        <ImageBrush ImageSource="{Binding Image,Converter={StaticResource imgUserConverter}}" d:ImageSource="/Images/user/default.jpg" Stretch="UniformToFill"/>
                     </Ellipse.Fill>
                 </Ellipse>
                 <Button Content="Chọn ảnh" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 20 0 0" Command="{Binding ChooseImageCommand}"/>

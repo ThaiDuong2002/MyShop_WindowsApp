@@ -24,6 +24,8 @@ public partial class User : ICloneable
 
     public string Password { get; set; } = "12345678";
 
+    public byte[]? Avatar { get; set; }
+
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
     public object Clone()
     {

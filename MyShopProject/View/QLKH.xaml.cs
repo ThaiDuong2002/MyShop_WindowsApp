@@ -18,7 +18,7 @@ namespace MyShopProject.View
             allUser.ItemsSource = _viewModel.Users;
 
 
-          
+            Global.GetActiveButton();
             Global.SaveScreen("QLKH");
         }
     }

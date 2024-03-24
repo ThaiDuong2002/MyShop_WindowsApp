@@ -30,15 +30,16 @@
                 <Setter Property="Tag" Value="Hidden"/>
             </Trigger>
 
-            <Trigger Property="IsFocused" Value="True">
+           
+
+            <DataTrigger Binding="{Binding ElementName=menuButton, Path=isActive}" Value="True">
                 <Setter Property="Tag" Value="Visible"/>
                 <Setter Property="Background" Value="#FFFFFF"/>
                 <Setter Property="Foreground" Value="BlueViolet"/>
-            </Trigger>
-            
-        
+            </DataTrigger>
 
-                <!--<Trigger Property="IsFocused" Value="True">
+
+            <!--<Trigger Property="IsFocused" Value="True">
     <Setter Property="Tag" Value="Visible"/>
     <Setter Property="Background" Value="#FFFFFF"/>
     <Setter Property="Foreground" Value="#348F6C"/>
@@ -66,20 +67,38 @@
     </Style>
 
 
-    <Style x:Key="iconBtn" TargetType="Icon:PackIconMaterial">
+    <Style x:Key="editBtn" TargetType="Icon:PackIconMaterial">
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="Foreground" Value="BlueViolet"/>
+        <Setter Property="Foreground" Value="Green"/>
 
         <Style.Triggers>
 
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Tag" Value="Hidden"/>
-                <Setter Property="Foreground" Value="#BC73FF"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Opacity" Value="0.6"/>
             </Trigger>
         </Style.Triggers>
 
     </Style>
+
+    <Style x:Key="deleteBtn" TargetType="Icon:PackIconMaterial">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="Red"/>
+
+        <Style.Triggers>
+
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Tag" Value="Hidden"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Opacity" Value="0.6"/>
+            </Trigger>
+        </Style.Triggers>
+
+    </Style>
+
 
 
     <DataTemplate DataType="{x:Type viewmodels:DashboardViewModel}">
@@ -92,5 +111,9 @@
 
     <DataTemplate DataType="{x:Type viewmodels:ThemKHViewModel}">
         <views:ThemKHView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewmodels:ProductCategoryManagementViewModel}">
+        <views:ProductCategoryManagementView/>
     </DataTemplate>
 </ResourceDictionary>

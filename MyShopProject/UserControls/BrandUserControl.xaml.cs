@@ -1,6 +1,4 @@
-﻿using MyShopProject.Model;
-using MyShopProject.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,23 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MyShopProject.View
+namespace MyShopProject.UserControls
 {
     /// <summary>
-    /// Interaction logic for ChinhSuaKHView.xaml
+    /// Interaction logic for BrandUserControl.xaml
     /// </summary>
-    public partial class ChinhSuaKHView : Window
+    public partial class BrandUserControl : UserControl
     {
-        public ChinhSuaKHViewModel _viewModel;
-        public ChinhSuaKHView(int id)
+        public BrandUserControl()
         {
             InitializeComponent();
-            _viewModel = new ChinhSuaKHViewModel();
-            _viewModel.Load(id);
-             DataContext = _viewModel;
-
         }
     }
 }
