@@ -63,6 +63,32 @@
                                          materialDesign:TextFieldAssist.HasClearButton="True"
                                          materialDesign:PasswordBoxAssist.Password="{Binding Path=Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}"
                                          Width="300" />
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Center">
+                                <CheckBox x:Name="rememberCheckBox"
+                                          Content="Nhớ mật khẩu"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Center"
+                                          Grid.Column="0"
+                                          Margin="0 0 150 30"
+                                          IsChecked="{Binding IsRemember, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                <Button x:Name="configButton"
+                                        Grid.Column="1"
+                                        Height="20"
+                                        VerticalAlignment="Top"
+                                        ToolTip="Config Database information"
+                                        Style="{StaticResource MaterialDesignIconForegroundButton}"
+                                        HorizontalAlignment="Center"
+                                        Command="{Binding ConfigCommand}"
+                                        CommandParameter="{Binding ElementName=loginView}"
+                                        Width="20">
+                                    <materialDesign:PackIcon Kind="Cog"
+                                                             Height="20"
+                                                             Width="20"
+                                                             VerticalAlignment="Center"
+                                                             HorizontalAlignment="Center"/>
+                                </Button>
+                            </StackPanel>
                             <Grid Width="124">
                                 <Button Height="40"
                                         x:Name="loginButton"
@@ -81,7 +107,7 @@
                     <StackPanel>
                         <Button IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                                 Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                                ToolTip="MaterialDesignFloatingActionMiniLightButton"
+                                ToolTip="Close"
                                 HorizontalAlignment="Right"
                                 Height="25"
                                 Width="25"

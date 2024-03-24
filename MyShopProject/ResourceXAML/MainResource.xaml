@@ -7,6 +7,5 @@
     <viewmodel:QLKHViewModel x:Key="QLKHVM"></viewmodel:QLKHViewModel>
     <viewmodel:ThemKHViewModel x:Key="ThemKHVM"></viewmodel:ThemKHViewModel>
     <viewmodel:ChinhSuaKHViewModel x:Key="ChinhSuaKHVM"></viewmodel:ChinhSuaKHViewModel>
-
-
+    <viewmodel:ConnectConfigViewModel x:Key="ConnectVM"></viewmodel:ConnectConfigViewModel>
 </ResourceDictionary>

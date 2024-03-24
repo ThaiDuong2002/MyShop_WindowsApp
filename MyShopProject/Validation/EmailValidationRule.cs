@@ -15,7 +15,7 @@ namespace MyShopProject.Validation
 
             return Regex.IsMatch((value ?? "").ToString(), @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$")
                 ? ValidationResult.ValidResult
-                : new ValidationResult(false, "Invalid email address.");
+                : new ValidationResult(false, "Email không hợp lệ");
         }
     }
 }

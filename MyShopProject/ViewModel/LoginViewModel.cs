@@ -15,24 +15,28 @@ namespace MyShopProject.ViewModel
             set
             {
                 if (string.IsNullOrEmpty(value))
-                    throw new ArgumentException("Password cannot be empty");
-                else if (value.Length < 6)
-                    throw new ArgumentException("Password must be at least 6 characters long");
+                    throw new ArgumentException("Vui lòng điền mật khẩu");
+                if (value.Length < 6)
+                    throw new ArgumentException("Mật khẩu phải có ít nhất 6 ký tự");
                 _Password = value;
                 OnPropertyChanged();
             }
         }
+        public bool IsRemember { get; set; }
 
         public ICommand CloseCommand { get; set; }
         public ICommand LoginCommand { get; set; }
+        public ICommand ConfigCommand { get; set; }
 
         public LoginViewModel()
         {
             IsLogin = false;
+            IsRemember = false;
             _UserName = "";
             _Password = "";
             CloseCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { p.Close(); });
             LoginCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { Login(p); });
+            ConfigCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { Config(p); });
         }
 
         void Login(Window p)
@@ -43,6 +47,13 @@ namespace MyShopProject.ViewModel
             MessageBox.Show(_UserName + _Password);
             IsLogin = true;
             p.Close();
+        }
+
+        void Config(Window p)
+        {
+            if (p == null)
+                return;
+            MessageBox.Show("Config");
         }
     }
 }

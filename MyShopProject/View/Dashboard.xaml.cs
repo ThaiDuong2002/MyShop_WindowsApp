@@ -1,19 +1,9 @@
 ﻿using MyShopProject.UserControls;
 using MyShopProject.ViewModel;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace MyShopProject.View
 {
@@ -28,6 +18,23 @@ namespace MyShopProject.View
         public static StackPanel subMenuBTN = null;
         public Dashboard()
         {
+            this.Hide();
+            LoginView loginView = new LoginView();
+            loginView.ShowDialog();
+
+            if (loginView.DataContext == null)
+                return;
+
+            var loginVM = loginView.DataContext as LoginViewModel;
+            if (loginVM == null)
+                return;
+            if (loginVM.IsLogin == false)
+            {
+                return;
+            }
+
+            this.Show();
+
             MainViewModel current = new MainViewModel();
             DataContext = current;
             InitializeComponent();
@@ -160,9 +167,9 @@ namespace MyShopProject.View
         private void MenuButton_Loaded(object sender, RoutedEventArgs e)
         {
             var item = sender as MenuButton;
-            Debug.WriteLine(item.btn.IsFocused);         
+            Debug.WriteLine(item.btn.IsFocused);
         }
 
-     
+
     }
 }
