@@ -25,18 +25,6 @@ namespace MyShopProject.View
         public ChinhSuaKHView(int id)
         {
             InitializeComponent();
-            /*user = (User)editUser.Clone();
-
-            Birthday = DateTime.Now;
-
-            var user1 = new User()
-            {
-                Name = user.Name,
-                Address = user.Address,
-                Phone = user.Phone,
-                Birthday = DateOnly.FromDateTime(Birthday)
-            };
-            base.DataContext = user1;*/
             _viewModel = new ChinhSuaKHViewModel();
             _viewModel.Load(id);
              DataContext = _viewModel;

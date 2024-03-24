@@ -35,8 +35,10 @@
                 <Setter Property="Background" Value="#FFFFFF"/>
                 <Setter Property="Foreground" Value="BlueViolet"/>
             </Trigger>
+            
+        
 
-            <!--<Trigger Property="IsFocused" Value="True">
+                <!--<Trigger Property="IsFocused" Value="True">
     <Setter Property="Tag" Value="Visible"/>
     <Setter Property="Background" Value="#FFFFFF"/>
     <Setter Property="Foreground" Value="#348F6C"/>

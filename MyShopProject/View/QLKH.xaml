@@ -10,7 +10,7 @@
       DataContext="{StaticResource QLKHVM}"
       VerticalAlignment="Center"
       HorizontalAlignment="Stretch"
-      Name="Page"
+      Name="QLKHView"
       Title="QLKH">
 
 
@@ -22,7 +22,7 @@
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Padding="20,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" TextAlignment="Left" FontSize="24" FontWeight="Bold"  Margin="0 20 0 0"> DANH SÁCH KHÁCH HÀNG</TextBlock>
-        <Button Command="{Binding ShowWindowCommand}" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 20 20 0" Content="Thêm khách hàng" x:Name="addCustomerButton" Background="BlueViolet" BorderThickness="0"/>
+        <Button Command="{Binding AddCommand}" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 20 20 0" Content="Thêm khách hàng" x:Name="addCustomerButton" Background="BlueViolet" BorderThickness="0"/>
         <TextBlock Name="amountCustomerText" Grid.Row="1" Text="{Binding AmountProduct}" Padding="20,40,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" TextAlignment="Left" FontSize="18" FontWeight="Bold"  Margin="0 20 0 0"/>
         <StackPanel Grid.Row="1" HorizontalAlignment="Right" Orientation="Horizontal" Margin="0 10 20 0">
             <StackPanel VerticalAlignment="Bottom" >
@@ -32,7 +32,7 @@
         </StackPanel>
 
         <materialDesign:Card MinHeight="500" VerticalAlignment="Stretch" Name="cardTable"  Margin="20" Padding="5" Grid.Row="2" >
-            <DataGrid ItemsSource="{Binding Users}" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto" IsReadOnly="True" x:Name="allUser" AutoGenerateColumns="False"  CanUserAddRows="False" >
+            <DataGrid ItemsSource="{Binding Users, UpdateSourceTrigger=PropertyChanged}" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto" IsReadOnly="True" x:Name="allUser" AutoGenerateColumns="False"  CanUserAddRows="False" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
                     <DataGridTextColumn Header="Họ và tên" Binding="{Binding Name}" />
@@ -43,10 +43,10 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <Button Click="editCustomerBtn"  Background="Transparent" BorderThickness="0">
+                                    <Button Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}" Background="Transparent" BorderThickness="0">
                                         <Icon:PackIconMaterial Style="{StaticResource iconBtn}" Kind="SquareEditOutline" Height="20" Width="20" Margin="0 0 10 0"/>
                                     </Button>
-                                    <Button Click="deleteCustomerBtn" Background="Transparent" BorderThickness="0">
+                                    <Button Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}" Background="Transparent" BorderThickness="0">
                                         <Icon:PackIconMaterial Style="{StaticResource iconBtn}" Kind="Delete" Height="20" Width="20" Margin="0 0 10 0"/>
                                     </Button>
                                 </StackPanel>
