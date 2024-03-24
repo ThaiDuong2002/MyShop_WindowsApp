@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,22 @@ namespace MyShopProject.UserControls
     /// </summary>
     public partial class BrandUserControl : UserControl
     {
+
+        
         public BrandUserControl()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg)|*.png;*.jpeg;*.jpg";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                image.Source = new BitmapImage(new Uri(openFileDialog.FileName));
+                fileName.Text = openFileDialog.FileName;
+            }
         }
     }
 }
