@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using MyShopProject.Model;
 using MyShopProject.Repositories;
+using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
@@ -18,11 +19,14 @@ namespace MyShopProject.ViewModel
         public string Address { get => _address; set { _address = value; OnPropertyChanged(); } }
         private DateTime _birthday = DateTime.Now;
         public DateTime Birthday { get => _birthday; set { _birthday = value; OnPropertyChanged(); } }
-
+        private string _username;
+        public string Username { get => _username; set { _username = value; OnPropertyChanged(); } }
         private BitmapImage _image { get; set; }
         public BitmapImage Image { get => _image; set { _image = value; OnPropertyChanged(); } }
 
+       
 
+        public OpenFileDialog openFileDialog;
 
 
 
@@ -56,13 +60,15 @@ namespace MyShopProject.ViewModel
                 System.Windows.MessageBox.Show("Vui lòng nhập đủ thông tin");
                 return;
             }
+            var path = new Uri(openFileDialog.FileName).ToString();
             var user = new User()
             {
                 Name = Name,
                 Phone = Phone,
                 Address = Address,
-                Birthday = DateOnly.FromDateTime(Birthday)
-            };
+                Birthday = DateOnly.FromDateTime(Birthday),
+                Avatar = path,
+           };
             if (userRepository.AddUser(user))
             {
                 MessageBox.Show("Thêm khách hàng thành công");
@@ -76,7 +82,7 @@ namespace MyShopProject.ViewModel
         }
         public void ChooseImage()
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == true)
             {
                 Image = new BitmapImage(new Uri(openFileDialog.FileName));

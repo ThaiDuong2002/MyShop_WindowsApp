@@ -28,6 +28,7 @@ namespace MyShopProject.View
             DashboardViewModel current = new DashboardViewModel();
             quantityProductAvailable.Text = current._quantityProductAvailable.ToString();
             top5Product.ItemsSource = current._top5ProductSoldList;
+            Global.GetActiveButton();
         }
     }
 }

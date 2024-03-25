@@ -65,7 +65,6 @@ namespace MyShopProject.ViewModel
         public ICommand EditCommand { get; set; }
         public ICommand AddCommand { get; set; }
 
-        public MenuButton select { get; set; }
 
         private string _amountProduct;
         public string AmountProduct { get => _amountProduct; set { _amountProduct = value; OnPropertyChanged(); } }
@@ -74,23 +73,25 @@ namespace MyShopProject.ViewModel
         {
             prevBtn = new RelayCommand<object>((p) => { return _currentPage > 1; }, (p) => { Prev(); });
             nextBtn = new RelayCommand<object>((p) => { return _currentPage < _totalPage; }, (p) => { Next(); });
-            searchBtn = new RelayCommand<object>((p) => { return !string.IsNullOrEmpty(SearchCustomerText) ; }, (p) => { Search(); });
+            searchBtn = new RelayCommand<object>((p) => { return !string.IsNullOrEmpty(SearchCustomerText); }, (p) => { Search(); });
             AddCommand = new RelayCommand<object>((p) => { return true; }, (p) => { ShowWindow(); });
-            DeleteCommand = new RelayCommand<User>((user) => { return user != null; }, (user) => { DeleteUser(user);});
+            DeleteCommand = new RelayCommand<User>((user) => { return user != null; }, (user) => { DeleteUser(user); });
             EditCommand = new RelayCommand<User>((user) => { return user != null; }, (user) => { EditUser(user); });
-            select = Dashboard.menuBTN.Children[1] as MenuButton;
-            select?.btn.Focus();
             LoadData();
             Global.SaveScreen("QLKH");
         }
-      
+
 
         public void LoadData()
         {
-            select?.btn.Focus();
-            if (!Users.IsNullOrEmpty()||_totalPage==0)
+            if (!Users.IsNullOrEmpty() || _totalPage == 0)
             {
                 Users.Clear(); // Xóa danh sách người dùng cũ
+                var product = _userRepository.GetUsersByPagination(_currentPage, 10);
+                if (product.IsNullOrEmpty())
+                {
+                    _currentPage--;
+                }
                 foreach (var user in _userRepository.GetUsersByPagination(_currentPage, 10))
                 {
                     Users.Add(user); // Thêm người dùng mới vào danh sách
@@ -103,23 +104,22 @@ namespace MyShopProject.ViewModel
                 _totalPage = numOfUsers / 10 + (numOfUsers % 10 == 0 ? 0 : 1); // Tính toán số trang
 
             }
-            AmountProduct = _userRepository.getNumOfUsers() + " khách hàng";
+            var totalUsers = _userRepository.getNumOfUsers();
+            AmountProduct = totalUsers + " khách hàng";
+            _totalPage = totalUsers / 10 + (totalUsers % 10 == 0 ? 0 : 1); // Tính toán số trang
             PageInfo = $"Trang {_currentPage}/{_totalPage}";
-            select?.btn.Focus();
-            
+
 
         }
 
         public void Prev()
         {
-            select?.btn.Focus();
             _currentPage--;
             LoadData();
         }
 
         public void Next()
         {
-            select?.btn.Focus();
             _currentPage++;
             LoadData();
         }
@@ -135,12 +135,10 @@ namespace MyShopProject.ViewModel
             int numOfUsers = Users.Count;// Lấy số lượng người dùng
             _totalPage = numOfUsers / 10 + (numOfUsers % 10 == 0 ? 0 : 1); // Tính toán số trang
             PageInfo = $"Trang {_currentPage}/{_totalPage}";
-            select?.btn.Focus();
         }
 
         public void ShowWindow()
         {
-            select?.btn.Focus();
             ThemKHView themKHView = new ThemKHView();
             if (themKHView.ShowDialog() == true)
             {
@@ -150,7 +148,6 @@ namespace MyShopProject.ViewModel
 
         public void EditUser(User user)
         {
-            select?.btn.Focus();
             ChinhSuaKHView chinhSuaKHView = new ChinhSuaKHView(user.Id);
             if (chinhSuaKHView.ShowDialog() == true)
             {
@@ -162,7 +159,6 @@ namespace MyShopProject.ViewModel
 
         public void DeleteUser(User user)
         {
-            select?.btn.Focus();
             MessageBoxResult result = MessageBox.Show("Bạn có chắc chắn muốn xóa khách hàng này?", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.No)
             {
@@ -173,8 +169,7 @@ namespace MyShopProject.ViewModel
                 if (_userRepository.deleteUser(user))
                 {
                     MessageBox.Show("Xóa khách hàng thành công");
-                    Users.Remove(user);
-                    AmountProduct = _userRepository.getNumOfUsers() + " khách hàng";
+                    LoadData();
                 }
                 else
                 {

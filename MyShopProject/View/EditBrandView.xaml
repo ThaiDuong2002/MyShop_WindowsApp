@@ -9,7 +9,7 @@
         DataContext="{StaticResource EditBrandVM}"
         Title="EditBrandView" Height="450" Width="800">
     <Grid>
-        <local:BrandUserControl/>
+        <local:BrandUserControl x:Name="editBrandView"/>
         <Button Command="{Binding SaveCommand}" Content="Lưu" HorizontalAlignment="Center" Margin="10,30,0,10" VerticalAlignment="Bottom" Height="30" />
     </Grid>
 </Window>

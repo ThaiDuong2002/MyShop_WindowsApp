@@ -9,6 +9,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\brand\brand1.jpg" />
+    <None Remove="Images\brand\brand2.jpg" />
+    <None Remove="Images\brand\brand3.jpg" />
+    <None Remove="Images\brand\brand4.jpg" />
+    <None Remove="Images\brand\brand5.jpg" />
+    <None Remove="Images\brand\brand6.jpg" />
+    <None Remove="Images\brand\brand7.jpg" />
+    <None Remove="Images\brand\brand8.jpg" />
+    <None Remove="Images\laptop\default.jpg" />
     <None Remove="Images\laptop\laptop1.jpg" />
     <None Remove="Images\laptop\laptop2.jpg" />
     <None Remove="Images\laptop\laptop3.jpg" />
@@ -41,6 +50,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\brand\brand1.jpg" />
+    <Resource Include="Images\brand\brand2.jpg" />
+    <Resource Include="Images\brand\brand3.jpg" />
+    <Resource Include="Images\brand\brand4.jpg" />
+    <Resource Include="Images\brand\brand5.jpg" />
+    <Resource Include="Images\brand\brand6.jpg" />
+    <Resource Include="Images\brand\brand7.jpg" />
+    <Resource Include="Images\brand\brand8.jpg" />
+    <Resource Include="Images\laptop\default.jpg" />
+    <Resource Include="Images\laptop\laptop6.jpg" />
     <Resource Include="Images\user\default.jpg" />
   </ItemGroup>
 
@@ -64,7 +83,6 @@
     <Resource Include="Images\laptop\laptop3.jpg" />
     <Resource Include="Images\laptop\laptop4.jpg" />
     <Resource Include="Images\laptop\laptop5.jpg" />
-    <Resource Include="Images\laptop\laptop6.jpg" />
     <Resource Include="Images\laptop\laptop7.jpg" />
     <Resource Include="Images\laptop\laptop8.jpg" />
     <Resource Include="Images\logo\logo.png" />

@@ -9,27 +9,12 @@ namespace MyShopProject.Converters
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (value is byte[] byteArray && byteArray.Length > 0)
+            if (value == null)
             {
-                using (MemoryStream stream = new MemoryStream(byteArray))
-                {
-                    BitmapImage image = new BitmapImage();
-                    image.BeginInit();
-                    image.CacheOption = BitmapCacheOption.OnLoad;
-                    image.StreamSource = stream;
-                    image.EndInit();
-                    return image;
-                }
+                return "/Images/user/default.jpg";
             }
-            else if (value is string stringValue && !string.IsNullOrEmpty(stringValue))
-            {
-                // Assuming value is the filename
-                string imagePath = $"/Images/brand/brand{stringValue}.jpg";
-                return new BitmapImage(new Uri(imagePath, UriKind.Relative));
-            }
+            return value;
 
-            // Return a default image or handle accordingly
-            return null;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

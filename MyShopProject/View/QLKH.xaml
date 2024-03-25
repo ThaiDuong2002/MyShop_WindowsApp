@@ -10,8 +10,13 @@
       DataContext="{StaticResource QLKHVM}"
       VerticalAlignment="Center"
       HorizontalAlignment="Stretch"
+      xmlns:Converter="clr-namespace:MyShopProject.Converters"
       Name="QLKHView"
       Title="QLKH">
+
+    <Page.Resources>
+        <Converter:DateFormatConverter x:Key="DateFormatConverter"/>
+    </Page.Resources>
 
 
     <Grid VerticalAlignment="Center">
@@ -36,7 +41,7 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
                     <DataGridTextColumn Header="Họ và tên" Binding="{Binding Name}" />
-                    <DataGridTextColumn Header="Email" Binding="{Binding Birthday}" />
+                    <DataGridTextColumn Header="Ngày sinh" Binding="{Binding Birthday, Converter={StaticResource DateFormatConverter}}" />
                     <DataGridTextColumn Header="Số điện thoại" Binding="{Binding Phone}" />
                     <DataGridTextColumn Header="Địa chỉ" Binding="{Binding Address}" />
                     <DataGridTemplateColumn Header="Hành động">
@@ -44,10 +49,10 @@
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
                                     <Button Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}" Background="Transparent" BorderThickness="0">
-                                        <Icon:PackIconMaterial Style="{StaticResource iconBtn}" Kind="SquareEditOutline" Height="20" Width="20" Margin="0 0 10 0"/>
+                                        <Icon:PackIconMaterial Style="{StaticResource editBtn}" Kind="SquareEditOutline" Height="20" Width="20" Margin="0 0 10 0"/>
                                     </Button>
                                     <Button Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}" Background="Transparent" BorderThickness="0">
-                                        <Icon:PackIconMaterial Style="{StaticResource iconBtn}" Kind="Delete" Height="20" Width="20" Margin="0 0 10 0"/>
+                                        <Icon:PackIconMaterial Style="{StaticResource deleteBtn}" Kind="Delete" Height="20" Width="20" Margin="0 0 10 0"/>
                                     </Button>
                                 </StackPanel>
                             </DataTemplate>

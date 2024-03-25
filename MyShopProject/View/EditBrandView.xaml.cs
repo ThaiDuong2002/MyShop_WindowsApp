@@ -2,6 +2,7 @@
 using MyShopProject.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,12 +24,13 @@ namespace MyShopProject.View
     {
         public Brand brand { get; set; }
         public EditBrandViewModel _viewmodel;
+        public TextBlock fileName { get; set; }
         public EditBrandView(Brand editBrand)
         {
             InitializeComponent();
             _viewmodel = new EditBrandViewModel();
-
-            _viewmodel.LoadData(editBrand);
+            fileName = editBrandView.fileName;
+            _viewmodel.LoadData(editBrand,fileName);
             DataContext = _viewmodel;
         }
     }

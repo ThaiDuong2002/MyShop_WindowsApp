@@ -19,6 +19,29 @@ namespace MyShopProject.Repositories
                 return new ObservableCollection<Brand>(context.Brands.ToList());
             }
         }
+        public ObservableCollection<Brand> GetBrandByPagination(int page, int itemPerPage)
+        {
+            using (var context = new MyShopContext())
+            {
+                return new ObservableCollection<Brand>(context.Brands.Skip((page - 1) * itemPerPage).Take(itemPerPage).ToList());
+            }
+
+        }
+
+        public int GetNumOfBrands()
+        {
+            using (var context = new MyShopContext())
+            {
+                return context.Brands.Count();
+            }
+        }
+        public ObservableCollection<Brand> GetBrandByName(string name)
+        {
+            using (var context = new MyShopContext())
+            {
+                return new ObservableCollection<Brand>(context.Brands.Where(b => b.Name.Contains(name)).ToList());
+            }
+        }
         public Brand GetBrandById(int Id)
         {
             using (var context = new MyShopContext())
@@ -36,7 +59,7 @@ namespace MyShopProject.Repositories
             }
         }
 
-        public bool UpdateBrand(Brand brand,int Id)
+        public bool UpdateBrand(Brand brand, int Id)
         {
             using (var context = new MyShopContext())
             {

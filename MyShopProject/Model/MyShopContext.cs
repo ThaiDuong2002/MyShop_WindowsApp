@@ -39,16 +39,6 @@ public partial class MyShopContext : DbContext
 
     public virtual DbSet<Brand> Brands { get; set; }
 
-    public virtual DbSet<Color> Colors { get; set; }
-
-    public virtual DbSet<Cpu> Cpus { get; set; }
-
-    public virtual DbSet<GraphicsCard> GraphicsCards { get; set; }
-
-    public virtual DbSet<LaptopSeries> LaptopSeries { get; set; }
-
-    public virtual DbSet<OS> Os { get; set; }
-
     public virtual DbSet<Order> Orders { get; set; }
 
     public virtual DbSet<OrderProduct> OrderProducts { get; set; }
@@ -57,15 +47,11 @@ public partial class MyShopContext : DbContext
 
     public virtual DbSet<Promotion> Promotions { get; set; }
 
-    public virtual DbSet<Ram> Rams { get; set; }
-
-    public virtual DbSet<Storage> Storages { get; set; }
-
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer($"Data Source={_serverName}; Initial Catalog={_databaseName}; TrustServerCertificate=True; User Id={_userName}; Password={_password}");
+        => optionsBuilder.UseSqlServer($"Data Source=localhost; Trusted_Connection=Yes; Initial Catalog=MyShop; TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -75,50 +61,6 @@ public partial class MyShopContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Name).HasMaxLength(25);
-        });
-
-        modelBuilder.Entity<Color>(entity =>
-        {
-            entity.ToTable("Color");
-
-            entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.Name).HasMaxLength(20);
-        });
-
-        modelBuilder.Entity<Cpu>(entity =>
-        {
-            entity.ToTable("CPU");
-
-            entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.Generation).HasMaxLength(100);
-            entity.Property(e => e.Name).HasMaxLength(100);
-        });
-
-        modelBuilder.Entity<GraphicsCard>(entity =>
-        {
-            entity.ToTable("GraphicsCard");
-
-            entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.Name).HasMaxLength(100);
-        });
-
-        modelBuilder.Entity<LaptopSeries>(entity =>
-        {
-            entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.BrandId).HasColumnName("BrandID");
-            entity.Property(e => e.Name).HasMaxLength(50);
-
-            entity.HasOne(d => d.Brand).WithMany(p => p.LaptopSeries)
-                .HasForeignKey(d => d.BrandId)
-                .HasConstraintName("FK_LaptopSeries_Brand");
-        });
-
-        modelBuilder.Entity<OS>(entity =>
-        {
-            entity.ToTable("OS");
-
-            entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.Name).HasMaxLength(100);
         });
 
         modelBuilder.Entity<Order>(entity =>
@@ -164,14 +106,7 @@ public partial class MyShopContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.BrandId).HasColumnName("BrandID");
-            entity.Property(e => e.ColorId).HasColumnName("ColorID");
-            entity.Property(e => e.CpuId).HasColumnName("CPU_ID");
-            entity.Property(e => e.GraphicsCardId).HasColumnName("GraphicsCardID");
             entity.Property(e => e.Name).HasMaxLength(200);
-            entity.Property(e => e.OsId).HasColumnName("OS_ID");
-            entity.Property(e => e.PartNumber).HasMaxLength(50);
-            entity.Property(e => e.RamId).HasColumnName("RAM_ID");
-            entity.Property(e => e.StorageId).HasColumnName("StorageID");
             entity.Property(e => e.WarrantyPeriod).HasMaxLength(20);
 
             entity.HasOne(d => d.Brand).WithMany(p => p.Products)
@@ -179,35 +114,6 @@ public partial class MyShopContext : DbContext
                 .OnDelete(DeleteBehavior.SetNull)
                 .HasConstraintName("FK_Product_Brand");
 
-            entity.HasOne(d => d.Color).WithMany(p => p.Products)
-                .HasForeignKey(d => d.ColorId)
-                .OnDelete(DeleteBehavior.SetNull)
-                .HasConstraintName("FK_Product_Color");
-
-            entity.HasOne(d => d.Cpu).WithMany(p => p.Products)
-                .HasForeignKey(d => d.CpuId)
-                .OnDelete(DeleteBehavior.SetNull)
-                .HasConstraintName("FK_Product_CPU");
-
-            entity.HasOne(d => d.GraphicsCard).WithMany(p => p.Products)
-                .HasForeignKey(d => d.GraphicsCardId)
-                .OnDelete(DeleteBehavior.SetNull)
-                .HasConstraintName("FK_Product_GraphicsCard");
-
-            entity.HasOne(d => d.Os).WithMany(p => p.Products)
-                .HasForeignKey(d => d.OsId)
-                .OnDelete(DeleteBehavior.SetNull)
-                .HasConstraintName("FK_Product_OS");
-
-            entity.HasOne(d => d.Ram).WithMany(p => p.Products)
-                .HasForeignKey(d => d.RamId)
-                .OnDelete(DeleteBehavior.SetNull)
-                .HasConstraintName("FK_Product_RAM");
-
-            entity.HasOne(d => d.Storage).WithMany(p => p.Products)
-                .HasForeignKey(d => d.StorageId)
-                .OnDelete(DeleteBehavior.SetNull)
-                .HasConstraintName("FK_Product_Storage");
         });
 
         modelBuilder.Entity<Promotion>(entity =>
@@ -219,22 +125,6 @@ public partial class MyShopContext : DbContext
             entity.Property(e => e.Name).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<Ram>(entity =>
-        {
-            entity.ToTable("RAM");
-
-            entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.Name).HasMaxLength(100);
-        });
-
-        modelBuilder.Entity<Storage>(entity =>
-        {
-            entity.ToTable("Storage");
-
-            entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.Name).HasMaxLength(100);
-        });
-
         modelBuilder.Entity<User>(entity =>
         {
             entity.ToTable("User");
@@ -242,9 +132,8 @@ public partial class MyShopContext : DbContext
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Address).HasMaxLength(200);
             entity.Property(e => e.Name).HasMaxLength(50);
-            entity.Property(e => e.Password).HasMaxLength(200);
             entity.Property(e => e.Phone).HasMaxLength(15);
-            entity.Property(e => e.UserName).HasMaxLength(50);
+            entity.Property(e => e.Avatar).HasMaxLength(200);
         });
 
         OnModelCreatingPartial(modelBuilder);

@@ -34,12 +34,10 @@ namespace MyShopProject.View
             var brand = new Brand()
             {
                 Name = addBrand.brandName.Text,
-                Logo = File.ReadAllBytes(addBrand.fileName.Text)
+                Logo = addBrand.fileName.Text
             };
             _viewModel.AddBrand(brand);
             addBrand.brandName.Text = "";
-
-
         }
     }
 }

@@ -2,10 +2,12 @@
 using MyShopProject.Repositories;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
@@ -24,8 +26,8 @@ namespace MyShopProject.ViewModel
                 OnPropertyChanged();
             }
         }
-        private byte[] _logo;
-        public byte[] Logo
+        private string _logo;
+        public string Logo
         {
             get { return _logo; }
             set
@@ -35,6 +37,7 @@ namespace MyShopProject.ViewModel
             }
         }
         public int Id;
+        public TextBlock fileName { get; set; }
         public ICommand SaveCommand { get; set; }
         public EditBrandViewModel()
         {
@@ -44,25 +47,28 @@ namespace MyShopProject.ViewModel
                 return true;
             }, (p) =>
             {
-               
+
                 updateBrand();
             });
         }
 
-        public void LoadData(Brand brand)
+        public void LoadData(Brand brand, TextBlock fileName)
         {
-            Id= brand.Id;
+            Id = brand.Id;
             Name = brand.Name;
             Logo = brand.Logo;
+            this.fileName = fileName;
         }
         public void updateBrand()
         {
+
+            var path = new Uri(this.fileName.Text).ToString();
             Brand brand = new Brand();
             brand.Name = Name;
-            brand.Logo = Logo;
-            if (ProductCatgoryRepository.UpdateBrand(brand,Id))
+            brand.Logo = path;
+            if (ProductCatgoryRepository.UpdateBrand(brand, Id))
             {
-                MessageBox.Show("Cập nhật thành công");
+                System.Windows.MessageBox.Show("Cập nhật thành công");
                 Application.Current.Windows[1].DialogResult = true;
             }
             else
@@ -70,5 +76,8 @@ namespace MyShopProject.ViewModel
                 MessageBox.Show("Cập nhật thất bại");
             }
         }
+
+        
+
     }
 }

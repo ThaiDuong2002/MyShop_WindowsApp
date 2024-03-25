@@ -39,6 +39,10 @@ namespace MyShopProject.Commands
             {
                 viewModel.SelectedViewModel = new QLKHViewModel();
             }
+            else if (parameter.ToString() == "QLLOAISP")
+            {
+                viewModel.SelectedViewModel = new ProductCategoryManagementViewModel();
+            }
 
         }
     }

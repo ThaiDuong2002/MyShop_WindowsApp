@@ -81,14 +81,14 @@
                 <materialDesign:Card Margin="10" Padding="10">
                     <DataGrid x:Name="top5Product" AutoGenerateColumns="False" ItemsSource="{Binding Products}" CanUserAddRows="False">
                         <DataGrid.Columns>
+                            <DataGridTextColumn Header="Mã sản phẩm" Binding="{Binding Id}"/>
                             <DataGridTemplateColumn Header="Ảnh">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Image Source="{Binding Id, Converter={StaticResource imgLaptopConverter}}" Width="50" Height="50"/>
+                                        <Image Source="{Binding Image, Converter={StaticResource imgLaptopConverter}}" Width="50" Height="50"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTextColumn Header="Mã sản phẩm" Binding="{Binding Id}"/>
                             <DataGridTextColumn Header="Tên sản phẩm" Binding="{Binding Name}"/>
                             <DataGridTextColumn Header="Giá" Binding="{Binding Price,Converter={StaticResource priceFormat}}"/>
                             <DataGridTextColumn Header="Số lượng hàng" Binding="{Binding Quantity}"/>

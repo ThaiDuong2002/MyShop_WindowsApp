@@ -6,9 +6,7 @@ public partial class Brand
 
     public string Name { get; set; } = null!;
 
-    public byte[]? Logo { get; set; }
-
-    public virtual ICollection<LaptopSeries> LaptopSeries { get; set; } = new List<LaptopSeries>();
+    public string? Logo { get; set; }
 
     public virtual ICollection<Product> Products { get; set; } = new List<Product>();
 }

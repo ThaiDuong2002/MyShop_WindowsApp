@@ -21,8 +21,6 @@ namespace MyShopProject.UserControls
     /// </summary>
     public partial class BrandUserControl : UserControl
     {
-
-        
         public BrandUserControl()
         {
             InitializeComponent();
@@ -35,7 +33,7 @@ namespace MyShopProject.UserControls
             if (openFileDialog.ShowDialog() == true)
             {
                 image.Source = new BitmapImage(new Uri(openFileDialog.FileName));
-                fileName.Text = openFileDialog.FileName;
+                fileName.Text = new Uri(openFileDialog.FileName).ToString();
             }
         }
     }
