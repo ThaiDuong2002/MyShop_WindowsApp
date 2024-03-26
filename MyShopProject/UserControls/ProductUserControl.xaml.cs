@@ -1,8 +1,6 @@
-﻿using MyShopProject.Model;
-using MyShopProject.ViewModel;
+﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,22 +11,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MyShopProject.View
+namespace MyShopProject.UserControls
 {
     /// <summary>
-    /// Interaction logic for EditBrandView.xaml
+    /// Interaction logic for ProductUserControl.xaml
     /// </summary>
-    public partial class EditBrandView : Window
+    public partial class ProductUserControl : UserControl
     {
-        public EditBrandViewModel _viewmodel;
-        public EditBrandView(Brand editBrand)
+        public ProductUserControl()
         {
             InitializeComponent();
-            _viewmodel = new EditBrandViewModel();
-            _viewmodel.LoadData(editBrand);
-            DataContext = _viewmodel;
         }
     }
 }

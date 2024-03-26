@@ -8,8 +8,12 @@
     <viewmodel:ThemKHViewModel x:Key="ThemKHVM"></viewmodel:ThemKHViewModel>
     <viewmodel:ChinhSuaKHViewModel x:Key="ChinhSuaKHVM"></viewmodel:ChinhSuaKHViewModel>
     <viewmodel:ProductCategoryManagementViewModel x:Key="ProductCategoryManagementVM"></viewmodel:ProductCategoryManagementViewModel>
+    <viewmodel:ProductManagementViewModel x:Key="ProductManagementVM"></viewmodel:ProductManagementViewModel>
     <viewmodel:ConnectConfigViewModel x:Key="ConnectConfigVM"></viewmodel:ConnectConfigViewModel>
     <viewmodel:AddBrandViewModel x:Key="AddBrandVM"></viewmodel:AddBrandViewModel>
     <viewmodel:EditBrandViewModel x:Key="EditBrandVM"></viewmodel:EditBrandViewModel>
 
+    <viewmodel:AddProductViewModel x:Key="AddProductVM"></viewmodel:AddProductViewModel>
+
+    <viewmodel:EditProductViewModel x:Key="EditProductVM"></viewmodel:EditProductViewModel>
 </ResourceDictionary>

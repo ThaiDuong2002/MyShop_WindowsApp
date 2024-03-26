@@ -54,6 +54,7 @@ namespace MyShopProject.View
             {
                 select = menu.Children[3] as MenuButton;
                 select?.btn.Focus();
+                select.btn.Command = current.UpdateViewCommand;
                 select?.btn.Command.Execute("QLSP");
             }
             else if (_screen.Equals("QLDH"))

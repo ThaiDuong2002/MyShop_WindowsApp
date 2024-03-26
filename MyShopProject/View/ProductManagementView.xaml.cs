@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MyShopProject.UserControls;
+using MyShopProject.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,28 @@ namespace MyShopProject.View
     /// </summary>
     public partial class ProductManagementView : Page
     {
+        public ProductManagementViewModel _viewModel;
         public ProductManagementView()
         {
             InitializeComponent();
+            _viewModel = new ProductManagementViewModel();
+            DataContext = _viewModel;
+
+            
+            Global.GetActiveButton();
+            Global.SaveScreen("QLSP");
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(searchProductInput.Text))
+            {
+                searchHintTextBlock.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                searchHintTextBlock.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }

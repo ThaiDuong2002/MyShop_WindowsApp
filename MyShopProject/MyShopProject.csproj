@@ -19,6 +19,11 @@
     <None Remove="Images\brand\brand8.jpg" />
     <None Remove="Images\laptop\default.jpg" />
     <None Remove="Images\laptop\laptop1.jpg" />
+    <None Remove="Images\laptop\laptop10.jpg" />
+    <None Remove="Images\laptop\laptop11.jpg" />
+    <None Remove="Images\laptop\laptop12.jpg" />
+    <None Remove="Images\laptop\laptop13.jpg" />
+    <None Remove="Images\laptop\laptop14.jpg" />
     <None Remove="Images\laptop\laptop2.jpg" />
     <None Remove="Images\laptop\laptop3.jpg" />
     <None Remove="Images\laptop\laptop4.jpg" />
@@ -26,6 +31,7 @@
     <None Remove="Images\laptop\laptop6.jpg" />
     <None Remove="Images\laptop\laptop7.jpg" />
     <None Remove="Images\laptop\laptop8.jpg" />
+    <None Remove="Images\laptop\laptop9.jpg" />
     <None Remove="Images\logo\logo.png" />
     <None Remove="Images\user\default.jpg" />
     <None Remove="Images\user\user1.jpg" />
@@ -59,7 +65,13 @@
     <Resource Include="Images\brand\brand7.jpg" />
     <Resource Include="Images\brand\brand8.jpg" />
     <Resource Include="Images\laptop\default.jpg" />
+    <Resource Include="Images\laptop\laptop10.jpg" />
+    <Resource Include="Images\laptop\laptop11.jpg" />
+    <Resource Include="Images\laptop\laptop12.jpg" />
+    <Resource Include="Images\laptop\laptop13.jpg" />
+    <Resource Include="Images\laptop\laptop14.jpg" />
     <Resource Include="Images\laptop\laptop6.jpg" />
+    <Resource Include="Images\laptop\laptop9.jpg" />
     <Resource Include="Images\user\default.jpg" />
   </ItemGroup>
 

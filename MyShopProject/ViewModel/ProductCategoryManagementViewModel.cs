@@ -127,21 +127,11 @@ namespace MyShopProject.ViewModel
         {
 
             AddBrandView addBrandView = new AddBrandView();
-            if (addBrandView.ShowDialog() == true)
+            addBrandView.ShowDialog();
+            if(addBrandView.DialogResult == true)
             {
                 LoadData();
             }
-            /*  var imagePath = $"\\images\\laptop\\laptop1.jpg";
-              string sourceDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-
-              // Đi lên hai cấp để đến thư mục gốc của dự án
-              string projectDirectory = Directory.GetParent(Directory.GetParent(sourceDirectory).FullName).FullName;
-
-              string projectDirectory2= Directory.GetParent(Directory.GetParent(Directory.GetParent(sourceDirectory).FullName).FullName).FullName;
-
-
-              var fullPath = $"{projectDirectory2}{imagePath}";
-              MessageBox.Show(fullPath.ToString());*/
         }
 
         public void EditBrandWindow()
@@ -149,8 +139,8 @@ namespace MyShopProject.ViewModel
             EditBrandView editBrandView = new EditBrandView(SelectedBrand);
             if (editBrandView.ShowDialog() == true)
             {
-                LoadData();
-
+                int index = Brands.IndexOf(SelectedBrand);
+                Brands[index] = _productCatgoryRepository.GetBrandById(SelectedBrand.Id);
             }
         }
 
@@ -185,7 +175,7 @@ namespace MyShopProject.ViewModel
         {
             _currentPage = 1;
             Brands.Clear();
-            foreach (var brand in _productCatgoryRepository.GetBrandByName(SearchBrandText))
+            foreach (var brand in _productCatgoryRepository.SearchBrandByName(SearchBrandText))
             {
                 Brands.Add(brand);
             }

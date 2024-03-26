@@ -10,13 +10,19 @@ namespace MyShopProject.Repositories
 {
     public class ProductCatgoryRepository
     {
-        public ProductCatgoryRepository() { }
-
         public ObservableCollection<Brand> GetAllBrands()
         {
             using (var context = new MyShopContext())
             {
                 return new ObservableCollection<Brand>(context.Brands.ToList());
+            }
+        }
+
+        public List<string> GetAllBrandsName()
+        {
+            using (var context = new MyShopContext())
+            {
+                return new List<string>(context.Brands.Select(b => b.Name).ToList());
             }
         }
         public ObservableCollection<Brand> GetBrandByPagination(int page, int itemPerPage)
@@ -35,11 +41,18 @@ namespace MyShopProject.Repositories
                 return context.Brands.Count();
             }
         }
-        public ObservableCollection<Brand> GetBrandByName(string name)
+        public ObservableCollection<Brand> SearchBrandByName(string name)
         {
             using (var context = new MyShopContext())
             {
                 return new ObservableCollection<Brand>(context.Brands.Where(b => b.Name.Contains(name)).ToList());
+            }
+        }
+        public Brand GetBrandByName(string name)
+        {
+            using (var context = new MyShopContext())
+            {
+                return context.Brands.Where(b => b.Name == name).FirstOrDefault();
             }
         }
         public Brand GetBrandById(int Id)

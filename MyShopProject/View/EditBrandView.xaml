@@ -7,9 +7,10 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         DataContext="{StaticResource EditBrandVM}"
+        Name="EditBrandWindow"
         Title="EditBrandView" Height="450" Width="800">
     <Grid>
         <local:BrandUserControl x:Name="editBrandView"/>
-        <Button Command="{Binding SaveCommand}" Content="Lưu" HorizontalAlignment="Center" Margin="10,30,0,10" VerticalAlignment="Bottom" Height="30" />
+        <Button Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=EditBrandWindow}" Content="Lưu" HorizontalAlignment="Center" Margin="10,30,0,10" VerticalAlignment="Bottom" Height="30" />
     </Grid>
 </Window>

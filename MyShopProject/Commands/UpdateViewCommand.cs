@@ -43,6 +43,10 @@ namespace MyShopProject.Commands
             {
                 viewModel.SelectedViewModel = new ProductCategoryManagementViewModel();
             }
+            else if(parameter.ToString()=="QLSP")
+            {
+                viewModel.SelectedViewModel = new ProductManagementViewModel();
+            }    
 
         }
     }

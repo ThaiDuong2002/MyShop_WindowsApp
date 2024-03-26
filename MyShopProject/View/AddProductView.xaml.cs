@@ -1,8 +1,5 @@
-﻿using MyShopProject.Model;
-using MyShopProject.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,17 +15,13 @@ using System.Windows.Shapes;
 namespace MyShopProject.View
 {
     /// <summary>
-    /// Interaction logic for EditBrandView.xaml
+    /// Interaction logic for AddProductView.xaml
     /// </summary>
-    public partial class EditBrandView : Window
+    public partial class AddProductView : Window
     {
-        public EditBrandViewModel _viewmodel;
-        public EditBrandView(Brand editBrand)
+        public AddProductView()
         {
             InitializeComponent();
-            _viewmodel = new EditBrandViewModel();
-            _viewmodel.LoadData(editBrand);
-            DataContext = _viewmodel;
         }
     }
 }

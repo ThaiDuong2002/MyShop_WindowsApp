@@ -70,6 +70,7 @@
     <Style x:Key="editBtn" TargetType="Icon:PackIconMaterial">
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Foreground" Value="Green"/>
 
         <Style.Triggers>
@@ -86,6 +87,7 @@
     <Style x:Key="deleteBtn" TargetType="Icon:PackIconMaterial">
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Foreground" Value="Red"/>
 
         <Style.Triggers>
@@ -97,6 +99,82 @@
             </Trigger>
         </Style.Triggers>
 
+    </Style>
+
+    <Style x:Key="textboxSearch" TargetType="TextBox">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Foreground" Value="DarkGray"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Padding" Value="20"/>
+        <!-- Adjust Padding values as needed -->
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0 10 10 10"/>
+        <!-- Adjust Margin values as needed -->
+        <Setter Property="HorizontalContentAlignment" Value="Left"/> <!-- Set HorizontalContentAlignment to Left -->
+        <Setter Property="VerticalContentAlignment" Value="Center"/> <!-- Set VerticalContentAlignment to Center -->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border x:Name="border" CornerRadius="20" Background="{TemplateBinding Background}" SnapsToDevicePixels="True"
+                            BorderThickness="1" BorderBrush="#e0e6ed">
+                        <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden"
+                                      VerticalScrollBarVisibility="Hidden" Margin="17 0 0 0"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="#BC73FF" TargetName="border"/>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="BorderBrush" Value="#BC73FF" TargetName="border"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="filterButton" TargetType="Button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="black"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Width" Value="150"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border" Background="{TemplateBinding Background}" BorderThickness="1" BorderBrush="#e0e6ed" CornerRadius="8">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        
+                        <DataTrigger Binding="{Binding ElementName=iconButton, Path=isActive}" Value="True">
+                            <Setter TargetName="border" Property="BorderBrush" Value="BlueViolet"/>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+                
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Tag" Value="Hidden"/>
+                <Setter Property="Background" Value="LightGray"/>
+            </Trigger>
+
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="Tag" Value="Hidden"/>
+            </Trigger>
+
+            <DataTrigger Binding="{Binding ElementName=iconButton, Path=isActive}" Value="True">
+                <Setter Property="Tag" Value="Visible"/>
+                <Setter Property="Background" Value="#FFFFFF"/>
+                <Setter Property="Foreground" Value="BlueViolet"/>
+            </DataTrigger>
+
+        </Style.Triggers>
     </Style>
 
 
@@ -115,5 +193,9 @@
 
     <DataTemplate DataType="{x:Type viewmodels:ProductCategoryManagementViewModel}">
         <views:ProductCategoryManagementView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewmodels:ProductManagementViewModel}">
+        <views:ProductManagementView/>
     </DataTemplate>
 </ResourceDictionary>

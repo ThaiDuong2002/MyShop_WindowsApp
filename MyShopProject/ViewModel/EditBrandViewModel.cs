@@ -1,4 +1,5 @@
-﻿using MyShopProject.Model;
+﻿using Microsoft.Win32;
+using MyShopProject.Model;
 using MyShopProject.Repositories;
 using System;
 using System.Collections.Generic;
@@ -37,39 +38,46 @@ namespace MyShopProject.ViewModel
             }
         }
         public int Id;
-        public TextBlock fileName { get; set; }
         public ICommand SaveCommand { get; set; }
+        public ICommand ChooseImageCommand { get; set; }
         public EditBrandViewModel()
         {
             ProductCatgoryRepository = new ProductCatgoryRepository();
-            SaveCommand = new RelayCommand<object>((p) =>
+            SaveCommand = new RelayCommand<Window>((p) =>
             {
                 return true;
             }, (p) =>
             {
 
-                updateBrand();
+                updateBrand(p);
             });
+
+            ChooseImageCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                ChooseImage();
+            });
+
+
         }
 
-        public void LoadData(Brand brand, TextBlock fileName)
+        public void LoadData(Brand brand)
         {
             Id = brand.Id;
             Name = brand.Name;
             Logo = brand.Logo;
-            this.fileName = fileName;
         }
-        public void updateBrand()
+        public void updateBrand(Window p)
         {
-
-            var path = new Uri(this.fileName.Text).ToString();
             Brand brand = new Brand();
             brand.Name = Name;
-            brand.Logo = path;
+            brand.Logo = Logo;
             if (ProductCatgoryRepository.UpdateBrand(brand, Id))
             {
                 System.Windows.MessageBox.Show("Cập nhật thành công");
-                Application.Current.Windows[1].DialogResult = true;
+                p.DialogResult = true;
             }
             else
             {
@@ -77,7 +85,17 @@ namespace MyShopProject.ViewModel
             }
         }
 
-        
+        public void ChooseImage()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg)|*.png;*.jpeg;*.jpg|All files (*.*)|*.*";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                Logo = new Uri(openFileDialog.FileName).ToString();
+            }
+        }
+
+
 
     }
 }

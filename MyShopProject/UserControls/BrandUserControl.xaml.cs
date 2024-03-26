@@ -25,16 +25,5 @@ namespace MyShopProject.UserControls
         {
             InitializeComponent();
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg)|*.png;*.jpeg;*.jpg";
-            if (openFileDialog.ShowDialog() == true)
-            {
-                image.Source = new BitmapImage(new Uri(openFileDialog.FileName));
-                fileName.Text = new Uri(openFileDialog.FileName).ToString();
-            }
-        }
     }
 }

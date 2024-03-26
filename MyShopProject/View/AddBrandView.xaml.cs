@@ -22,22 +22,9 @@ namespace MyShopProject.View
     /// </summary>
     public partial class AddBrandView : Window
     {
-        public AddBrandViewModel _viewModel;
         public AddBrandView()
         {
             InitializeComponent();
-            _viewModel = new AddBrandViewModel();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            var brand = new Brand()
-            {
-                Name = addBrand.brandName.Text,
-                Logo = addBrand.fileName.Text
-            };
-            _viewModel.AddBrand(brand);
-            addBrand.brandName.Text = "";
         }
     }
 }

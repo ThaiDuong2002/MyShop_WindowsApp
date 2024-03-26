@@ -29,7 +29,19 @@ namespace MyShopProject.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            string input = value as string;
+            if (input != null)
+            {
+                // Xóa bỏ ký hiệu "VNĐ" trước khi chuyển đổi
+                input = input.Replace(" VND", "");
+
+                double result;
+                if (double.TryParse(input, NumberStyles.AllowThousands, culture, out result))
+                {
+                    return result;
+                }
+            }
+            return value;
         }
     }
 }

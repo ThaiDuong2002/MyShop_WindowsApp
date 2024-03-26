@@ -7,9 +7,10 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         DataContext="{StaticResource AddBrandVM}"
+        Name="AddBrandWindow"
         Title="AddBrandView" Height="450" Width="500">
     <Grid>
         <local:BrandUserControl x:Name="addBrand"/>
-        <Button Click="Button_Click" Command="{Binding AddCommand}" Content="Thêm nhãn hàng" HorizontalAlignment="Center" Margin="10,30,0,10" VerticalAlignment="Bottom" Height="30" />
+        <Button Command="{Binding AddCommand}" CommandParameter="{Binding ElementName=AddBrandWindow}" Content="Thêm nhãn hàng" HorizontalAlignment="Center" Margin="10,30,0,10" VerticalAlignment="Bottom" Height="30" />
     </Grid>
 </Window>
