@@ -17,6 +17,8 @@
     <None Remove="Images\brand\brand6.jpg" />
     <None Remove="Images\brand\brand7.jpg" />
     <None Remove="Images\brand\brand8.jpg" />
+    <None Remove="Images\icon\back.jpg" />
+    <None Remove="Images\icon\back_hover.jpg" />
     <None Remove="Images\laptop\default.jpg" />
     <None Remove="Images\laptop\laptop1.jpg" />
     <None Remove="Images\laptop\laptop10.jpg" />
@@ -64,6 +66,8 @@
     <Resource Include="Images\brand\brand6.jpg" />
     <Resource Include="Images\brand\brand7.jpg" />
     <Resource Include="Images\brand\brand8.jpg" />
+    <Resource Include="Images\icon\back.jpg" />
+    <Resource Include="Images\icon\back_hover.jpg" />
     <Resource Include="Images\laptop\default.jpg" />
     <Resource Include="Images\laptop\laptop10.jpg" />
     <Resource Include="Images\laptop\laptop11.jpg" />

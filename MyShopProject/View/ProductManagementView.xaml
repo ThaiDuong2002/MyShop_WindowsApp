@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:MyShopProject.View"
       mc:Ignorable="d" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="750" d:DesignWidth="800"
       DataContext="{StaticResource ProductManagementVM}"
       xmlns:Converter="clr-namespace:MyShopProject.Converters"
       xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
@@ -16,7 +16,7 @@
         <Converter:PriceConverter x:Key="PriceConverter"/>
     </Page.Resources>
 
-    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#F8F8FC" >
+    <Grid Background="#F8F8FC" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -132,7 +132,7 @@
                     </ListView.ItemsPanel>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <materialDesign:Card Cursor="Hand" Width="250" Margin="0 0 0 10" Background="White" materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                    <materialDesign:Card Cursor="Hand" Width="250" Margin="0 0 0 10" Background="White" materialDesign:ShadowAssist.ShadowDepth="Depth1">
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
@@ -152,7 +152,22 @@
                             </materialDesign:Card>
                         </DataTemplate>
                     </ListView.ItemTemplate>
-                </ListView>
+            <ListView.Resources>
+                <ContextMenu x:Key="productsContextMenu">
+                    <MenuItem Header="View details">
+
+                    </MenuItem>
+                </ContextMenu>
+            </ListView.Resources>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="ContextMenu"
+            Value="{StaticResource productsContextMenu}"/>
+                    <EventSetter Event="MouseDoubleClick"
+                 Handler="ProductListView_MouseDoubleClick"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
 
 
 
@@ -163,5 +178,6 @@
             <Label x:Name="contentPage" Content="{Binding PageInfo}" FontSize="16" BorderThickness="0" Margin="10"/>
             <Button Command="{Binding nextBtn}" Content="Trang sau" Background="BlueViolet" BorderThickness="0" Margin="10"/>
         </StackPanel>
+        <Frame Name="nextPage"></Frame>
     </Grid>
 </Page>

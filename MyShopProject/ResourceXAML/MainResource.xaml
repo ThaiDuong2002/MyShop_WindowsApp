@@ -12,8 +12,7 @@
     <viewmodel:ConnectConfigViewModel x:Key="ConnectConfigVM"></viewmodel:ConnectConfigViewModel>
     <viewmodel:AddBrandViewModel x:Key="AddBrandVM"></viewmodel:AddBrandViewModel>
     <viewmodel:EditBrandViewModel x:Key="EditBrandVM"></viewmodel:EditBrandViewModel>
-
     <viewmodel:AddProductViewModel x:Key="AddProductVM"></viewmodel:AddProductViewModel>
-
     <viewmodel:EditProductViewModel x:Key="EditProductVM"></viewmodel:EditProductViewModel>
+    <viewmodel:DetailProductViewModel x:Key="DetailProductVM"></viewmodel:DetailProductViewModel>
 </ResourceDictionary>

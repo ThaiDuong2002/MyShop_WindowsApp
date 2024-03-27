@@ -11,7 +11,7 @@ namespace MyShopProject.Converters
         {
             if (value == null)
             {
-                return "/Images/user/default.jpg";
+                return "/Images/laptop/default.jpg";
             }
             return value;
 

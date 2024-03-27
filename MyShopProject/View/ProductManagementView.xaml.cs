@@ -1,4 +1,5 @@
-﻿using MyShopProject.UserControls;
+﻿using MyShopProject.Model;
+using MyShopProject.UserControls;
 using MyShopProject.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,7 @@ namespace MyShopProject.View
     public partial class ProductManagementView : Page
     {
         public ProductManagementViewModel _viewModel;
+        public Page currentPage;
         public ProductManagementView()
         {
             InitializeComponent();
@@ -44,6 +46,18 @@ namespace MyShopProject.View
             {
                 searchHintTextBlock.Visibility = Visibility.Collapsed;
             }
+        }
+
+        private void ProductListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (listView.SelectedItem != null)
+            {
+                currentPage = this;
+                var product = listView.SelectedItem as Product;
+                var detailProductPage = new DetailProductView(product,currentPage);
+                NavigationService.Navigate(detailProductPage);
+            }
+
         }
     }
 }
