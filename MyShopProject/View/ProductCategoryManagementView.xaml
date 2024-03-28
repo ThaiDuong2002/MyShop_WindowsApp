@@ -24,25 +24,16 @@
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Padding="20,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" TextAlignment="Left" FontSize="24" FontWeight="Bold"  Margin="0 20 0 0"> DANH SÁCH NHÃN HÀNG</TextBlock>
-        <Button Command="{Binding AddCommand}" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 20 20 0" Content="Thêm nhãn hàng" x:Name="addCustomerButton" Background="BlueViolet" BorderThickness="0"/>
+        <Button Grid.Row="0" HorizontalAlignment="Right" Command="{Binding ImportBrandCommand}" Background="BlueViolet" BorderThickness="0" Margin="0 20 20 0">
+            <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="FileImportOutline" Width="25" Height="25"/>
+                <TextBlock VerticalAlignment="Center" Text="Nhập sản phẩm" />
+            </StackPanel>
+        </Button>
         <TextBlock Name="amountCustomerText" Grid.Row="1" Text="{Binding AmountProduct}" Padding="20,40,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" TextAlignment="Left" FontSize="18" FontWeight="Bold"  Margin="0 20 0 0"/>
         <StackPanel Grid.Row="1" HorizontalAlignment="Right" Orientation="Horizontal" Margin="0 10 20 0">
             <StackPanel Orientation="Horizontal">
-                <Button
-                    Command="{Binding EditCommand}"
-                    Content="Sửa"
-                    Background="Green"
-                    Margin="20 40 0 0"
-                    BorderThickness="0"
-                    />
-                <Button
-                    Command="{Binding DeleteCommand}"
-                    Content="Xóa"
-                    Margin="20 40 20 0"
-                    Background="Red"
-                    BorderThickness="0"
-                    />
-
+                <Button Command="{Binding AddCommand}" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 40 20 0" Content="Thêm nhãn hàng" x:Name="addCustomerButton" Background="BlueViolet" BorderThickness="0"/>
                 <StackPanel VerticalAlignment="Bottom" >
                 <TextBox Text="{Binding SearchBrandText, UpdateSourceTrigger=PropertyChanged}" Name="searchCustomerInput" materialDesign:HintAssist.Hint="Tìm kiếm tên nhãn hàng" BorderBrush="{DynamicResource MaterialDesignDivider}" Height="25" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="200" />
             </StackPanel>
@@ -62,7 +53,7 @@
                         Padding="10"
                         Margin="10"
                         Width="250"
-                        Height="250"
+                        Height="280"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Background="White"
@@ -79,6 +70,10 @@
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="Tên nhãn hàng: " FontSize="16"/>
                                 <TextBlock Text="{Binding Name}" FontSize="16" FontWeight="Bold" Foreground="Red"  />
+                            </StackPanel>
+                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" >
+                                <Button Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding}" Content="Sửa" Background="Green" BorderThickness="0" Margin="0 10 0 0"/>
+                                <Button Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding}" Content="Xóa" Background="Red" BorderThickness="0" Margin="10 10 0 0"/>
                             </StackPanel>
                         </StackPanel>
                     </materialDesign:Card>

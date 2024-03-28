@@ -10,6 +10,8 @@
 
   <ItemGroup>
     <None Remove="Images\brand\brand1.jpg" />
+    <None Remove="Images\brand\brand10.jpg" />
+    <None Remove="Images\brand\brand11.jpg" />
     <None Remove="Images\brand\brand2.jpg" />
     <None Remove="Images\brand\brand3.jpg" />
     <None Remove="Images\brand\brand4.jpg" />
@@ -17,6 +19,7 @@
     <None Remove="Images\brand\brand6.jpg" />
     <None Remove="Images\brand\brand7.jpg" />
     <None Remove="Images\brand\brand8.jpg" />
+    <None Remove="Images\brand\brand9.jpg" />
     <None Remove="Images\icon\back.jpg" />
     <None Remove="Images\icon\back_hover.jpg" />
     <None Remove="Images\laptop\default.jpg" />
@@ -26,6 +29,9 @@
     <None Remove="Images\laptop\laptop12.jpg" />
     <None Remove="Images\laptop\laptop13.jpg" />
     <None Remove="Images\laptop\laptop14.jpg" />
+    <None Remove="Images\laptop\laptop15.jpg" />
+    <None Remove="Images\laptop\laptop16.jpg" />
+    <None Remove="Images\laptop\laptop17.jpg" />
     <None Remove="Images\laptop\laptop2.jpg" />
     <None Remove="Images\laptop\laptop3.jpg" />
     <None Remove="Images\laptop\laptop4.jpg" />
@@ -59,6 +65,8 @@
 
   <ItemGroup>
     <Resource Include="Images\brand\brand1.jpg" />
+    <Resource Include="Images\brand\brand10.jpg" />
+    <Resource Include="Images\brand\brand11.jpg" />
     <Resource Include="Images\brand\brand2.jpg" />
     <Resource Include="Images\brand\brand3.jpg" />
     <Resource Include="Images\brand\brand4.jpg" />
@@ -66,6 +74,7 @@
     <Resource Include="Images\brand\brand6.jpg" />
     <Resource Include="Images\brand\brand7.jpg" />
     <Resource Include="Images\brand\brand8.jpg" />
+    <Resource Include="Images\brand\brand9.jpg" />
     <Resource Include="Images\icon\back.jpg" />
     <Resource Include="Images\icon\back_hover.jpg" />
     <Resource Include="Images\laptop\default.jpg" />
@@ -74,12 +83,17 @@
     <Resource Include="Images\laptop\laptop12.jpg" />
     <Resource Include="Images\laptop\laptop13.jpg" />
     <Resource Include="Images\laptop\laptop14.jpg" />
+    <Resource Include="Images\laptop\laptop15.jpg" />
+    <Resource Include="Images\laptop\laptop16.jpg" />
+    <Resource Include="Images\laptop\laptop17.jpg" />
     <Resource Include="Images\laptop\laptop6.jpg" />
     <Resource Include="Images\laptop\laptop9.jpg" />
     <Resource Include="Images\user\default.jpg" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="DocumentFormat.OpenXml" Version="3.0.2" />
+    <PackageReference Include="EPPlus" Version="7.0.10" />
     <PackageReference Include="InteractiveDataDisplay.WPF" Version="1.0.0" />
     <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="4.11.0" />
     <PackageReference Include="MaterialDesignThemes" Version="4.8" />

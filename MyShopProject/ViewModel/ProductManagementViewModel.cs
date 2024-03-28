@@ -1,14 +1,11 @@
 ﻿using Microsoft.IdentityModel.Tokens;
-using Microsoft.VisualBasic.ApplicationServices;
+using Microsoft.Win32;
 using MyShopProject.Model;
 using MyShopProject.Repositories;
 using MyShopProject.View;
-using System;
-using System.Collections.Generic;
+using OfficeOpenXml;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows;
 using System.Windows.Input;
 
@@ -73,7 +70,7 @@ namespace MyShopProject.ViewModel
         }
         private string _amountProduct;
         public string AmountProduct { get => _amountProduct; set { _amountProduct = value; OnPropertyChanged(); } }
-        private int _selectedItemPerPage=8;
+        private int _selectedItemPerPage = 8;
         public int SelectedItemPerPage
         {
             get => _selectedItemPerPage;
@@ -84,8 +81,8 @@ namespace MyShopProject.ViewModel
                 LoadData();
             }
         }
-        private int category=0;
-        private string _selectedCategory="Tất cả";
+        private int category = 0;
+        private string _selectedCategory = "Tất cả";
         public string SelectedCategory
         {
             get => _selectedCategory;
@@ -104,7 +101,7 @@ namespace MyShopProject.ViewModel
                 LoadData();
             }
         }
-        public List<int> ItemsPerPage => new List<int> { 4,8, 16, 20, 25 };
+        public List<int> ItemsPerPage => new List<int> { 4, 8, 16, 20, 25 };
         private int _currentPage = 1;
         private int _totalPage = 1;
 
@@ -116,6 +113,7 @@ namespace MyShopProject.ViewModel
         public ICommand AddProductCommand { get; set; }
         public ICommand EditProductCommand { get; set; }
         public ICommand DeleteProductCommand { get; set; }
+        public ICommand ImportProductCommand { get; set; }
 
 
 
@@ -169,16 +167,21 @@ namespace MyShopProject.ViewModel
                 DeleteProduct(p);
             });
 
+            ImportProductCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                ImportProduct();
+            });
+
             AmountProduct = totalProducts + " sản phẩm";
             _totalPage = totalProducts / SelectedItemPerPage + (totalProducts % SelectedItemPerPage == 0 ? 0 : 1); // Tính toán số trang
             PageInfo = $"Trang {_currentPage}/{_totalPage}";
         }
 
-        public int OrderFilter=-1;
+        public int OrderFilter = -1;
         public void LoadData()
         {
             Products.Clear(); // Xóa danh sách  cũ
-            (int totalCount, ObservableCollection<Product> products) result = _productRepository.GetFilteredProducts(category,_currentPage, SelectedItemPerPage,OrderFilter, SearchProductText, MinPrice, MaxPrice);
+            (int totalCount, ObservableCollection<Product> products) result = _productRepository.GetFilteredProducts(category, _currentPage, SelectedItemPerPage, OrderFilter, SearchProductText, MinPrice, MaxPrice);
             int totalProducts = result.totalCount;
             ObservableCollection<Product> product = result.products;
             AmountProduct = totalProducts + " sản phẩm";
@@ -201,7 +204,7 @@ namespace MyShopProject.ViewModel
             }
         }
 
-       private bool _isAscendingActive;
+        private bool _isAscendingActive;
         public bool IsAscendingActive
         {
             get => _isAscendingActive;
@@ -233,13 +236,13 @@ namespace MyShopProject.ViewModel
         }
         public void OrderFilterProduct(object p)
         {
-            if(p.ToString()=="ascending")
+            if (p.ToString() == "ascending")
             {
                 OrderFilter = 0;
                 IsAscendingActive = true;
                 IsDescendingActive = false;
                 IsSaleActive = false;
-            }    
+            }
             else
             {
                 OrderFilter = 1;
@@ -251,7 +254,7 @@ namespace MyShopProject.ViewModel
         }
 
 
-        private double _minPrice=0;
+        private double _minPrice = 0;
         public double MinPrice
         {
             get => _minPrice;
@@ -288,8 +291,8 @@ namespace MyShopProject.ViewModel
         {
             _currentPage = 1;
             Products.Clear();
-            (int totalCount, ObservableCollection<Product> products) result = _productRepository.GetFilteredProducts(category, _currentPage, SelectedItemPerPage, OrderFilter, SearchProductText,MinPrice,MaxPrice);
-            
+            (int totalCount, ObservableCollection<Product> products) result = _productRepository.GetFilteredProducts(category, _currentPage, SelectedItemPerPage, OrderFilter, SearchProductText, MinPrice, MaxPrice);
+
             ObservableCollection<Product> products = result.products;
             foreach (var item in products)
             {
@@ -302,25 +305,25 @@ namespace MyShopProject.ViewModel
 
         public void AddProductWindow()
         {
-          AddProductView addProductView = new AddProductView();
-           addProductView.ShowDialog();
-          if(addProductView.DialogResult==true)
-          {
-             LoadData();
-          }
-           
+            AddProductView addProductView = new AddProductView();
+            addProductView.ShowDialog();
+            if (addProductView.DialogResult == true)
+            {
+                LoadData();
+            }
+
         }
         public void EditProductWindow(Product product)
         {
             EditProductView editProductView = new EditProductView(product);
             editProductView.ShowDialog();
-            if(editProductView.DialogResult==true)
+            if (editProductView.DialogResult == true)
             {
-               int index = Products.IndexOf(product);
-               Products[index] = _productRepository.getProductByID(product.Id);
+                int index = Products.IndexOf(product);
+                Products[index] = _productRepository.getProductByID(product.Id);
             }
-           
-           
+
+
         }
         public void DeleteProduct(Product p)
         {
@@ -334,6 +337,43 @@ namespace MyShopProject.ViewModel
                 else
                 {
                     MessageBox.Show("Xóa sản phẩm thất bại", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        public void ImportProduct()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string path = openFileDialog.FileName;
+                var package = new ExcelPackage(new FileInfo(path));
+                var workSheet = package.Workbook.Worksheets[0];
+                int totalRows = workSheet.Dimension.Rows;
+                try
+                {
+
+                    for (int i = 2; i <= totalRows; i++)
+                    {
+                        Product product = new Product()
+                        {
+                            Name = workSheet.Cells[i, 1].Value.ToString(),
+                            BrandId = int.Parse(workSheet.Cells[i, 2].Value.ToString()),
+                            Price = int.Parse(workSheet.Cells[i, 3].Value.ToString()),
+                            Quantity = int.Parse(workSheet.Cells[i, 4].Value.ToString()),
+                            WarrantyPeriod = workSheet.Cells[i, 5].Value.ToString(),
+                            Weight = Math.Round(float.Parse(workSheet.Cells[i, 6].Value.ToString()),1),
+                            Image = workSheet.Cells[i, 7].Value.ToString()
+                        };
+                        _productRepository.AddProduct(product);
+                    }
+                    System.Windows.MessageBox.Show("Nhập sản phẩm thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    LoadData();
+                }
+                catch
+                {
+                    System.Windows.MessageBox.Show("Nhập sản phẩm thất bại", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
         }

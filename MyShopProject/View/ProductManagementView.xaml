@@ -32,7 +32,19 @@
             materialDesign:ShadowAssist.ShadowDepth="Depth1"
             materialDesign:ShadowAssist.ShadowEdges="Bottom"
             Background="White">
-            <TextBlock Text="Quản lý sản phẩm" FontSize="24" FontWeight="Bold"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="Quản lý sản phẩm" Margin="10" FontSize="24" FontWeight="Bold"/>
+                <Button Grid.Column="1" Command="{Binding ImportProductCommand}" Background="BlueViolet" BorderThickness="0" Margin="10">
+                    <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="FileImportOutline" Width="25" Height="25"/>
+                        <TextBlock VerticalAlignment="Center" Text="Nhập sản phẩm" Margin="5 0 0 0"/>
+                    </StackPanel>
+                </Button>
+            </Grid>
         </materialDesign:Card>
         <materialDesign:Card
             Grid.Row="1"
