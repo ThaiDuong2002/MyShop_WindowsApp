@@ -1,18 +1,7 @@
 ﻿using MyShopProject.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace MyShopProject.UserControls
 {
@@ -21,12 +10,12 @@ namespace MyShopProject.UserControls
     /// </summary>
     public partial class MenuButton : UserControl
     {
-        public ICommand updateViewCommand { get;set; }
+        public ICommand updateViewCommand { get; set; }
         public MenuButton()
         {
             InitializeComponent();
 
-            updateViewCommand = new RelayCommand<UserControl>((p) => { return true; }, (p) => {  });
+            updateViewCommand = new RelayCommand<UserControl>((p) => { return true; }, (p) => { });
         }
 
         public string Title

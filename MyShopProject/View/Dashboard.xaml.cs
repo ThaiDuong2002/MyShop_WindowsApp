@@ -26,41 +26,42 @@ namespace MyShopProject.View
             subMenuBTN = subMenu;
 
             var select = menu.Children[0] as MenuButton;
-            select.btn.Command = current.UpdateViewCommand;
+            select!.btn.Command = current.UpdateViewCommand;
 
             string _screen = System.Configuration.ConfigurationManager.AppSettings["Screen"]!;
             if (_screen.Equals("Dashboard"))
             {
                 select = menu.Children[0] as MenuButton;
                 select?.btn.Focus();
-                select.btn.Command = current.UpdateViewCommand;
+                select!.btn.Command = current.UpdateViewCommand;
                 select?.btn.Command.Execute("Dashboard");
             }
             else if (_screen.Equals("QLKH"))
             {
                 select = menu.Children[1] as MenuButton;
                 select?.btn.Focus();
-                select.btn.Command = current.UpdateViewCommand;
+                select!.btn.Command = current.UpdateViewCommand;
                 select?.btn.Command.Execute("QLKH");
             }
             else if (_screen.Equals("QLLOAISP"))
             {
                 select = menu.Children[2] as MenuButton;
                 select?.btn.Focus();
-                select.btn.Command = current.UpdateViewCommand;
+                select!.btn.Command = current.UpdateViewCommand;
                 select?.btn.Command.Execute("QLLOAISP");
             }
             else if (_screen.Equals("QLSP"))
             {
                 select = menu.Children[3] as MenuButton;
                 select?.btn.Focus();
-                select.btn.Command = current.UpdateViewCommand;
+                select!.btn.Command = current.UpdateViewCommand;
                 select?.btn.Command.Execute("QLSP");
             }
             else if (_screen.Equals("QLDH"))
             {
                 select = menu.Children[4] as MenuButton;
                 select?.btn.Focus();
+                select!.btn.Command = current.UpdateViewCommand;
                 select?.btn.Command.Execute("QLDH");
             }
             else if (_screen.Equals("QLKM"))
@@ -91,7 +92,7 @@ namespace MyShopProject.View
             {
                 select = menu.Children[0] as MenuButton;
                 select?.btn.Focus();
-                select.btn.Command = current.UpdateViewCommand;
+                select!.btn.Command = current.UpdateViewCommand;
                 select?.btn.Command.Execute("Dashboard");
             }
 
@@ -100,10 +101,10 @@ namespace MyShopProject.View
                 if (menu.Children[i] is MenuButton)
                 {
                     var select_ = menu.Children[i] as MenuButton;
-                    if (select_.btn.IsFocused == true)
+                    if (select_?.btn.IsFocused == true)
                         select_.isActive = true;
                     else
-                        select_.isActive = false;
+                        select_!.isActive = false;
                 }
             }
 
@@ -112,10 +113,10 @@ namespace MyShopProject.View
                 if (subMenuBTN.Children[i] is MenuButton)
                 {
                     var select_ = subMenuBTN.Children[i] as MenuButton;
-                    if (select_.btn.IsFocused == true)
+                    if (select_?.btn.IsFocused == true)
                         select_.isActive = true;
                     else
-                        select_.isActive = false;
+                        select_!.isActive = false;
                 }
             }
         }
@@ -154,7 +155,7 @@ namespace MyShopProject.View
         private void MenuButton_Loaded(object sender, RoutedEventArgs e)
         {
             var item = sender as MenuButton;
-            Debug.WriteLine(item.btn.IsFocused);
+            Debug.WriteLine(item!.btn.IsFocused);
         }
 
 

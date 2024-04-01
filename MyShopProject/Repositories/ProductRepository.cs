@@ -18,7 +18,7 @@ namespace MyShopProject.Repositories
             return products;
         }
 
-        public (int totalCount, ObservableCollection<Product> products) GetFilteredProducts(int category, int page, int itemPerPage, int? sortOrder,string?name,double? minPrice, double? maxPrice)
+        public (int totalCount, ObservableCollection<Product> products) GetFilteredProducts(int category, int page, int itemPerPage, int? sortOrder, string? name, double? minPrice, double? maxPrice)
         {
             int totalCount;
             ObservableCollection<Product> products = new ObservableCollection<Product>();
@@ -27,18 +27,18 @@ namespace MyShopProject.Repositories
                 IQueryable<Product> query = context.Products.Include(p => p.Brand);
 
                 // Lọc theo danh mục nếu category có giá trị
-                if (category!=0)
+                if (category != 0)
                     query = query.Where(p => p.BrandId == category);
 
                 // Sắp xếp theo giá nếu sortOrder là "asc", ngược lại sắp xếp giảm dần
-                if(sortOrder.HasValue)
+                if (sortOrder.HasValue)
                 {
-                    if (sortOrder== 0)
+                    if (sortOrder == 0)
                         query = query.OrderBy(p => p.Price);
-                    else if(sortOrder==1)
+                    else if (sortOrder == 1)
                         query = query.OrderByDescending(p => p.Price);
                 }
-                
+
                 // Lọc theo tên nếu name có giá trị
                 if (!string.IsNullOrEmpty(name))
                     query = query.Where(p => p.Name.Contains(name));
@@ -138,7 +138,7 @@ namespace MyShopProject.Repositories
                 return true;
             }
         }
-        public bool UpdateProduct(Product product,int id)
+        public bool UpdateProduct(Product product, int id)
         {
             using (var context = new MyShopContext())
             {
@@ -167,6 +167,6 @@ namespace MyShopProject.Repositories
                 return true;
             }
         }
-    
+
     }
 }

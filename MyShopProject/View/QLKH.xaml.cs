@@ -1,5 +1,4 @@
-﻿using MyShopProject.UserControls;
-using MyShopProject.ViewModel;
+﻿using MyShopProject.ViewModel;
 using System.Windows.Controls;
 
 namespace MyShopProject.View

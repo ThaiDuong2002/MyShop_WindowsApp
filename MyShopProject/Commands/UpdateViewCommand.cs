@@ -43,10 +43,14 @@ namespace MyShopProject.Commands
             {
                 viewModel.SelectedViewModel = new ProductCategoryManagementViewModel();
             }
-            else if(parameter.ToString()=="QLSP")
+            else if (parameter.ToString() == "QLSP")
             {
                 viewModel.SelectedViewModel = new ProductManagementViewModel();
-            }    
+            }
+            else if (parameter.ToString() == "QLDH")
+            {
+                viewModel.SelectedViewModel = new OrderManagementViewModel();
+            }
 
         }
     }

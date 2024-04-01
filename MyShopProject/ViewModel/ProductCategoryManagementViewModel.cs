@@ -6,10 +6,8 @@ using MyShopProject.View;
 using OfficeOpenXml;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
 
 namespace MyShopProject.ViewModel
 {
@@ -108,14 +106,14 @@ namespace MyShopProject.ViewModel
             PageInfo = $"Trang {_currentPage}/{_totalPage}";
             AmountProduct = $"Tổng số thương hiệu: {totalBrands}";
         }
- 
+
 
         public void AddBrandWindow()
         {
 
             AddBrandView addBrandView = new AddBrandView();
             addBrandView.ShowDialog();
-            if(addBrandView.DialogResult == true)
+            if (addBrandView.DialogResult == true)
             {
                 LoadData();
             }
@@ -182,7 +180,7 @@ namespace MyShopProject.ViewModel
                 int totalRows = workSheet.Dimension.Rows;
                 try
                 {
-                    for(int i = 2; i <= totalRows; i++)
+                    for (int i = 2; i <= totalRows; i++)
                     {
                         var brand = new Brand()
                         {

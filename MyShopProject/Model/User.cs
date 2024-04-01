@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace MyShopProject.Model;
+﻿namespace MyShopProject.Model;
 
 public partial class User : ICloneable
 {
@@ -14,7 +11,7 @@ public partial class User : ICloneable
     public string Phone { get; set; } = null!;
 
     public string Address { get; set; } = null!;
-    public string? Avatar { get; set; } 
+    public string? Avatar { get; set; }
 
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
     public object Clone()

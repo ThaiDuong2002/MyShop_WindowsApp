@@ -363,7 +363,7 @@ namespace MyShopProject.ViewModel
                             Price = int.Parse(workSheet.Cells[i, 3].Value.ToString()),
                             Quantity = int.Parse(workSheet.Cells[i, 4].Value.ToString()),
                             WarrantyPeriod = workSheet.Cells[i, 5].Value.ToString(),
-                            Weight = Math.Round(float.Parse(workSheet.Cells[i, 6].Value.ToString()),1),
+                            Weight = Math.Round(float.Parse(workSheet.Cells[i, 6].Value.ToString()), 1),
                             Image = workSheet.Cells[i, 7].Value.ToString()
                         };
                         _productRepository.AddProduct(product);

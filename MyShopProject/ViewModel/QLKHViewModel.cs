@@ -1,7 +1,6 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using MyShopProject.Model;
 using MyShopProject.Repositories;
-using MyShopProject.UserControls;
 using MyShopProject.View;
 using System.Collections.ObjectModel;
 using System.Windows;

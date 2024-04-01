@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace MyShopProject.Model;
+﻿namespace MyShopProject.Model;
 
 public partial class Promotion
 {

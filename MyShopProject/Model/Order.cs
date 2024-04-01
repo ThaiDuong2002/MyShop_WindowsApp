@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace MyShopProject.Model;
+﻿namespace MyShopProject.Model;
 
 public partial class Order
 {
@@ -12,6 +9,8 @@ public partial class Order
     public DateTime CreatedAt { get; set; }
 
     public DateTime UpdatedAt { get; set; }
+
+    public byte Status { get; set; }
 
     public virtual ICollection<OrderProduct> OrderProducts { get; set; } = new List<OrderProduct>();
 

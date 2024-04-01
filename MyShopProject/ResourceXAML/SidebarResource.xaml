@@ -198,4 +198,8 @@
     <DataTemplate DataType="{x:Type viewmodels:ProductManagementViewModel}">
         <views:ProductManagementView/>
     </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewmodels:OrderManagementViewModel}">
+        <views:OrderManagementView/>
+    </DataTemplate>
 </ResourceDictionary>

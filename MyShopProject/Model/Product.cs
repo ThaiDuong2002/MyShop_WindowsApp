@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace MyShopProject.Model;
+﻿namespace MyShopProject.Model;
 
 public partial class Product
 {
@@ -26,7 +23,7 @@ public partial class Product
 
     public virtual Brand? Brand { get; set; }
 
-    
+
     public virtual ICollection<OrderProduct> OrderProducts { get; set; } = new List<OrderProduct>();
 
 }
