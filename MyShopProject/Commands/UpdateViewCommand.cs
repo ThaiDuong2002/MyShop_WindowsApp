@@ -51,6 +51,10 @@ namespace MyShopProject.Commands
             {
                 viewModel.SelectedViewModel = new OrderManagementViewModel();
             }
+            else if (parameter.ToString() == "QLKM")
+            {
+                viewModel.SelectedViewModel = new PromotionManagementViewModel();
+            }
 
         }
     }

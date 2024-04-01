@@ -202,4 +202,8 @@
     <DataTemplate DataType="{x:Type viewmodels:OrderManagementViewModel}">
         <views:OrderManagementView/>
     </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewmodels:PromotionManagementViewModel}">
+        <views:PromotionManagemantView/>
+    </DataTemplate>
 </ResourceDictionary>

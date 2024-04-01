@@ -68,6 +68,7 @@ namespace MyShopProject.View
             {
                 select = menu.Children[5] as MenuButton;
                 select?.btn.Focus();
+                select!.btn.Command = current.UpdateViewCommand;
                 select?.btn.Command.Execute("QLKM");
             }
             else if (_screen.Equals("TKDTVLN"))
