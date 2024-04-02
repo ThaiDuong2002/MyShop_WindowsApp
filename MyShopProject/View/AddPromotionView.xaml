@@ -1,0 +1,16 @@
+﻿<Window x:Class="MyShopProject.View.AddPromotionView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyShopProject.UserControls"
+        mc:Ignorable="d"
+        Name="AddPromotionWindow"
+        WindowStartupLocation="CenterScreen"
+        DataContext="{StaticResource AddPromotionVM}"
+        Title="Thêm khuyến mãi" Height="380" Width="600">
+    <Grid>
+        <local:PromotionUserControl/>
+        <Button Command="{Binding AddCommand}" CommandParameter="{Binding ElementName=AddPromotionWindow}" Content="Thêm khuyến mãi" HorizontalAlignment="Center" Margin="10,30,0,10" VerticalAlignment="Bottom" Height="30" />
+    </Grid>
+</Window>

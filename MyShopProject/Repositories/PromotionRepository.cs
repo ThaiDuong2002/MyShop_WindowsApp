@@ -38,34 +38,57 @@ namespace MyShopProject.Repositories
             return promotions;
         }
 
-        public ObservableCollection<Promotion> GetPromotionById(int promotionId)
+        public Promotion GetPromotionById(int promotionId)
         {
-            ObservableCollection<Promotion> promotions = new ObservableCollection<Promotion>();
             using (var context = new MyShopContext())
             {
-                promotions = new ObservableCollection<Promotion>(context.Promotions
-                                       .Where(p => p.Id == promotionId).ToList());
+                return context.Promotions.Where(p => p.Id == promotionId).FirstOrDefault();
             }
-            return promotions;
         }
 
-        public void DeletePromotion(int promotionId)
+        public bool DeletePromotion(int promotionId)
         {
             using (var context = new MyShopContext())
             {
                 var promotion = context.Promotions.Find(promotionId);
                 context.Promotions.Remove(promotion!);
                 context.SaveChanges();
+                return true;
             }
         }
 
-        public void AddPromotion(Promotion promotion)
+        public bool AddPromotion(Promotion promotion)
         {
             using (var context = new MyShopContext())
             {
                 context.Promotions.Add(promotion);
                 context.SaveChanges();
+                return true;
             }
         }
+
+        public bool UpdatePromotion(Promotion promotion,int id)
+        {
+            using (var context = new MyShopContext())
+            {
+                var promotionToUpdate = context.Promotions.Where(p => p.Id == id).FirstOrDefault();
+                promotionToUpdate.Name = promotion.Name;
+                promotionToUpdate.ByPercent = promotion.ByPercent;
+                promotionToUpdate.ByCash = promotion.ByCash;
+                promotionToUpdate.ByProduct = promotion.ByProduct;
+                context.SaveChanges();
+                return true;
+            }
+        }
+
+
+
+        public int GetNumOfPromotions()
+        {
+            using (var context = new MyShopContext())
+            {
+                return context.Promotions.Count();
+            }
+        }   
     }
 }

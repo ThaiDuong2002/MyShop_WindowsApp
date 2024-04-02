@@ -57,7 +57,7 @@
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0" >
                     <TextBlock x:Name="searchHintTextBlock" Padding="20" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
-                            Panel.ZIndex="1" Text="Tìm kiếm sản phẩm">
+                            Panel.ZIndex="1" Text="Tìm kiếm khuyến mãi">
                         <TextBlock.Style>
                             <Style TargetType="TextBlock">
                                 <Setter Property="Visibility" Value="Visible"/>
@@ -91,7 +91,8 @@
                    Content="{Binding AmountPromotions}"
                    FontSize="20" FontWeight="Bold" 
                    Margin="20 10" />    
-            <Button Grid.Column="1" 
+            <Button Grid.Column="1"
+                    Command="{Binding AddPromotionCommand}"
                     Content="Thêm khuyến mãi" 
                     Background="BlueViolet" 
                     BorderThickness="0" 
@@ -181,6 +182,7 @@
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
                                     <Button Background="Transparent" 
+                                            Command="{Binding DataContext.EditPromotionCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}"
                                     BorderThickness="0">
                                         <Icon:PackIconMaterial Style="{StaticResource editBtn}" 
                                                        Kind="SquareEditOutline" 
@@ -189,8 +191,10 @@
                                                        Margin="0 0 10 0"/>
                                     </Button>
                                     <Button Background="Transparent"
+                                      Command="{Binding DataContext.DeletePromotionCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}"
                                     BorderThickness="0">
                                         <Icon:PackIconMaterial Style="{StaticResource deleteBtn}" 
+                                                               
                                                        Kind="Delete" 
                                                        Height="20" 
                                                        Width="20" 

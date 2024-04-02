@@ -20,6 +20,7 @@
     <None Remove="Images\brand\brand7.jpg" />
     <None Remove="Images\brand\brand8.jpg" />
     <None Remove="Images\brand\brand9.jpg" />
+    <None Remove="Images\discount\discount.png" />
     <None Remove="Images\icon\back.jpg" />
     <None Remove="Images\icon\back_hover.jpg" />
     <None Remove="Images\laptop\default.jpg" />
@@ -75,6 +76,7 @@
     <Resource Include="Images\brand\brand7.jpg" />
     <Resource Include="Images\brand\brand8.jpg" />
     <Resource Include="Images\brand\brand9.jpg" />
+    <Resource Include="Images\discount\discount.png" />
     <Resource Include="Images\icon\back.jpg" />
     <Resource Include="Images\icon\back_hover.jpg" />
     <Resource Include="Images\laptop\default.jpg" />

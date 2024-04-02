@@ -1,7 +1,9 @@
 ﻿using MyShopProject.Model;
 using MyShopProject.Repositories;
+using MyShopProject.View;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Windows;
 using System.Windows.Input;
 
 namespace MyShopProject.ViewModel
@@ -66,6 +68,9 @@ namespace MyShopProject.ViewModel
         public ICommand prevBtn { get; set; }
         public ICommand nextBtn { get; set; }
         public ICommand KeyDownCommand { get; set; }
+        public ICommand AddPromotionCommand { get; set; }
+        public ICommand EditPromotionCommand { get; set; }
+        public ICommand DeletePromotionCommand { get; set; }
         public PromotionManagementViewModel()
         {
             _pageInfo = $"Trang {_currentPage} / {_totalPage}";
@@ -75,6 +80,10 @@ namespace MyShopProject.ViewModel
             prevBtn = new RelayCommand<object>((p) => { return _currentPage > 1; }, (p) => { _currentPage--; LoadData(); });
             nextBtn = new RelayCommand<object>((p) => { return _currentPage < _totalPage; }, (p) => { _currentPage++; LoadData(); });
             KeyDownCommand = new RelayCommand<object>((p) => { return true; }, (p) => { LoadData(); });
+            AddPromotionCommand = new RelayCommand<object>((p) => { return true; }, (p) => { AddPromotionWindow(); });
+            EditPromotionCommand = new RelayCommand<Promotion>((p) => { return p != null; }, (p) => { EditPromotionWindow(p); });
+            DeletePromotionCommand = new RelayCommand<Promotion>((p) => { return p != null; }, (p) => { DeletePromotion(p); });
+
             LoadData();
         }
         private void LoadData()
@@ -86,6 +95,45 @@ namespace MyShopProject.ViewModel
             AmountPromotions = $"{totalPromotions} khuyến mãi";
             _totalPage = totalPromotions / SelectedItemsPerPage + (totalPromotions % SelectedItemsPerPage == 0 ? 0 : 1);
             PageInfo = $"Trang {_currentPage} / {_totalPage}";
+        }
+
+        private void AddPromotionWindow()
+        {
+            AddPromotionView addPromotionView = new AddPromotionView();
+            if (addPromotionView.ShowDialog() == true)
+            {
+                LoadData();
+            }
+        }
+
+        private void EditPromotionWindow(Promotion promotion)
+        {
+            EditPromotionView editPromotionView = new EditPromotionView(promotion);
+            if (editPromotionView.ShowDialog() == true)
+            {
+                var index = Promotions.IndexOf(promotion);
+                Promotions[index] = _promotionRepository.GetPromotionById(promotion.Id);
+
+            }
+        }
+
+
+        private void DeletePromotion(Promotion promotion)
+        {
+            if (MessageBox.Show("Bạn có chắc chắn muốn xóa khuyến mãi này không?", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                if (_promotionRepository.DeletePromotion(promotion.Id))
+                {
+                    MessageBox.Show("Xóa khuyến mãi thành công");
+                    Promotions.Remove(promotion);
+                    var totalPromotions = int.Parse(AmountPromotions.Split(' ')[0]) - 1;
+                    AmountPromotions = $"{totalPromotions} khuyến mãi";
+                }
+                else
+                {
+                    MessageBox.Show("Xóa khuyến mãi thất bại");
+                }
+            }
         }
     }
 }
