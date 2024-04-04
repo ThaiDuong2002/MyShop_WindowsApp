@@ -20,7 +20,7 @@ namespace MyShopProject.Converters
             }
             else
             {
-              
+
                 if (value is int intValue)
                 {
                     return intValue.ToString("N0", culture) + " VND";

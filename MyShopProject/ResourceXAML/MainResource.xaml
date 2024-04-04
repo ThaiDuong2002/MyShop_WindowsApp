@@ -19,4 +19,5 @@
     <viewmodel:PromotionManagementViewModel x:Key="PromotionManagementVM"></viewmodel:PromotionManagementViewModel>
     <viewmodel:AddPromotionViewModel x:Key="AddPromotionVM"></viewmodel:AddPromotionViewModel>
     <viewmodel:EditPromotionViewModel x:Key="EditPromotionVM"></viewmodel:EditPromotionViewModel>
+    <viewmodel:OrderDetailViewModel x:Key="OrderDetailVM"></viewmodel:OrderDetailViewModel>
 </ResourceDictionary>

@@ -1,5 +1,6 @@
 ﻿using MyShopProject.Repositories;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
 
 namespace MyShopProject.ViewModel
@@ -66,6 +67,8 @@ namespace MyShopProject.ViewModel
         public ICommand FilterOrderCommand { get; set; }
         public ICommand prevBtn { get; set; }
         public ICommand nextBtn { get; set; }
+        public ICommand editBtn { get; set; }
+        public ICommand deleteBtn { get; set; }
         public OrderManagementViewModel()
         {
             _startDate = null;
@@ -75,6 +78,9 @@ namespace MyShopProject.ViewModel
             _orderDetails = new ObservableCollection<OrderDetail>();
             prevBtn = new RelayCommand<object>((p) => { return _currentPage > 1; }, (p) => { Prev(); });
             nextBtn = new RelayCommand<object>((p) => { return _currentPage < _totalPage; }, (p) => { Next(); });
+            editBtn = new RelayCommand<object>((p) => { return true; }, (p) => { });
+            deleteBtn = new RelayCommand<OrderDetail>((p) => { return true; }, (p) => { DeleteOrder(p); });
+
             FilterOrderCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 LoadData();
@@ -92,27 +98,39 @@ namespace MyShopProject.ViewModel
             PageInfo = $"Trang {_currentPage}/{_totalPage}";
         }
 
-        //private void FilterOrder(object p)
-        //{
-        //    if (StartDate == null || EndDate == null)
-        //    {
-        //        LoadData();
-        //    }
+        private void EditOrder(OrderDetail order)
+        {
+            if (order == null)
+            {
+                return;
+            }
+            MessageBox.Show("Edit order");
+        }
 
-        //    var filteredOrders = new ObservableCollection<OrderDetail>(_orderRepository.GetAllOrderDetailsByPagination(StartDate, EndDate, _currentPage, SelectedItemsPerPage));
-        //    if (filteredOrders.Count == 0)
-        //    {
-        //        _orderDetails.Clear();
-        //    }
-        //}
+        private void DeleteOrder(OrderDetail order)
+        {
+            if (MessageBox.Show("Bạn có chắc chắn muốn xóa đơn hàng này không?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    _orderRepository.DeleteOrder(order);
+                    MessageBox.Show("Xóa đơn hàng thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    LoadData();
+                }
+                catch
+                {
+                    MessageBox.Show("Xóa đơn hàng không thành công", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
 
-        public void Prev()
+        private void Prev()
         {
             _currentPage--;
             LoadData();
         }
 
-        public void Next()
+        private void Next()
         {
             _currentPage++;
             LoadData();

@@ -46,7 +46,7 @@ namespace MyShopProject.Repositories
             User user = new User();
             using (var context = new MyShopContext())
             {
-                user = context.Users.Where(u => u.Id == id).FirstOrDefault();
+                user = context.Users.Where(u => u.Id == id).FirstOrDefault()!;
             }
             return user;
         }

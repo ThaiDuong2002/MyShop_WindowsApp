@@ -39,16 +39,16 @@ namespace MyShopProject.Repositories
             return orders;
         }
 
-        public ObservableCollection<Order> GetOrderBtId(int orderId)
+        public Order GetOrderById(int orderId)
         {
-            ObservableCollection<Order> orders = new ObservableCollection<Order>();
+            Order order = new Order();
             using (var context = new MyShopContext())
             {
-                orders = new ObservableCollection<Order>(context.Orders
+                order = context.Orders
                     .Include(o => o.User)
-                    .Where(o => o.Id == orderId).ToList());
+                    .FirstOrDefault(o => o.Id == orderId)!;
             }
-            return orders;
+            return order;
         }
 
         public (ObservableCollection<OrderDetail>, int) GetAllOrderDetailsByPagination(DateTime? startDate, DateTime? endDate, int Page, int ItemsPerPage)
@@ -113,6 +113,44 @@ namespace MyShopProject.Repositories
                 count = context.Orders.Count();
             }
             return count;
+        }
+        public (Order?, int, int) GetNumberOfOrderProductByOrderId(int orderId)
+        {
+            using (var context = new MyShopContext())
+            {
+                var order = context.Orders
+                    .Include(o => o.OrderProducts)
+                    .ThenInclude(op => op.Product)
+                    .ThenInclude(p => p.Brand)
+                    .FirstOrDefault(o => o.Id == orderId);
+
+                if (order == null)
+                {
+                    return (null, 0, 0);
+                }
+
+                int numberOfOrderProducts = order.OrderProducts.Count;
+
+                int numberOfDistinctBrands = order.OrderProducts
+                    .Select(op => op.Product.BrandId)
+                    .Distinct()
+                    .Count();
+
+                return (order, numberOfOrderProducts, numberOfDistinctBrands);
+            }
+        }
+
+        public void DeleteOrder(OrderDetail order)
+        {
+            using (var context = new MyShopContext())
+            {
+                var orderToDelete = context.Orders.FirstOrDefault(o => o.Id == order.Id);
+                if (orderToDelete != null)
+                {
+                    context.Orders.Remove(orderToDelete);
+                    context.SaveChanges();
+                }
+            }
         }
     }
 }

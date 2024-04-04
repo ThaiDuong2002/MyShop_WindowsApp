@@ -1,5 +1,7 @@
-﻿using MyShopProject.ViewModel;
+﻿using MyShopProject.Repositories;
+using MyShopProject.ViewModel;
 using System.Windows.Controls;
+using System.Windows.Navigation;
 
 namespace MyShopProject.View
 {
@@ -18,6 +20,13 @@ namespace MyShopProject.View
 
             Global.GetActiveButton();
             Global.SaveScreen("QLDH");
+        }
+
+        private void ViewOrderDetail_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            OrderDetail orderDetail = (OrderDetail)allOrder.SelectedItem;
+            OrderDetailView orderDetailView = new OrderDetailView(orderDetail, this);
+            NavigationService.Navigate(orderDetailView);
         }
     }
 }
