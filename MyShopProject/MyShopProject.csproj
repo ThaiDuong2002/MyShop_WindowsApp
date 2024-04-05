@@ -41,6 +41,7 @@
     <None Remove="Images\laptop\laptop7.jpg" />
     <None Remove="Images\laptop\laptop8.jpg" />
     <None Remove="Images\laptop\laptop9.jpg" />
+    <None Remove="Images\logo\db.png" />
     <None Remove="Images\logo\logo.png" />
     <None Remove="Images\user\default.jpg" />
     <None Remove="Images\user\user1.jpg" />
@@ -62,6 +63,10 @@
     <None Remove="Images\user\user7.jpg" />
     <None Remove="Images\user\user8.jpg" />
     <None Remove="Images\user\user9.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\logo\db.png" />
   </ItemGroup>
 
   <ItemGroup>

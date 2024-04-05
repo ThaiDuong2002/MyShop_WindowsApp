@@ -135,6 +135,13 @@
                             NameView="TKBH" />
                     </StackPanel>
                 </Expander>
+                <uc:MenuButton
+                    Title="Lưu trữ và khôi phục dữ liệu"
+                    Height="40"
+                    Margin="5,15,0,0"
+                    Icon="Database"
+                    Loaded="MenuButton_Loaded"
+                    NameView="DB" />
             </StackPanel>
         </Border>
 

@@ -22,4 +22,5 @@
     <viewmodel:EditPromotionViewModel x:Key="EditPromotionVM" />
     <viewmodel:OrderDetailViewModel x:Key="OrderDetailVM" />
     <viewmodel:AddOrderViewModel x:Key="AddOrderVM" />
+    <viewmodel:BackupRestoreDBViewModel x:Key="BackupRestoreDBVM" />
 </ResourceDictionary>

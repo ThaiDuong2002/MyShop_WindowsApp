@@ -89,6 +89,13 @@ namespace MyShopProject.View
                 select?.btn.Focus();
                 select?.btn.Command.Execute("TKBH");
             }
+            else if (_screen.Equals("DB"))
+            {
+                select = menu.Children[7] as MenuButton;
+                select?.btn.Focus();
+                select!.btn.Command = current.UpdateViewCommand;
+                select?.btn.Command.Execute("DB");
+            }
             else
             {
                 select = menu.Children[0] as MenuButton;

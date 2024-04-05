@@ -249,4 +249,8 @@
     <DataTemplate DataType="{x:Type viewmodels:PromotionManagementViewModel}">
         <views:PromotionManagemantView />
     </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewmodels:BackupRestoreDBViewModel}">
+        <views:BackupRestoreDBView />
+    </DataTemplate>
 </ResourceDictionary>

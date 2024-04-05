@@ -55,6 +55,10 @@ namespace MyShopProject.Commands
             {
                 viewModel.SelectedViewModel = new PromotionManagementViewModel();
             }
+            else if (parameter.ToString() == "DB")
+            {
+                viewModel.SelectedViewModel = new BackupRestoreDBViewModel();
+            }
 
         }
     }
