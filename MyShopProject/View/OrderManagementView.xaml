@@ -22,6 +22,7 @@
 
     <Page.Resources>
         <Converter:DateFormatConverter x:Key="DateFormatConverter" />
+        <Converter:PriceConverter x:Key="PriceConverter" />
     </Page.Resources>
 
     <Grid Background="#F8F8FC">
@@ -154,7 +155,7 @@
                         Header="Ngày đặt" />
                     <DataGridTextColumn
                         Width="*"
-                        Binding="{Binding TotalPrice}"
+                        Binding="{Binding TotalPrice, Converter={StaticResource PriceConverter}}"
                         Header="Tổng tiền" />
                     <DataGridTemplateColumn
                         Width="*"

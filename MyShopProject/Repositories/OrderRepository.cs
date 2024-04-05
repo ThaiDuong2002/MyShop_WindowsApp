@@ -9,7 +9,7 @@ namespace MyShopProject.Repositories
         public int Id { get; set; }
         public string UserName { get; set; }
         public DateTime CreatedAt { get; set; }
-        public decimal TotalPrice { get; set; }
+        public int TotalPrice { get; set; }
 
         public byte Status { get; set; }
     }
@@ -75,18 +75,18 @@ namespace MyShopProject.Repositories
 
                 foreach (var order in orders)
                 {
-                    decimal totalPrice = order.OrderProducts.Sum(op =>
+                    int totalPrice = order.OrderProducts.Sum(op =>
                     {
-                        decimal productPrice = op.Product.Price;
+                        int productPrice = op.Product.Price;
                         if (op.Promotion != null)
                         {
                             if (op.Promotion.ByPercent != null)
                             {
-                                productPrice -= productPrice * (decimal)op.Promotion.ByPercent / 100;
+                                productPrice -= productPrice * op.Promotion.ByPercent.Value / 100;
                             }
                             else if (op.Promotion.ByCash != null)
                             {
-                                productPrice -= (decimal)op.Promotion.ByCash;
+                                productPrice -= op.Promotion.ByCash.Value;
                             }
                         }
                         return productPrice * op.Amount;

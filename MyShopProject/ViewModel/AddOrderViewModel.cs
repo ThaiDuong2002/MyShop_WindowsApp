@@ -126,6 +126,7 @@ namespace MyShopProject.ViewModel
         public ICommand CancelCommand { get; set; }
         public AddOrderViewModel()
         {
+            OrderProductStorage.ClearOrderProductStore();
             _products = new ObservableCollection<Product>();
             _orderProductStores = new ObservableCollection<OrderProductStore>();
             _promotions = new ObservableCollection<Promotion>();
@@ -218,6 +219,8 @@ namespace MyShopProject.ViewModel
                 _orderProductRepository.AddOrderProduct(orderProduct);
             }
             MessageBox.Show("Thêm đơn hàng thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+            OrderProductStorage.ClearOrderProductStore();
+            p.DialogResult = true;
             p.Close();
         }
     }
