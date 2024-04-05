@@ -1,149 +1,209 @@
-﻿<Page x:Class="MyShopProject.View.PromotionManagemantView"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:MyShopProject.View"
-      mc:Ignorable="d" 
-      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      d:DesignHeight="750" d:DesignWidth="800"
-      xmlns:Converter="clr-namespace:MyShopProject.Converters"
-      xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
-      xmlns:uc="clr-namespace:MyShopProject.UserControls"
-      xmlns:validate="clr-namespace:MyShopProject.Validation"
-      DataContext="{StaticResource PromotionManagementVM}"
-      Name="promotionView"
-      Title="PromotionManagemantView">
+﻿<Page
+    x:Class="MyShopProject.View.PromotionManagemantView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Converter="clr-namespace:MyShopProject.Converters"
+    xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:MyShopProject.View"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:uc="clr-namespace:MyShopProject.UserControls"
+    xmlns:validate="clr-namespace:MyShopProject.Validation"
+    Name="promotionView"
+    Title="PromotionManagemantView"
+    d:DesignHeight="750"
+    d:DesignWidth="800"
+    DataContext="{StaticResource PromotionManagementVM}"
+    mc:Ignorable="d">
 
     <Page.Resources>
-        <Converter:NotNullConverter x:Key="NotNullConverter"/>
-        <Converter:PriceConverter x:Key="PriceConverter"/>
+        <Converter:NotNullConverter x:Key="NotNullConverter" />
+        <Converter:PriceConverter x:Key="PriceConverter" />
     </Page.Resources>
 
     <Grid Background="#F8F8FC">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
         </Grid.RowDefinitions>
-        <materialDesign:Card Grid.Row="0"
-                     Padding="10"
-                     Width="Auto"
-                     Height="Auto"
-                     materialDesign:ShadowAssist.ShadowDepth="Depth1"
-                     materialDesign:ShadowAssist.ShadowEdges="Bottom"
-                     Background="White">
+        <materialDesign:Card
+            Grid.Row="0"
+            Width="Auto"
+            Height="Auto"
+            Padding="10"
+            materialDesign:ShadowAssist.ShadowDepth="Depth1"
+            materialDesign:ShadowAssist.ShadowEdges="Bottom"
+            Background="White">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="Quản lý khuyến mãi" Margin="10" FontSize="24" FontWeight="Bold"/>
+                <TextBlock
+                    Grid.Column="0"
+                    Margin="10"
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Text="Quản lý khuyến mãi" />
             </Grid>
         </materialDesign:Card>
 
-        <materialDesign:Card Grid.Row="1"
-                     Padding="10"
-                     Margin="0 10 0 0"
-                     Width="Auto"
-                     Height="Auto"
-                     Background="White">
+        <materialDesign:Card
+            Grid.Row="1"
+            Width="Auto"
+            Height="Auto"
+            Margin="0,10,0,0"
+            Padding="10"
+            Background="White">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0" >
-                    <TextBlock x:Name="searchHintTextBlock" Padding="20" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
-                            Panel.ZIndex="1" Text="Tìm kiếm khuyến mãi">
+                <Grid Grid.Column="0">
+                    <TextBlock
+                        x:Name="searchHintTextBlock"
+                        Padding="20"
+                        VerticalAlignment="Center"
+                        Panel.ZIndex="1"
+                        Foreground="#b0b9c6"
+                        IsHitTestVisible="False"
+                        Text="Tìm kiếm khuyến mãi">
                         <TextBlock.Style>
                             <Style TargetType="TextBlock">
-                                <Setter Property="Visibility" Value="Visible"/>
+                                <Setter Property="Visibility" Value="Visible" />
                                 <Style.Triggers>
-                                    <DataTrigger Value="False" Binding="{Binding Text.IsEmpty, ElementName=searchPromotionInput}">
-                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    <DataTrigger
+                                        Binding="{Binding Text.IsEmpty, ElementName=searchPromotionInput}"
+                                        Value="False">
+                                        <Setter Property="Visibility" Value="Collapsed" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
                         </TextBlock.Style>
                     </TextBlock>
-                    <TextBox x:Name="searchPromotionInput"
-                             Text="{Binding SearchPromotionText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                             Style="{StaticResource textboxSearch}" 
-                             Height="40">
+                    <TextBox
+                        x:Name="searchPromotionInput"
+                        Height="40"
+                        Style="{StaticResource textboxSearch}"
+                        Text="{Binding SearchPromotionText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                         <TextBox.InputBindings>
-                            <KeyBinding Key="Enter" Command="{Binding KeyDownCommand}" CommandParameter="{Binding ElementName=promotionView}"/>
+                            <KeyBinding
+                                Key="Enter"
+                                Command="{Binding KeyDownCommand}"
+                                CommandParameter="{Binding ElementName=promotionView}" />
                         </TextBox.InputBindings>
                     </TextBox>
-                    <materialDesign:PackIcon Kind="Magnify" Width="25" Height="25" Margin="0 0 20 0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                    <materialDesign:PackIcon
+                        Width="25"
+                        Height="25"
+                        Margin="0,0,20,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Kind="Magnify" />
                 </Grid>
             </Grid>
         </materialDesign:Card>
 
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" 
-                   Content="{Binding AmountPromotions}"
-                   FontSize="20" FontWeight="Bold" 
-                   Margin="20 10" />    
-            <Button Grid.Column="1"
-                    Command="{Binding AddPromotionCommand}"
-                    Content="Thêm khuyến mãi" 
-                    Background="BlueViolet" 
-                    BorderThickness="0" 
-                    Margin="20 10"/>
+            <Label
+                Grid.Column="0"
+                Margin="20,10"
+                Content="{Binding AmountPromotions}"
+                FontSize="20"
+                FontWeight="Bold" />
+            <Button
+                Grid.Column="1"
+                Margin="20,10"
+                Background="BlueViolet"
+                BorderThickness="0"
+                Command="{Binding AddPromotionCommand}"
+                Content="Thêm khuyến mãi" />
         </Grid>
 
-        <materialDesign:Card Grid.Row="3" Name="orderCardTable" VerticalAlignment="Stretch">
-            <DataGrid VerticalScrollBarVisibility="Visible"
-                      ItemsSource="{Binding Promotions, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                      HorizontalScrollBarVisibility="Auto"
-                      IsReadOnly="True"
-                      x:Name="allOrder"
-                      AutoGenerateColumns="False"
-                      CanUserAddRows="False">   
+        <materialDesign:Card
+            Name="orderCardTable"
+            Grid.Row="3"
+            VerticalAlignment="Stretch">
+            <DataGrid
+                x:Name="allOrder"
+                AutoGenerateColumns="False"
+                CanUserAddRows="False"
+                HorizontalScrollBarVisibility="Auto"
+                IsReadOnly="True"
+                ItemsSource="{Binding Promotions, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                VerticalScrollBarVisibility="Visible">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Id}" Header="ID" Width="50" />
-                    <DataGridTextColumn Binding="{Binding Name}" Header="Tên khuyến mãi" Width="*" />
-                    <DataGridTemplateColumn Header="Hình thức" Width="*">
+                    <DataGridTextColumn
+                        Width="50"
+                        Binding="{Binding Id}"
+                        Header="ID" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding Name}"
+                        Header="Tên khuyến mãi" />
+                    <DataGridTemplateColumn
+                        Width="*"
+                        Header="Hình thức">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Border BorderThickness="1" Width="90" CornerRadius="15" HorizontalAlignment="Left">
+                                <Border
+                                    Width="90"
+                                    HorizontalAlignment="Left"
+                                    BorderThickness="1"
+                                    CornerRadius="15">
                                     <Border.Style>
                                         <Style TargetType="Border">
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding ByCash, Converter={StaticResource NotNullConverter}}" Value="True">
-                                                    <Setter Property="BorderBrush" Value="Purple"/>
+                                                <DataTrigger
+                                                    Binding="{Binding ByCash, Converter={StaticResource NotNullConverter}}"
+                                                    Value="True">
+                                                    <Setter Property="BorderBrush" Value="Purple" />
                                                 </DataTrigger>
-                                                <DataTrigger Binding="{Binding ByPercent, Converter={StaticResource NotNullConverter}}" Value="True">
-                                                    <Setter Property="BorderBrush" Value="Orange"/>
+                                                <DataTrigger
+                                                    Binding="{Binding ByPercent, Converter={StaticResource NotNullConverter}}"
+                                                    Value="True">
+                                                    <Setter Property="BorderBrush" Value="Orange" />
                                                 </DataTrigger>
-                                                <DataTrigger Binding="{Binding ByProduct, Converter={StaticResource NotNullConverter}}" Value="True">
-                                                    <Setter Property="BorderBrush" Value="SkyBlue"/>
+                                                <DataTrigger
+                                                    Binding="{Binding ByProduct, Converter={StaticResource NotNullConverter}}"
+                                                    Value="True">
+                                                    <Setter Property="BorderBrush" Value="SkyBlue" />
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
                                     </Border.Style>
-                                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center">
                                         <TextBlock.Style>
                                             <Style TargetType="TextBlock">
                                                 <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding ByCash, Converter={StaticResource NotNullConverter}}" Value="True">
-                                                        <Setter Property="Foreground" Value="Purple"/>
-                                                        <Setter Property="Text" Value="Tiền"/>
+                                                    <DataTrigger
+                                                        Binding="{Binding ByCash, Converter={StaticResource NotNullConverter}}"
+                                                        Value="True">
+                                                        <Setter Property="Foreground" Value="Purple" />
+                                                        <Setter Property="Text" Value="Tiền" />
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding ByPercent, Converter={StaticResource NotNullConverter}}" Value="True">
-                                                        <Setter Property="Foreground" Value="Orange"/>
-                                                        <Setter Property="Text" Value="Phần trăm"/>
+                                                    <DataTrigger
+                                                        Binding="{Binding ByPercent, Converter={StaticResource NotNullConverter}}"
+                                                        Value="True">
+                                                        <Setter Property="Foreground" Value="Orange" />
+                                                        <Setter Property="Text" Value="Phần trăm" />
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding ByProduct, Converter={StaticResource NotNullConverter}}" Value="True">
-                                                        <Setter Property="Foreground" Value="SkyBlue"/>
-                                                        <Setter Property="Text" Value="Tặng quà"/>
+                                                    <DataTrigger
+                                                        Binding="{Binding ByProduct, Converter={StaticResource NotNullConverter}}"
+                                                        Value="True">
+                                                        <Setter Property="Foreground" Value="SkyBlue" />
+                                                        <Setter Property="Text" Value="Tặng quà" />
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
@@ -154,21 +214,31 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn Header="Nội dung" Width="2*">
+                    <DataGridTemplateColumn
+                        Width="2*"
+                        Header="Nội dung">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center">
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center">
                                     <TextBlock.Style>
                                         <Style TargetType="TextBlock">
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding ByCash, Converter={StaticResource NotNullConverter}}" Value="True">
-                                                    <Setter Property="Text" Value="{Binding ByCash, Converter={StaticResource PriceConverter}, StringFormat='Giảm {0}'}"/>
+                                                <DataTrigger
+                                                    Binding="{Binding ByCash, Converter={StaticResource NotNullConverter}}"
+                                                    Value="True">
+                                                    <Setter Property="Text" Value="{Binding ByCash, Converter={StaticResource PriceConverter}, StringFormat='Giảm {0}'}" />
                                                 </DataTrigger>
-                                                <DataTrigger Binding="{Binding ByPercent, Converter={StaticResource NotNullConverter}}" Value="True">
-                                                    <Setter Property="Text" Value="{Binding ByPercent, StringFormat='Giảm {0} % giá trị sản phẩm'}"/>
+                                                <DataTrigger
+                                                    Binding="{Binding ByPercent, Converter={StaticResource NotNullConverter}}"
+                                                    Value="True">
+                                                    <Setter Property="Text" Value="{Binding ByPercent, StringFormat='Giảm {0} % giá trị sản phẩm'}" />
                                                 </DataTrigger>
-                                                <DataTrigger Binding="{Binding ByProduct, Converter={StaticResource NotNullConverter}}" Value="True">
-                                                    <Setter Property="Text" Value="{Binding ByProduct, StringFormat='Tặng {0}'}"/>
+                                                <DataTrigger
+                                                    Binding="{Binding ByProduct, Converter={StaticResource NotNullConverter}}"
+                                                    Value="True">
+                                                    <Setter Property="Text" Value="{Binding ByProduct, StringFormat='Tặng {0}'}" />
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
@@ -181,24 +251,29 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <Button Background="Transparent" 
-                                            Command="{Binding DataContext.EditPromotionCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}"
-                                    BorderThickness="0">
-                                        <Icon:PackIconMaterial Style="{StaticResource editBtn}" 
-                                                       Kind="SquareEditOutline" 
-                                                       Height="20" 
-                                                       Width="20" 
-                                                       Margin="0 0 10 0"/>
+                                    <Button
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        Command="{Binding DataContext.EditPromotionCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"
+                                        CommandParameter="{Binding}">
+                                        <Icon:PackIconMaterial
+                                            Width="20"
+                                            Height="20"
+                                            Margin="0,0,10,0"
+                                            Kind="SquareEditOutline"
+                                            Style="{StaticResource editBtn}" />
                                     </Button>
-                                    <Button Background="Transparent"
-                                      Command="{Binding DataContext.DeletePromotionCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}"
-                                    BorderThickness="0">
-                                        <Icon:PackIconMaterial Style="{StaticResource deleteBtn}" 
-                                                               
-                                                       Kind="Delete" 
-                                                       Height="20" 
-                                                       Width="20" 
-                                                       Margin="0 0 10 0"/>
+                                    <Button
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        Command="{Binding DataContext.DeletePromotionCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"
+                                        CommandParameter="{Binding}">
+                                        <Icon:PackIconMaterial
+                                            Width="20"
+                                            Height="20"
+                                            Margin="0,0,10,0"
+                                            Kind="Delete"
+                                            Style="{StaticResource deleteBtn}" />
                                     </Button>
                                 </StackPanel>
                             </DataTemplate>
@@ -208,22 +283,40 @@
             </DataGrid>
         </materialDesign:Card>
 
-        <StackPanel Grid.Row="4"
+        <StackPanel
             Name="Pagination"
-            Orientation="Horizontal"
+            Grid.Row="4"
+            HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            HorizontalAlignment="Center">
-            <Label Content="Số khuyến mãi mỗi trang"
-           Margin="10"
-           FontSize="16"
-           BorderThickness="0" />
-            <ComboBox Style="{StaticResource MaterialDesignComboBox}"
-                      ItemsSource="{Binding ItemsPerPage}"
-                      SelectedItem="{Binding SelectedItemsPerPage}"
-              Margin="10"/>
-            <Button Content="Trang trước" Command="{Binding prevBtn}" Background="BlueViolet" BorderThickness="0" Margin="10"/>
-            <Label x:Name="contentPage" Content="{Binding PageInfo}" FontSize="16" BorderThickness="0" Margin="10"/>
-            <Button Content="Trang sau" Command="{Binding nextBtn}" Background="BlueViolet" BorderThickness="0" Margin="10"/>
+            Orientation="Horizontal">
+            <Label
+                Margin="10"
+                BorderThickness="0"
+                Content="Số khuyến mãi mỗi trang"
+                FontSize="16" />
+            <ComboBox
+                Margin="10"
+                ItemsSource="{Binding ItemsPerPage}"
+                SelectedItem="{Binding SelectedItemsPerPage}"
+                Style="{StaticResource MaterialDesignComboBox}" />
+            <Button
+                Margin="10"
+                Background="BlueViolet"
+                BorderThickness="0"
+                Command="{Binding prevBtn}"
+                Content="Trang trước" />
+            <Label
+                x:Name="contentPage"
+                Margin="10"
+                BorderThickness="0"
+                Content="{Binding PageInfo}"
+                FontSize="16" />
+            <Button
+                Margin="10"
+                Background="BlueViolet"
+                BorderThickness="0"
+                Command="{Binding nextBtn}"
+                Content="Trang sau" />
         </StackPanel>
     </Grid>
 </Page>

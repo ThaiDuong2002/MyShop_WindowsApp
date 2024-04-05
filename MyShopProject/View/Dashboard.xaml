@@ -1,62 +1,167 @@
-﻿<Window x:Class="MyShopProject.View.Dashboard"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MyShopProject.View"
-        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
-        xmlns:uc="clr-namespace:MyShopProject.UserControls"
-        mc:Ignorable="d"
-        Name="dashboard"
-        WindowStartupLocation="CenterScreen"
-Title="Dashboard" Height="750" Width="1350">
+﻿<Window
+    x:Class="MyShopProject.View.Dashboard"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:MyShopProject.View"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:uc="clr-namespace:MyShopProject.UserControls"
+    Name="dashboard"
+    Title="Dashboard"
+    Width="1350"
+    Height="750"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="270"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="270" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="10*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Border Grid.Column="0" CornerRadius="0 30 0 0" Background="BlueViolet" BorderThickness="0">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,10,0">
-                <Image Source="/Images/logo/logo.png" Width="50" Height="50" Margin="10 10 0 10"/>
-                <TextBlock Text="My Shop" Foreground="White" FontSize="25" Margin="10 10 0 10"/>
+        <Border
+            Grid.Column="0"
+            Background="BlueViolet"
+            BorderThickness="0"
+            CornerRadius="0 30 0 0">
+            <StackPanel
+                Margin="0,10,10,0"
+                HorizontalAlignment="Center"
+                Orientation="Horizontal">
+                <Image
+                    Width="50"
+                    Height="50"
+                    Margin="10,10,0,10"
+                    Source="/Images/logo/logo.png" />
+                <TextBlock
+                    Margin="10,10,0,10"
+                    FontSize="25"
+                    Foreground="White"
+                    Text="My Shop" />
             </StackPanel>
         </Border>
-        <Border Background="BlueViolet" Grid.Column="0" Grid.Row="1" BorderThickness="0">
-            <StackPanel Margin="0 0 0 0" Name="menu">
-                <uc:MenuButton Margin="5,10,0,0" Title="Dashboard" Icon="ViewDashboard" NameView="Dashboard"  Height="40" Loaded="MenuButton_Loaded"/>
-                <uc:MenuButton Margin="5,10,0,0" Title="Danh Sách Khách Hàng" Icon="AccountGroup" NameView="QLKH"  Height="40" Loaded="MenuButton_Loaded"/>
-                <uc:MenuButton Margin="5,10,0,0" Title="Danh Sách Loại Sản Phẩm" Icon="ClipboardTextPlayOutline" NameView="QLLOAISP"  Height="40" Loaded="MenuButton_Loaded"/>
-                <uc:MenuButton Margin="5,10,0,0" Title="Danh Sách Sản Phẩm" Icon="Clipboard" NameView="QLSP"  Height="40" Loaded="MenuButton_Loaded"/>
-                <uc:MenuButton Margin="5,15,0,0" Title="Quản Lý Đơn Hàng" Icon="PlusBox" Height="40" NameView="QLDH"  Loaded="MenuButton_Loaded"/>
-                <uc:MenuButton Margin="5,15,0,0" Title="Quản Lý Khuyến Mãi" Icon="Flower" Height="40" NameView="QLKM" Loaded="MenuButton_Loaded"/>
-                <Expander Margin="0,10,0,0"  Background="{x:Null}" FontSize="16" Foreground="White">
+        <Border
+            Grid.Row="1"
+            Grid.Column="0"
+            Background="BlueViolet"
+            BorderThickness="0">
+            <StackPanel
+                Name="menu"
+                Margin="0,0,0,0">
+                <uc:MenuButton
+                    Title="Dashboard"
+                    Height="40"
+                    Margin="5,10,0,0"
+                    Icon="ViewDashboard"
+                    Loaded="MenuButton_Loaded"
+                    NameView="Dashboard" />
+                <uc:MenuButton
+                    Title="Danh Sách Khách Hàng"
+                    Height="40"
+                    Margin="5,10,0,0"
+                    Icon="AccountGroup"
+                    Loaded="MenuButton_Loaded"
+                    NameView="QLKH" />
+                <uc:MenuButton
+                    Title="Danh Sách Loại Sản Phẩm"
+                    Height="40"
+                    Margin="5,10,0,0"
+                    Icon="ClipboardTextPlayOutline"
+                    Loaded="MenuButton_Loaded"
+                    NameView="QLLOAISP" />
+                <uc:MenuButton
+                    Title="Danh Sách Sản Phẩm"
+                    Height="40"
+                    Margin="5,10,0,0"
+                    Icon="Clipboard"
+                    Loaded="MenuButton_Loaded"
+                    NameView="QLSP" />
+                <uc:MenuButton
+                    Title="Quản Lý Đơn Hàng"
+                    Height="40"
+                    Margin="5,15,0,0"
+                    Icon="PlusBox"
+                    Loaded="MenuButton_Loaded"
+                    NameView="QLDH" />
+                <uc:MenuButton
+                    Title="Quản Lý Khuyến Mãi"
+                    Height="40"
+                    Margin="5,15,0,0"
+                    Icon="Flower"
+                    Loaded="MenuButton_Loaded"
+                    NameView="QLKM" />
+                <Expander
+                    Margin="0,10,0,0"
+                    Background="{x:Null}"
+                    FontSize="16"
+                    Foreground="White">
                     <Expander.Header>
                         <StackPanel Orientation="Horizontal">
-                            <Icon:PackIconMaterial Kind="ChartBar" Width="25" Height="18" VerticalAlignment="Center"></Icon:PackIconMaterial>
-                            <TextBlock Text="Thống kê" FontSize="16"  VerticalAlignment="Center" Margin="5 0 0 0"></TextBlock>
+                            <Icon:PackIconMaterial
+                                Width="25"
+                                Height="18"
+                                VerticalAlignment="Center"
+                                Kind="ChartBar" />
+                            <TextBlock
+                                Margin="5,0,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="16"
+                                Text="Thống kê" />
                         </StackPanel>
                     </Expander.Header>
                     <StackPanel Name="subMenu">
-                        <uc:MenuButton Margin="30,0,0,0" Title="Doanh thu và lợi nhuận" Height="40" NameView="TKDTVLN" Loaded="MenuButton_Loaded"/>
-                        <uc:MenuButton Margin="30,12,0,0" Title="Sản phẩm" Height="40" NameView="TKSP" Loaded="MenuButton_Loaded"/>
-                        <uc:MenuButton Margin="30,12,0,0" Title="Bán hàng" Height="40" NameView="TKBH" Loaded="MenuButton_Loaded"/>
+                        <uc:MenuButton
+                            Title="Doanh thu và lợi nhuận"
+                            Height="40"
+                            Margin="30,0,0,0"
+                            Loaded="MenuButton_Loaded"
+                            NameView="TKDTVLN" />
+                        <uc:MenuButton
+                            Title="Sản phẩm"
+                            Height="40"
+                            Margin="30,12,0,0"
+                            Loaded="MenuButton_Loaded"
+                            NameView="TKSP" />
+                        <uc:MenuButton
+                            Title="Bán hàng"
+                            Height="40"
+                            Margin="30,12,0,0"
+                            Loaded="MenuButton_Loaded"
+                            NameView="TKBH" />
                     </StackPanel>
                 </Expander>
             </StackPanel>
         </Border>
-        
-        <Border Background="#ffffff" Grid.Column="1" Grid.RowSpan="3" MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_MouseLeftButtonDown">
-            <Frame NavigationUIVisibility="Hidden" Content="{Binding SelectedViewModel}"/>
+
+        <Border
+            Grid.RowSpan="3"
+            Grid.Column="1"
+            Background="#ffffff"
+            MouseDown="Border_MouseDown"
+            MouseLeftButtonDown="Border_MouseLeftButtonDown">
+            <Frame
+                Content="{Binding SelectedViewModel}"
+                NavigationUIVisibility="Hidden" />
         </Border>
-        
-        <Border Grid.Column="0" Grid.Row="2" CornerRadius="0 0 30 0" Background="BlueViolet" BorderThickness="0">
-            <uc:MenuButton Margin="5,5,0,0" Title="Đăng Xuất" Icon="Logout" NameView="dang_xuat" Height="40" Loaded="MenuButton_Loaded"></uc:MenuButton>
+
+        <Border
+            Grid.Row="2"
+            Grid.Column="0"
+            Background="BlueViolet"
+            BorderThickness="0"
+            CornerRadius="0 0 30 0">
+            <uc:MenuButton
+                Title="Đăng Xuất"
+                Height="40"
+                Margin="5,5,0,0"
+                Icon="Logout"
+                Loaded="MenuButton_Loaded"
+                NameView="dang_xuat" />
         </Border>
     </Grid>
 </Window>

@@ -1,16 +1,26 @@
-﻿<Window x:Class="MyShopProject.View.EditPromotionView"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MyShopProject.UserControls"
-        mc:Ignorable="d"
-        Name="EditPromotionWindow"
-        DataContext="{StaticResource EditProductVM}"
-        WindowStartupLocation="CenterScreen"
-        Title="EditPromotionView" Height="380" Width="600">
+﻿<Window
+    x:Class="MyShopProject.View.EditPromotionView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:MyShopProject.UserControls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Name="EditPromotionWindow"
+    Title="EditPromotionView"
+    Width="600"
+    Height="380"
+    DataContext="{StaticResource EditProductVM}"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
     <Grid>
-        <local:PromotionUserControl/>
-        <Button Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=EditPromotionWindow}" Content="Cập nhật" HorizontalAlignment="Center" Margin="10,30,0,10" VerticalAlignment="Bottom" Height="30" />
+        <local:PromotionUserControl />
+        <Button
+            Height="30"
+            Margin="10,30,0,10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Command="{Binding SaveCommand}"
+            CommandParameter="{Binding ElementName=EditPromotionWindow}"
+            Content="Cập nhật" />
     </Grid>
 </Window>

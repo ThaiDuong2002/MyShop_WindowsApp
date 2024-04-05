@@ -1,35 +1,49 @@
-﻿<UserControl x:Class="MyShopProject.UserControls.BrandUserControl"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:MyShopProject.UserControls"
-             xmlns:Converter="clr-namespace:MyShopProject.Converters"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="800">
+﻿<UserControl
+    x:Class="MyShopProject.UserControls.BrandUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Converter="clr-namespace:MyShopProject.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:MyShopProject.UserControls"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
     <UserControl.Resources>
-        <Converter:ImgLaptopConverter x:Key="imgLaptopConverter"/>
+        <Converter:ImgLaptopConverter x:Key="imgLaptopConverter" />
     </UserControl.Resources>
     <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <StackPanel Margin="10" Grid.Row="0" Orientation="Vertical">
-            <Image Name="image" Source="{Binding Logo,Converter={StaticResource imgLaptopConverter}}" d:Source="/Images/brand/brand1.jpg" Margin="10" Width="200" Height="200" />
-            <Button Command="{Binding ChooseImageCommand}" Content="Chọn ảnh" Width="100" />
+        <StackPanel
+            Grid.Row="0"
+            Margin="10"
+            Orientation="Vertical">
+            <Image
+                Name="image"
+                Width="200"
+                Height="200"
+                Margin="10"
+                d:Source="/Images/brand/brand1.jpg"
+                Source="{Binding Logo, Converter={StaticResource imgLaptopConverter}}" />
+            <Button
+                Width="100"
+                Command="{Binding ChooseImageCommand}"
+                Content="Chọn ảnh" />
         </StackPanel>
-        <TextBox Grid.Row="1" VerticalAlignment="Center"
-         materialDesign:HintAssist.Hint="Tên nhãn hàng"
-         Style="{StaticResource MaterialDesignOutlinedTextBox}"
-         Width="300"
-         Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}"
-         Name="brandName"
-         Margin="0 0 0 30">
-
-        </TextBox>
+        <TextBox
+            Name="brandName"
+            Grid.Row="1"
+            Width="300"
+            Margin="0,0,0,30"
+            VerticalAlignment="Center"
+            materialDesign:HintAssist.Hint="Tên nhãn hàng"
+            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+            Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
 
     </Grid>
 </UserControl>

@@ -50,8 +50,8 @@
                         Grid.Row="1"
                         Height="80"
                         Margin="10"
-                        SelectedItem="{Binding SelectedUser}"
                         ItemsSource="{Binding Users}"
+                        SelectedItem="{Binding SelectedUser}"
                         Style="{StaticResource MaterialDesignOutlinedComboBox}">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
@@ -196,16 +196,16 @@
                             Height="30"
                             Margin="20,0"
                             Background="Blue"
-                            Content="Tạo đơn hàng"
                             Command="{Binding AddOrderCommand}"
                             CommandParameter="{Binding ElementName=addOrderView}"
+                            Content="Tạo đơn hàng"
                             Style="{StaticResource MaterialDesignRaisedDarkButton}" />
                         <Button
                             Height="30"
                             Background="Red"
-                            Content="Hủy"
                             Command="{Binding CancelCommand}"
                             CommandParameter="{Binding ElementName=addOrderView}"
+                            Content="Hủy"
                             Style="{StaticResource MaterialDesignRaisedDarkButton}" />
                     </StackPanel>
                     <StackPanel

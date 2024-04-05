@@ -1,65 +1,133 @@
-﻿<Page x:Class="MyShopProject.View.DetailProductView"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:MyShopProject.View"
-      xmlns:Converter="clr-namespace:MyShopProject.Converters"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      DataContext="{StaticResource DetailProductVM}"
-      Title="DetailProductView">
+﻿<Page
+    x:Class="MyShopProject.View.DetailProductView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Converter="clr-namespace:MyShopProject.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:MyShopProject.View"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="DetailProductView"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    DataContext="{StaticResource DetailProductVM}"
+    mc:Ignorable="d">
     <Page.Resources>
-        <Converter:PriceConverter x:Key="PriceConverter"/>
+        <Converter:PriceConverter x:Key="PriceConverter" />
     </Page.Resources>
 
     <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <Image Cursor="Hand" MouseLeftButtonDown="Image_MouseLeftButtonDown" HorizontalAlignment="Left" Width="50" Height="50" Margin="20">
+            <Image
+                Width="50"
+                Height="50"
+                Margin="20"
+                HorizontalAlignment="Left"
+                Cursor="Hand"
+                MouseLeftButtonDown="Image_MouseLeftButtonDown">
                 <Image.Style>
                     <Style TargetType="{x:Type Image}">
-                        <Setter Property="Source" Value="/Images/icon/back.jpg"/>
+                        <Setter Property="Source" Value="/Images/icon/back.jpg" />
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Source" Value="/Images/icon/back_hover.jpg"/>
+                                <Setter Property="Source" Value="/Images/icon/back_hover.jpg" />
                             </Trigger>
                         </Style.Triggers>
                     </Style>
                 </Image.Style>
             </Image>
-            <TextBlock Text="Chi tiết sản phẩm" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="20"
+                FontWeight="Bold"
+                Text="Chi tiết sản phẩm" />
         </Grid>
         <Grid Grid.Row="1">
-            <Image  Source="{Binding Image}">
-                
-            </Image>
+            <Image Source="{Binding Image}" />
         </Grid>
         <Grid Grid.Row="2">
             <StackPanel HorizontalAlignment="Center">
-                <TextBlock HorizontalAlignment="Center" FontSize="25" Text="{Binding Name}" d:Text="MacBook Air M1 2020 13 inch (8GB/256GB SSD)" FontWeight="Bold"/>
-                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                    <TextBlock Text="Thương hiệu: " Foreground="Gray" FontSize="20" />
-                    <TextBlock Text="{Binding Brand.Name}" d:Text="MACBOOK" Foreground="Blue" FontSize="20" FontWeight="Bold"/>
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    d:Text="MacBook Air M1 2020 13 inch (8GB/256GB SSD)"
+                    FontSize="25"
+                    FontWeight="Bold"
+                    Text="{Binding Name}" />
+                <StackPanel
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal">
+                    <TextBlock
+                        FontSize="20"
+                        Foreground="Gray"
+                        Text="Thương hiệu: " />
+                    <TextBlock
+                        d:Text="MACBOOK"
+                        FontSize="20"
+                        FontWeight="Bold"
+                        Foreground="Blue"
+                        Text="{Binding Brand.Name}" />
                 </StackPanel>
-                <TextBlock HorizontalAlignment="Center" Text="{Binding Price,Converter={StaticResource PriceConverter}}" d:Text="21,590,000 VND" Foreground="Red" FontSize="20" FontWeight="Bold"/>
-                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                    <TextBlock Text="Bảo hành: " Foreground="Gray" FontSize="20" />
-                    <TextBlock Text="{Binding WarrantyPeriod}" Foreground="Black" FontSize="20" FontWeight="Bold"/>
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    d:Text="21,590,000 VND"
+                    FontSize="20"
+                    FontWeight="Bold"
+                    Foreground="Red"
+                    Text="{Binding Price, Converter={StaticResource PriceConverter}}" />
+                <StackPanel
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal">
+                    <TextBlock
+                        FontSize="20"
+                        Foreground="Gray"
+                        Text="Bảo hành: " />
+                    <TextBlock
+                        FontSize="20"
+                        FontWeight="Bold"
+                        Foreground="Black"
+                        Text="{Binding WarrantyPeriod}" />
                 </StackPanel>
-                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                    <TextBlock Text="Cân nặng: " Foreground="Gray" FontSize="20" />
-                    <TextBlock Text="{Binding Weight}" Foreground="Black" FontSize="20" FontWeight="Bold"/>
-                    <TextBlock Text=" kg" Foreground="Black" FontSize="20" FontWeight="Bold"/>
+                <StackPanel
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal">
+                    <TextBlock
+                        FontSize="20"
+                        Foreground="Gray"
+                        Text="Cân nặng: " />
+                    <TextBlock
+                        FontSize="20"
+                        FontWeight="Bold"
+                        Foreground="Black"
+                        Text="{Binding Weight}" />
+                    <TextBlock
+                        FontSize="20"
+                        FontWeight="Bold"
+                        Foreground="Black"
+                        Text=" kg" />
                 </StackPanel>
-                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                    <TextBlock Text="Số lượng: " Foreground="Gray" FontSize="20" />
-                    <TextBlock HorizontalAlignment="Center" Text="{Binding Quantity}" d:Text="15" FontSize="20" FontWeight="Bold"/>
-                    <TextBlock Text=" sản phẩm" Foreground="Black" FontSize="20" FontWeight="Bold"/>
+                <StackPanel
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal">
+                    <TextBlock
+                        FontSize="20"
+                        Foreground="Gray"
+                        Text="Số lượng: " />
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        d:Text="15"
+                        FontSize="20"
+                        FontWeight="Bold"
+                        Text="{Binding Quantity}" />
+                    <TextBlock
+                        FontSize="20"
+                        FontWeight="Bold"
+                        Foreground="Black"
+                        Text=" sản phẩm" />
                 </StackPanel>
             </StackPanel>
         </Grid>

@@ -1,16 +1,26 @@
-﻿<Window x:Class="MyShopProject.View.AddBrandView"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MyShopProject.UserControls"
-        mc:Ignorable="d"
-        WindowStartupLocation="CenterScreen"
-        DataContext="{StaticResource AddBrandVM}"
-        Name="AddBrandWindow"
-        Title="AddBrandView" Height="450" Width="500">
+﻿<Window
+    x:Class="MyShopProject.View.AddBrandView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:MyShopProject.UserControls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Name="AddBrandWindow"
+    Title="AddBrandView"
+    Width="500"
+    Height="450"
+    DataContext="{StaticResource AddBrandVM}"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
     <Grid>
-        <local:BrandUserControl x:Name="addBrand"/>
-        <Button Command="{Binding AddCommand}" CommandParameter="{Binding ElementName=AddBrandWindow}" Content="Thêm nhãn hàng" HorizontalAlignment="Center" Margin="10,30,0,10" VerticalAlignment="Bottom" Height="30" />
+        <local:BrandUserControl x:Name="addBrand" />
+        <Button
+            Height="30"
+            Margin="10,30,0,10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Command="{Binding AddCommand}"
+            CommandParameter="{Binding ElementName=AddBrandWindow}"
+            Content="Thêm nhãn hàng" />
     </Grid>
 </Window>
