@@ -175,5 +175,19 @@ namespace MyShopProject.Repositories
                 return true;
             }
         }
+        public bool UpdateEditOrderDate(int orderId, DateTime date)
+        {
+            using (var context = new MyShopContext())
+            {
+                var order = context.Orders.FirstOrDefault(o => o.Id == orderId);
+                if (order == null)
+                {
+                    return false;
+                }
+                order.UpdatedAt = date;
+                context.SaveChanges();
+                return true;
+            }
+        }
     }
 }

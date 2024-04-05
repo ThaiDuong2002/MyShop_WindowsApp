@@ -90,6 +90,7 @@ namespace MyShopProject.View
                 {
                     _productRepository.UpdateQuantityAfterOrder(orderProduct.ProductId, orderProduct.Amount);
                 }
+                _orderRepository.UpdateEditOrderDate(_orderDetail.Id, DateTime.Now);
             }
             else
             {
@@ -107,6 +108,7 @@ namespace MyShopProject.View
                 OrderStatusBorder.BorderBrush = System.Windows.Media.Brushes.Red;
                 OrderStatusText.Text = "Đã hủy";
                 OrderStatusText.Foreground = System.Windows.Media.Brushes.Red;
+                _orderRepository.UpdateEditOrderDate(_orderDetail.Id, DateTime.Now);
             }
             else
             {
