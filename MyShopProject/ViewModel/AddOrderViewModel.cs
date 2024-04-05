@@ -169,6 +169,10 @@ namespace MyShopProject.ViewModel
         }
         private void AddProduct(Product p)
         {
+            if (p.Quantity == 0)
+            {
+                MessageBox.Show("Sản phẩm đã hết hàng!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
             OrderProductStorage.AddOrderProductStore(new OrderProductStore
             {
                 ProductId = p.Id,
@@ -207,6 +211,15 @@ namespace MyShopProject.ViewModel
                 UpdatedAt = DateTime.Now,
                 Status = 1,
             });
+            foreach (var orderProductStore in OrderProductStorage.OrderProductStores)
+            {
+                bool IsAvailable = _productRepository.CheckProductQuantity(orderProductStore.ProductId, orderProductStore.Quantity);
+                if (!IsAvailable)
+                {
+                    MessageBox.Show("Sản phẩm " + orderProductStore.ProductName + " không đủ số lượng!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+            }
             foreach (var orderProductStore in OrderProductStorage.OrderProductStores)
             {
                 OrderProduct orderProduct = new OrderProduct

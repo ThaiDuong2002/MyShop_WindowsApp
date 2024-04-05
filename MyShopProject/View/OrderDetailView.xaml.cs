@@ -16,6 +16,7 @@ namespace MyShopProject.View
         private OrderDetail _orderDetail;
         private OrderRepository _orderRepository = new OrderRepository();
         private OrderProductRepository _orderProductRepository = new OrderProductRepository();
+        private ProductRepository _productRepository = new ProductRepository();
         public OrderDetailView(OrderDetail orderDetail, Page page)
         {
             InitializeComponent();
@@ -84,6 +85,12 @@ namespace MyShopProject.View
                 OrderStatusBorder.BorderBrush = System.Windows.Media.Brushes.Green;
                 OrderStatusText.Text = "Đã hoàn thành";
                 OrderStatusText.Foreground = System.Windows.Media.Brushes.Green;
+                ObservableCollection<OrderProduct> orderProducts = _orderProductRepository.GetOrderProductsByOrderId(_orderDetail.Id);
+                foreach (var orderProduct in orderProducts)
+                {
+                    _productRepository.UpdateQuantityAfterOrder(orderProduct.ProductId, orderProduct.Amount);
+                }
+                _orderRepository.UpdateEditOrderDate(_orderDetail.Id, DateTime.Now);
             }
             else
             {
@@ -101,6 +108,7 @@ namespace MyShopProject.View
                 OrderStatusBorder.BorderBrush = System.Windows.Media.Brushes.Red;
                 OrderStatusText.Text = "Đã hủy";
                 OrderStatusText.Foreground = System.Windows.Media.Brushes.Red;
+                _orderRepository.UpdateEditOrderDate(_orderDetail.Id, DateTime.Now);
             }
             else
             {
