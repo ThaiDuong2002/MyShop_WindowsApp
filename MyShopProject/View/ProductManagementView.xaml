@@ -197,11 +197,6 @@
                         Icon="SortDescending"
                         NameView="descending"
                         isActive="{Binding IsDescendingActive}" />
-                    <uc:IconButton
-                        Title="Khuyến mãi"
-                        Icon="Sale"
-                        NameView="sale"
-                        isActive="{Binding IsSaleActive}" />
                 </StackPanel>
 
             </Grid>
