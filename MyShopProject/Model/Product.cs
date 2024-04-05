@@ -6,8 +6,6 @@ public partial class Product
 
     public string Name { get; set; } = null!;
 
-    public string WarrantyPeriod { get; set; } = null!;
-
     public double Weight { get; set; }
 
     public int Price { get; set; }
@@ -16,7 +14,9 @@ public partial class Product
 
     public int? BrandId { get; set; }
 
-    public int? Quantity { get; set; }
+    public int PriceOriginal { get; set; }
+
+    public int Quantity { get; set; }
 
     public string? Image { get; set; }
 

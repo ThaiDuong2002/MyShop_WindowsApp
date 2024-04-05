@@ -60,6 +60,17 @@ namespace MyShopProject.ViewModel
                 OnPropertyChanged(nameof(Price));
             }
         }
+        private int _priceOriginal;
+        public int PriceOriginal
+        {
+            get { return _priceOriginal; }
+            set
+            {
+                _priceOriginal = value;
+                OnPropertyChanged(nameof(PriceOriginal));
+            }
+        }
+
         private int _quantity;
         public int Quantity
         {
@@ -68,16 +79,6 @@ namespace MyShopProject.ViewModel
             {
                 _quantity = value;
                 OnPropertyChanged(nameof(Quantity));
-            }
-        }
-        private string _warrantyPeriod;
-        public string WarrantyPeriod
-        {
-            get { return _warrantyPeriod; }
-            set
-            {
-                _warrantyPeriod = value;
-                OnPropertyChanged(nameof(WarrantyPeriod));
             }
         }
         private float _weight;
@@ -143,9 +144,9 @@ namespace MyShopProject.ViewModel
             Name = editProduct.Name;
             SelectedCategory =editProduct.Brand.Name;
             Price = editProduct.Price;
-            Quantity = editProduct.Quantity.Value;
-            WarrantyPeriod = editProduct.WarrantyPeriod;
+            PriceOriginal = editProduct.PriceOriginal;
             Weight = (float)editProduct.Weight;
+            Quantity = editProduct.Quantity;
             Image = editProduct.Image;
         }
 
@@ -157,8 +158,8 @@ namespace MyShopProject.ViewModel
                 Name = Name,
                 BrandId = BrandId,
                 Price = Price,
+                PriceOriginal = PriceOriginal,
                 Quantity = Quantity,
-                WarrantyPeriod = WarrantyPeriod,
                 Weight = Weight,
                 Image = Image
             };

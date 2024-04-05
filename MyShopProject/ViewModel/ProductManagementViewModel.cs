@@ -360,9 +360,9 @@ namespace MyShopProject.ViewModel
                         {
                             Name = workSheet.Cells[i, 1].Value.ToString(),
                             BrandId = int.Parse(workSheet.Cells[i, 2].Value.ToString()),
-                            Price = int.Parse(workSheet.Cells[i, 3].Value.ToString()),
-                            Quantity = int.Parse(workSheet.Cells[i, 4].Value.ToString()),
-                            WarrantyPeriod = workSheet.Cells[i, 5].Value.ToString(),
+                            PriceOriginal = int.Parse(workSheet.Cells[i, 3].Value.ToString()),
+                            Price = int.Parse(workSheet.Cells[i, 4].Value.ToString()),
+                            Quantity = int.Parse(workSheet.Cells[i, 5].Value.ToString()),
                             Weight = Math.Round(float.Parse(workSheet.Cells[i, 6].Value.ToString()), 1),
                             Image = workSheet.Cells[i, 7].Value.ToString()
                         };
@@ -371,9 +371,9 @@ namespace MyShopProject.ViewModel
                     System.Windows.MessageBox.Show("Nhập sản phẩm thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                     LoadData();
                 }
-                catch
+                catch(System.Exception e)
                 {
-                    System.Windows.MessageBox.Show("Nhập sản phẩm thất bại", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    System.Windows.MessageBox.Show($"Nhập sản phẩm thất bại", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
         }

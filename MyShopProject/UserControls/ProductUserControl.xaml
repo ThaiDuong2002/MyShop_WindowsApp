@@ -94,14 +94,14 @@
                         Grid.Column="0"
                         Margin="10,0,0,30"
                         VerticalAlignment="Center"
-                        materialDesign:HintAssist.Hint="Số lượng"
+                        materialDesign:HintAssist.Hint="Giá gốc"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                        Text="{Binding Quantity}" />
+                        Text="{Binding PriceOriginal, Converter={StaticResource priceConverter}, UpdateSourceTrigger=PropertyChanged}" />
                     <TextBox
                         Grid.Column="1"
                         Margin="10,0,10,30"
                         VerticalAlignment="Center"
-                        materialDesign:HintAssist.Hint="Giá"
+                        materialDesign:HintAssist.Hint="Giá bán"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
                         Text="{Binding Price, Converter={StaticResource priceConverter}, UpdateSourceTrigger=PropertyChanged}" />
                 </Grid>
@@ -114,9 +114,9 @@
                         Grid.Column="0"
                         Margin="10,0,0,30"
                         VerticalAlignment="Center"
-                        materialDesign:HintAssist.Hint="Số tháng bảo hành"
+                        materialDesign:HintAssist.Hint="Số lượng"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                        Text="{Binding WarrantyPeriod}" />
+                        Text="{Binding Quantity}" />
                     <TextBox
                         Grid.Column="1"
                         Margin="10,0,10,30"

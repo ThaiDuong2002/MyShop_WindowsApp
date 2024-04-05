@@ -72,25 +72,31 @@
                         Foreground="Blue"
                         Text="{Binding Brand.Name}" />
                 </StackPanel>
-                <TextBlock
-                    HorizontalAlignment="Center"
-                    d:Text="21,590,000 VND"
-                    FontSize="20"
-                    FontWeight="Bold"
-                    Foreground="Red"
-                    Text="{Binding Price, Converter={StaticResource PriceConverter}}" />
                 <StackPanel
                     HorizontalAlignment="Center"
                     Orientation="Horizontal">
                     <TextBlock
                         FontSize="20"
                         Foreground="Gray"
-                        Text="Bảo hành: " />
+                        Text="Giá gốc: " />
                     <TextBlock
                         FontSize="20"
                         FontWeight="Bold"
                         Foreground="Black"
-                        Text="{Binding WarrantyPeriod}" />
+                        Text="{Binding PriceOriginal,Converter={StaticResource PriceConverter}}" />
+                </StackPanel>
+                <StackPanel
+        HorizontalAlignment="Center"
+        Orientation="Horizontal">
+                    <TextBlock
+            FontSize="20"
+            Foreground="Gray"
+            Text="Giá bán: " />
+                    <TextBlock
+            FontSize="20"
+            FontWeight="Bold"
+            Foreground="Red"
+            Text="{Binding Price,Converter={StaticResource PriceConverter}}" />
                 </StackPanel>
                 <StackPanel
                     HorizontalAlignment="Center"

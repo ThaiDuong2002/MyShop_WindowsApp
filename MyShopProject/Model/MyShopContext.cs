@@ -108,7 +108,6 @@ public partial class MyShopContext : DbContext
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.BrandId).HasColumnName("BrandID");
             entity.Property(e => e.Name).HasMaxLength(200);
-            entity.Property(e => e.WarrantyPeriod).HasMaxLength(20);
 
             entity.HasOne(d => d.Brand).WithMany(p => p.Products)
                 .HasForeignKey(d => d.BrandId)

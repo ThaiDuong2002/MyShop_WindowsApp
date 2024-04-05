@@ -146,7 +146,6 @@ namespace MyShopProject.Repositories
                 if (productUpdate != null)
                 {
                     productUpdate.Name = product.Name;
-                    productUpdate.WarrantyPeriod = product.WarrantyPeriod;
                     productUpdate.Weight = product.Weight;
                     productUpdate.Price = product.Price;
                     productUpdate.BrandId = product.BrandId;
