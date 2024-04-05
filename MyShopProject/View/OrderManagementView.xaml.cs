@@ -27,6 +27,12 @@ namespace MyShopProject.View
             OrderDetail orderDetail = (OrderDetail)allOrder.SelectedItem;
             OrderDetailView orderDetailView = new OrderDetailView(orderDetail, this);
             NavigationService.Navigate(orderDetailView);
+            NavigationService.RemoveBackEntry();
+        }
+
+        private void Page_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            _viewModel.LoadData();
         }
     }
 }

@@ -67,7 +67,7 @@ namespace MyShopProject.Repositories
             }
         }
 
-        public bool UpdatePromotion(Promotion promotion,int id)
+        public bool UpdatePromotion(Promotion promotion, int id)
         {
             using (var context = new MyShopContext())
             {
@@ -89,6 +89,6 @@ namespace MyShopProject.Repositories
             {
                 return context.Promotions.Count();
             }
-        }   
+        }
     }
 }

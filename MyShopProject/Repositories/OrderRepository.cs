@@ -152,5 +152,28 @@ namespace MyShopProject.Repositories
                 }
             }
         }
+        public int AddOrder(Order order)
+        {
+            using (var context = new MyShopContext())
+            {
+                context.Orders.Add(order);
+                context.SaveChanges();
+                return order.Id;
+            }
+        }
+        public bool UpdateOrderByStatus(int orderId, byte status)
+        {
+            using (var context = new MyShopContext())
+            {
+                var order = context.Orders.FirstOrDefault(o => o.Id == orderId);
+                if (order == null)
+                {
+                    return false;
+                }
+                order.Status = status;
+                context.SaveChanges();
+                return true;
+            }
+        }
     }
 }

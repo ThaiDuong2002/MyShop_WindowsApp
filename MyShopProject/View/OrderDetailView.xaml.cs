@@ -1,6 +1,7 @@
 ﻿using MyShopProject.Model;
 using MyShopProject.Repositories;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -36,10 +37,24 @@ namespace MyShopProject.View
         {
             Order order = _orderRepository.GetOrderById(_orderDetail.Id);
             (Order? orderDetail, int numOfProduct, int numOfProductType) = _orderRepository.GetNumberOfOrderProductByOrderId(_orderDetail.Id);
-            //UserName.Text = order.User.Name;
-            //Birthday.Text = order.User.Birthday.ToString("dd/MM/yyyy");
-            //Address.Text = order.User.Address;
-            //Phone.Text = order.User.Phone;
+            if (_orderDetail.Status == 0)
+            {
+                OrderStatusBorder.BorderBrush = System.Windows.Media.Brushes.Red;
+                OrderStatusText.Text = "Đã hủy";
+                OrderStatusText.Foreground = System.Windows.Media.Brushes.Red;
+            }
+            else if (_orderDetail.Status == 1)
+            {
+                OrderStatusBorder.BorderBrush = System.Windows.Media.Brushes.Blue;
+                OrderStatusText.Text = "Đang xử lý";
+                OrderStatusText.Foreground = System.Windows.Media.Brushes.Blue;
+            }
+            else
+            {
+                OrderStatusBorder.BorderBrush = System.Windows.Media.Brushes.Green;
+                OrderStatusText.Text = "Đã hoàn thành";
+                OrderStatusText.Foreground = System.Windows.Media.Brushes.Green;
+            }
 
             CreatedAt.Text = orderDetail!.CreatedAt.ToString("dd/MM/yyyy");
             NumOfProduct.Text = numOfProduct.ToString();
@@ -52,6 +67,45 @@ namespace MyShopProject.View
             combinedOrder.OrderProducts = orderProduct;
             combinedOrder.TotalPrice = totalPrice;
             DataContext = combinedOrder;
+            if (_orderDetail.Status != 1)
+            {
+                AcceptedBtn.IsEnabled = false;
+                CancelBtn.IsEnabled = false;
+            }
+        }
+
+        private void AcceptedBtn_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Bạn xác nhận hoàn thành đơn?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                _orderRepository.UpdateOrderByStatus(_orderDetail.Id, 2);
+                AcceptedBtn.IsEnabled = false;
+                CancelBtn.IsEnabled = false;
+                OrderStatusBorder.BorderBrush = System.Windows.Media.Brushes.Green;
+                OrderStatusText.Text = "Đã hoàn thành";
+                OrderStatusText.Foreground = System.Windows.Media.Brushes.Green;
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        private void CancelBtn_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Bạn xác nhận hủy đơn?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                _orderRepository.UpdateOrderByStatus(_orderDetail.Id, 0);
+                AcceptedBtn.IsEnabled = false;
+                CancelBtn.IsEnabled = false;
+                OrderStatusBorder.BorderBrush = System.Windows.Media.Brushes.Red;
+                OrderStatusText.Text = "Đã hủy";
+                OrderStatusText.Foreground = System.Windows.Media.Brushes.Red;
+            }
+            else
+            {
+                return;
+            }
         }
     }
 }

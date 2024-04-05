@@ -101,12 +101,12 @@
 
         <materialDesign:Card Grid.Row="3" Name="orderCardTable" VerticalAlignment="Stretch">
             <DataGrid VerticalScrollBarVisibility="Visible"
-              ItemsSource="{Binding Promotions, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-              HorizontalScrollBarVisibility="Auto"
-              IsReadOnly="True"
-              x:Name="allOrder"
-              AutoGenerateColumns="False"
-              CanUserAddRows="False">
+                      ItemsSource="{Binding Promotions, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                      HorizontalScrollBarVisibility="Auto"
+                      IsReadOnly="True"
+                      x:Name="allOrder"
+                      AutoGenerateColumns="False"
+                      CanUserAddRows="False">   
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Id}" Header="ID" Width="50" />
                     <DataGridTextColumn Binding="{Binding Name}" Header="Tên khuyến mãi" Width="*" />

@@ -15,7 +15,7 @@ namespace MyShopProject.Converters
 
             if (phone.Length == 10)
             {
-                return string.Format("({0}) {1}-{2}", phone.Substring(0, 4), phone.Substring(4, 3), phone.Substring(7, 3));
+                return string.Format("{0} {1} {2}", phone.Substring(0, 4), phone.Substring(4, 3), phone.Substring(7, 3));
             }
             else if (phone.Length == 7)
             {

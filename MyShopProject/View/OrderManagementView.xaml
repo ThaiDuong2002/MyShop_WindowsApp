@@ -15,6 +15,7 @@
       xmlns:validate="clr-namespace:MyShopProject.Validation"
       DataContext="{StaticResource OrderManagementVM}"
       Name="orderView"
+      Loaded="Page_Loaded"
       Title="OrderManagementView">
 
     <Page.Resources>
@@ -97,6 +98,8 @@
                    FontSize="20" FontWeight="Bold" 
                    Margin="20 10" />
             <Button Grid.Column="1" 
+                    Command="{Binding addBtn}"
+                    CommandParameter="{Binding ElementName=orderView}"
                     Content="Thêm đơn hàng" 
                     Background="BlueViolet" 
                     BorderThickness="0" 
@@ -172,16 +175,6 @@
                                         <Icon:PackIconMaterial Style="{StaticResource editBtn}"
                                                                Foreground="Blue"
                                                                Kind="Cart"
-                                                               Height="15" 
-                                                               Width="15" 
-                                                               Margin="0"/>              
-                                    </Button>
-                                    <Button Background="Transparent" 
-                                            Command="{Binding DataContext.editBtn, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"
-                                            CommandParameter="{Binding}"
-                                            BorderThickness="0">
-                                        <Icon:PackIconMaterial Style="{StaticResource editBtn}" 
-                                                               Kind="SquareEditOutline" 
                                                                Height="15" 
                                                                Width="15" 
                                                                Margin="0"/>

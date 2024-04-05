@@ -1,4 +1,5 @@
 ﻿using MyShopProject.Repositories;
+using MyShopProject.View;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
@@ -67,7 +68,7 @@ namespace MyShopProject.ViewModel
         public ICommand FilterOrderCommand { get; set; }
         public ICommand prevBtn { get; set; }
         public ICommand nextBtn { get; set; }
-        public ICommand editBtn { get; set; }
+        public ICommand addBtn { get; set; }
         public ICommand deleteBtn { get; set; }
         public OrderManagementViewModel()
         {
@@ -78,7 +79,7 @@ namespace MyShopProject.ViewModel
             _orderDetails = new ObservableCollection<OrderDetail>();
             prevBtn = new RelayCommand<object>((p) => { return _currentPage > 1; }, (p) => { Prev(); });
             nextBtn = new RelayCommand<object>((p) => { return _currentPage < _totalPage; }, (p) => { Next(); });
-            editBtn = new RelayCommand<object>((p) => { return true; }, (p) => { });
+            addBtn = new RelayCommand<object>((p) => { return true; }, (p) => { AddOrder(); });
             deleteBtn = new RelayCommand<OrderDetail>((p) => { return true; }, (p) => { DeleteOrder(p); });
 
             FilterOrderCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
@@ -88,7 +89,7 @@ namespace MyShopProject.ViewModel
             LoadData();
         }
 
-        private void LoadData()
+        public void LoadData()
         {
             (ObservableCollection<OrderDetail> ordersList, int totalCount) result = _orderRepository.GetAllOrderDetailsByPagination(StartDate, EndDate, _currentPage, SelectedItemsPerPage);
             OrderDetails = result.ordersList;
@@ -96,6 +97,18 @@ namespace MyShopProject.ViewModel
             AmountProduct = $"{totalProducts} đơn hàng";
             _totalPage = totalProducts / SelectedItemsPerPage + (totalProducts % SelectedItemsPerPage == 0 ? 0 : 1);
             PageInfo = $"Trang {_currentPage}/{_totalPage}";
+        }
+
+        private void AddOrder()
+        {
+            AddOrderView addOrderView = new AddOrderView();
+            AddOrderViewModel addOrderViewModel = new AddOrderViewModel();
+            addOrderView.DataContext = addOrderViewModel;
+            addOrderView.ShowDialog();
+            if (addOrderView.DialogResult == true)
+            {
+                LoadData();
+            }
         }
 
         private void EditOrder(OrderDetail order)

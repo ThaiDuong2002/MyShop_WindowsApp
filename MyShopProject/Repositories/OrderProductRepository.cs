@@ -49,5 +49,21 @@ namespace MyShopProject.Repositories
             }
             return totalPrice;
         }
+        public bool AddOrderProduct(OrderProduct orderProduct)
+        {
+            try
+            {
+                using (var context = new MyShopContext())
+                {
+                    context.OrderProducts.Add(orderProduct);
+                    context.SaveChanges();
+                }
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }
