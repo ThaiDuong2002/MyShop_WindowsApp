@@ -167,6 +167,25 @@ namespace MyShopProject.Repositories
                 return true;
             }
         }
-
+        public bool UpdateQuantityAfterOrder(int id, int quantity)
+        {
+            using (var context = new MyShopContext())
+            {
+                var product = context.Products.Find(id);
+                product!.Quantity -= quantity;
+                context.SaveChanges();
+                return true;
+            }
+        }
+        public bool CheckProductQuantity(int id, int quantity)
+        {
+            using (var context = new MyShopContext())
+            {
+                var product = context.Products.Find(id);
+                if (product!.Quantity < quantity)
+                    return false;
+                return true;
+            }
+        }
     }
 }
