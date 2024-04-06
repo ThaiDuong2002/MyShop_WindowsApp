@@ -75,18 +75,21 @@ namespace MyShopProject.View
             {
                 select = subMenu.Children[0] as MenuButton;
                 select?.btn.Focus();
+                select!.btn.Command = current.UpdateViewCommand;
                 select?.btn.Command.Execute("TKDTVLN");
             }
             else if (_screen.Equals("TKSP"))
             {
                 select = subMenu.Children[1] as MenuButton;
                 select?.btn.Focus();
+                select!.btn.Command = current.UpdateViewCommand;
                 select?.btn.Command.Execute("TKSP");
             }
             else if (_screen.Equals("TKBH"))
             {
                 select = subMenu.Children[2] as MenuButton;
                 select?.btn.Focus();
+                select!.btn.Command = current.UpdateViewCommand;
                 select?.btn.Command.Execute("TKBH");
             }
             else if (_screen.Equals("DB"))

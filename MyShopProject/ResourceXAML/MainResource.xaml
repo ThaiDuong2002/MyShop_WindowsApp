@@ -23,4 +23,7 @@
     <viewmodel:OrderDetailViewModel x:Key="OrderDetailVM" />
     <viewmodel:AddOrderViewModel x:Key="AddOrderVM" />
     <viewmodel:BackupRestoreDBViewModel x:Key="BackupRestoreDBVM" />
+    <viewmodel:RevenueStatisticsViewModel x:Key="RevenueStatisticsVM" />
+    <viewmodel:ProductStatisticsViewModel x:Key="ProductStatisticsVM" />
+    <viewmodel:ReportProductViewModel x:Key="ReportProductVM" />
 </ResourceDictionary>

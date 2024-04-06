@@ -253,4 +253,16 @@
     <DataTemplate DataType="{x:Type viewmodels:BackupRestoreDBViewModel}">
         <views:BackupRestoreDBView />
     </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewmodels:RevenueStatisticsViewModel}">
+        <views:RevenueStatisticsView />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewmodels:ProductStatisticsViewModel}">
+        <views:ProductStatisticsView />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewmodels:ReportProductViewModel}">
+        <views:ReportProductView />
+    </DataTemplate>
 </ResourceDictionary>

@@ -59,7 +59,18 @@ namespace MyShopProject.Commands
             {
                 viewModel.SelectedViewModel = new BackupRestoreDBViewModel();
             }
-
+            else if (parameter.ToString() == "TKDTVLN")
+            {
+                viewModel.SelectedViewModel = new RevenueStatisticsViewModel();
+            }
+            else if (parameter.ToString() == "TKSP")
+            {
+                viewModel.SelectedViewModel = new ProductStatisticsViewModel();
+            }
+            else if (parameter.ToString() == "TKBH")
+            {
+                viewModel.SelectedViewModel = new ReportProductViewModel();
+            }
         }
     }
 }

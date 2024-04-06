@@ -154,6 +154,10 @@
                         Binding="{Binding CreatedAt, Converter={StaticResource DateFormatConverter}}"
                         Header="Ngày đặt" />
                     <DataGridTextColumn
+                        Width="2*"
+                        Binding="{Binding UpdatedAt, Converter={StaticResource DateFormatConverter}}"
+                        Header="Ngày cập nhật" />
+                    <DataGridTextColumn
                         Width="*"
                         Binding="{Binding TotalPrice, Converter={StaticResource PriceConverter}}"
                         Header="Tổng tiền" />

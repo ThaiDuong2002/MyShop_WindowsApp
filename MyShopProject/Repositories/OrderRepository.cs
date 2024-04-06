@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyShopProject.Model;
 using System.Collections.ObjectModel;
+using System.Globalization;
 
 namespace MyShopProject.Repositories
 {
@@ -9,6 +10,7 @@ namespace MyShopProject.Repositories
         public int Id { get; set; }
         public string UserName { get; set; }
         public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
         public int TotalPrice { get; set; }
 
         public byte Status { get; set; }
@@ -97,6 +99,7 @@ namespace MyShopProject.Repositories
                         Id = order.Id,
                         UserName = order.User.Name,
                         CreatedAt = order.CreatedAt,
+                        UpdatedAt = order.UpdatedAt,
                         TotalPrice = totalPrice,
                         Status = order.Status
                     }); ;
@@ -188,6 +191,172 @@ namespace MyShopProject.Repositories
                 context.SaveChanges();
                 return true;
             }
+        }
+        public (List<int>, List<int>, List<string>) GetRevenueAndProfitByDateToDate(DateTime startDate, DateTime endDate)
+        {
+            var revenues = new List<int>();
+            var profits = new List<int>();
+            var labels = new List<string>();
+
+            using (var _context = new MyShopContext())
+            {
+                var orders = _context.Orders
+                    .Where(o => o.Status == 2 && o.UpdatedAt >= startDate && o.UpdatedAt <= endDate)
+                    .Include(o => o.OrderProducts)
+                    .ThenInclude(op => op.Product)
+                    .Include(o => o.OrderProducts)
+                    .ThenInclude(op => op.Promotion)
+                    .ToList();
+
+                for (var day = startDate; day.Date <= endDate.Date; day = day.AddDays(1))
+                {
+                    var dailyOrders = orders.Where(o => o.UpdatedAt.Date == day.Date).ToList();
+
+                    var dailyRevenue = dailyOrders.Sum(o => o.OrderProducts.Sum(op =>
+                    {
+                        var discount = op.Promotion?.ByCash ?? (op.Promotion?.ByPercent ?? 0) * op.Product.Price / 100;
+                        return op.Amount * (op.Product.Price - discount);
+                    }));
+                    revenues.Add(dailyRevenue);
+
+                    var dailyProfit = dailyOrders.Sum(o => o.OrderProducts.Sum(op =>
+                    {
+                        var discount = op.Promotion?.ByCash ?? (op.Promotion?.ByPercent ?? 0) * op.Product.Price / 100;
+                        var revenue = op.Amount * (op.Product.Price - discount);
+                        return revenue - (op.Product.PriceOriginal * op.Amount);
+                    }));
+                    profits.Add(dailyProfit);
+
+                    labels.Add(day.ToString("dd/MM/yyyy"));
+                }
+            }
+            return (revenues, profits, labels);
+        }
+
+        public (List<int>, List<int>, List<string>) GetRevenueAndProfitByYear(int Year)
+        {
+            var revenues = new List<int>();
+            var profits = new List<int>();
+            var labels = new List<string>();
+            using (var _context = new MyShopContext())
+            {
+                var orders = _context.Orders
+            .Where(o => o.Status == 2 && o.UpdatedAt.Year == Year)
+            .Include(o => o.OrderProducts)
+            .ThenInclude(op => op.Product)
+            .Include(o => o.OrderProducts)
+            .ThenInclude(op => op.Promotion)
+            .ToList();
+
+                for (int month = 1; month <= 12; month++)
+                {
+                    var monthlyOrders = orders.Where(o => o.UpdatedAt.Month == month).ToList();
+
+                    var monthlyRevenue = monthlyOrders.Sum(o => o.OrderProducts.Sum(op =>
+                    {
+                        var discount = op.Promotion?.ByCash ?? (op.Promotion?.ByPercent ?? 0) * op.Product.Price / 100;
+                        return op.Amount * (op.Product.Price - discount);
+                    }));
+                    revenues.Add(monthlyRevenue);
+
+                    var monthlyProfit = monthlyOrders.Sum(o => o.OrderProducts.Sum(op =>
+                    {
+                        var discount = op.Promotion?.ByCash ?? (op.Promotion?.ByPercent ?? 0) * op.Product.Price / 100;
+                        var revenue = op.Amount * (op.Product.Price - discount);
+                        return revenue - (op.Product.PriceOriginal * op.Amount);
+                    }));
+                    profits.Add(monthlyProfit);
+
+                    labels.Add(CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(month));
+                }
+            }
+            return (revenues, profits, labels);
+        }
+        public (List<int>, List<int>, List<string>) GetRevenueAndProfitByMonth(int Year, int Month)
+        {
+            var revenues = new List<int>();
+            var profits = new List<int>();
+            var labels = new List<string>();
+            using (var _context = new MyShopContext())
+            {
+                var orders = _context.Orders
+            .Where(o => o.Status == 2 && o.UpdatedAt.Year == Year && o.UpdatedAt.Month == Month)
+            .Include(o => o.OrderProducts)
+            .ThenInclude(op => op.Product)
+            .Include(o => o.OrderProducts)
+            .ThenInclude(op => op.Promotion)
+            .ToList();
+
+                var startDate = new DateTime(Year, Month, 1);
+                var endDate = startDate.AddMonths(1).AddDays(-1);
+
+                for (var day = startDate; day.Date <= endDate.Date; day = day.AddDays(7))
+                {
+                    var weekEnd = day.AddDays(6) > endDate ? endDate : day.AddDays(6);
+                    var weeklyOrders = orders.Where(o => o.UpdatedAt.Date >= day.Date && o.UpdatedAt.Date <= weekEnd.Date).ToList();
+
+                    var weeklyRevenue = weeklyOrders.Sum(o => o.OrderProducts.Sum(op =>
+                    {
+                        var discount = op.Promotion?.ByCash ?? (op.Promotion?.ByPercent ?? 0) * op.Product.Price / 100;
+                        return op.Amount * (op.Product.Price - discount);
+                    }));
+                    revenues.Add(weeklyRevenue);
+
+                    var weeklyProfit = weeklyOrders.Sum(o => o.OrderProducts.Sum(op =>
+                    {
+                        var discount = op.Promotion?.ByCash ?? (op.Promotion?.ByPercent ?? 0) * op.Product.Price / 100;
+                        var revenue = op.Amount * (op.Product.Price - discount);
+                        return revenue - (op.Product.PriceOriginal * op.Amount);
+                    }));
+                    profits.Add(weeklyProfit);
+
+                    labels.Add($"{day:dd/MM/yyyy} - {weekEnd:dd/MM/yyyy}");
+                }
+            }
+            return (revenues, profits, labels);
+        }
+        public (List<int>, List<int>, List<string>) GetRevenueAndProfitByWeek(int Year, int Month, int Week)
+        {
+            var revenues = new List<int>();
+            var profits = new List<int>();
+            var labels = new List<string>();
+            using (var _context = new MyShopContext())
+            {
+                var firstDayOfMonth = new DateTime(Year, Month, 1);
+                var firstDayOfWeek = firstDayOfMonth.AddDays((Week - 1) * 7);
+                var lastDayOfWeek = firstDayOfWeek.AddDays(6);
+
+                var orders = _context.Orders
+                    .Where(o => o.Status == 2 && o.UpdatedAt >= firstDayOfWeek && o.UpdatedAt <= lastDayOfWeek)
+                    .Include(o => o.OrderProducts)
+                    .ThenInclude(op => op.Product)
+                    .Include(o => o.OrderProducts)
+                    .ThenInclude(op => op.Promotion)
+                    .ToList();
+
+                for (var day = firstDayOfWeek; day.Date <= lastDayOfWeek.Date; day = day.AddDays(1))
+                {
+                    var dailyOrders = orders.Where(o => o.UpdatedAt.Date == day.Date).ToList();
+
+                    var dailyRevenue = dailyOrders.Sum(o => o.OrderProducts.Sum(op =>
+                    {
+                        var discount = op.Promotion?.ByCash ?? (op.Promotion?.ByPercent ?? 0) * op.Product.Price / 100;
+                        return op.Amount * (op.Product.Price - discount);
+                    }));
+                    revenues.Add(dailyRevenue);
+
+                    var dailyProfit = dailyOrders.Sum(o => o.OrderProducts.Sum(op =>
+                    {
+                        var discount = op.Promotion?.ByCash ?? (op.Promotion?.ByPercent ?? 0) * op.Product.Price / 100;
+                        var revenue = op.Amount * (op.Product.Price - discount);
+                        return revenue - (op.Product.PriceOriginal * op.Amount);
+                    }));
+                    profits.Add(dailyProfit);
+
+                    labels.Add(day.ToString("dd/MM/yyyy"));
+                }
+            }
+            return (revenues, profits, labels);
         }
     }
 }
