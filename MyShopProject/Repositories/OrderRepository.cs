@@ -488,6 +488,91 @@ namespace MyShopProject.Repositories
             }
             return (hashMap, labels);
         }
+        public Dictionary<string, int> GetTop5BestSalersProductByYear(int Year)
+        {
+            var hashMap = new Dictionary<string, int>();
+            using (var _context = new MyShopContext())
+            {
+                var orders = _context.Orders
+            .Where(o => o.Status == 2 && o.UpdatedAt.Year == Year)
+            .Include(o => o.OrderProducts)
+            .ThenInclude(op => op.Product)
+            .ToList();
+
+                var productSales = orders
+                    .SelectMany(o => o.OrderProducts)
+                    .GroupBy(op => op.Product.Name)
+                    .Select(g => new { ProductName = g.Key, Sales = g.Sum(op => op.Amount) })
+                    .OrderByDescending(g => g.Sales)
+                    .Take(5)
+                    .ToList();
+
+                foreach (var productSale in productSales)
+                {
+                    hashMap.Add(productSale.ProductName, productSale.Sales);
+                }
+            }
+            return hashMap;
+        }
+        public Dictionary<string, int> GetTop5BestSalersProductByMonth(int Year, int Month)
+        {
+            var hashMap = new Dictionary<string, int>();
+            using (var _context = new MyShopContext())
+            {
+                var orders = _context.Orders
+                        .Where(o => o.Status == 2 && o.UpdatedAt.Year == Year && o.UpdatedAt.Month == Month)
+                        .Include(o => o.OrderProducts)
+                        .ThenInclude(op => op.Product)
+                        .ToList();
+
+                var productSales = orders
+                    .SelectMany(o => o.OrderProducts)
+                    .GroupBy(op => op.Product.Name)
+                    .Select(g => new { ProductName = g.Key, Sales = g.Sum(op => op.Amount) })
+                    .OrderByDescending(g => g.Sales)
+                    .Take(5)
+                    .ToList();
+
+                foreach (var productSale in productSales)
+                {
+                    hashMap.Add(productSale.ProductName, productSale.Sales);
+                }
+            }
+            return hashMap;
+        }
+        public (Dictionary<string, int>, string) GetTop5BestSalersProductByWeek(int Year, int Month, int Week)
+        {
+            var hashMap = new Dictionary<string, int>();
+            string date = "";
+            using (var _context = new MyShopContext())
+            {
+                var firstDayOfMonth = new DateTime(Year, Month, 1);
+                var firstDayOfWeek = firstDayOfMonth.AddDays((Week - 1) * 7);
+                var lastDayOfWeek = firstDayOfWeek.AddDays(6);
+
+                var orders = _context.Orders
+                    .Where(o => o.Status == 2 && o.UpdatedAt >= firstDayOfWeek && o.UpdatedAt <= lastDayOfWeek)
+                    .Include(o => o.OrderProducts)
+                    .ThenInclude(op => op.Product)
+                    .ToList();
+
+                var productSales = orders
+                    .SelectMany(o => o.OrderProducts)
+                    .GroupBy(op => op.Product.Name)
+                    .Select(g => new { ProductName = g.Key, Sales = g.Sum(op => op.Amount) })
+                    .OrderByDescending(g => g.Sales)
+                    .Take(5)
+                    .ToList();
+
+                foreach (var productSale in productSales)
+                {
+                    hashMap.Add(productSale.ProductName, productSale.Sales);
+                }
+
+                date = $"{firstDayOfWeek:dd/MM/yyyy} - {lastDayOfWeek:dd/MM/yyyy}";
+            }
+            return (hashMap, date);
+        }
     }
 
 }
