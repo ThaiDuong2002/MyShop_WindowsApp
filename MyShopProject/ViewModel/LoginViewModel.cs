@@ -1,7 +1,6 @@
 ﻿using MyShopProject.Model;
 using MyShopProject.Utilities;
 using MyShopProject.View;
-using System.Configuration;
 using System.Windows;
 using System.Windows.Input;
 
@@ -44,16 +43,22 @@ namespace MyShopProject.ViewModel
             ServerName = "";
             DatabaseName = "";
 
-            if (ConfigurationManager.AppSettings["appSettings"] != null)
+            var isRemember = SecurityConfig.getValueFromConfig("IsRemember") == "True";
+            if (isRemember)
             {
-                var IsRemember = SecurityConfig.getValueFromConfig("IsRemember") == "True";
-                var _UserName = SecurityConfig.getValueFromConfig("UserName");
+                var userName = SecurityConfig.getValueFromConfig("UserName");
                 var configEntropy = Convert.FromBase64String(SecurityConfig.getValueFromConfig("Entropy"));
-                var password = SecurityConfig.getValueFromConfig("Password");
-                var _Password = SecurityConfig.DecryptString(password, configEntropy);
-                var ServerName = SecurityConfig.getValueFromConfig("ServerName");
-                var DatabaseName = SecurityConfig.getValueFromConfig("DatabaseName");
+                var passwordEncrypted = SecurityConfig.getValueFromConfig("Password");
+                var password = SecurityConfig.DecryptString(passwordEncrypted, configEntropy);
+                var serverName = SecurityConfig.getValueFromConfig("ServerName");
+                var databaseName = SecurityConfig.getValueFromConfig("DatabaseName");
+                UserName = userName;
+                Password = password;
+                ServerName = serverName;
+                DatabaseName = databaseName;
+                IsRemember = isRemember;
             }
+
 
             CloseCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { p.Close(); });
             LoginCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { Login(p); });

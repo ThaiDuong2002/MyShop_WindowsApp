@@ -42,7 +42,7 @@ namespace MyShopProject.Utilities
                 config.AppSettings.Settings["DatabaseName"].Value = databasename;
                 config.AppSettings.Settings["Entropy"].Value = entropy;
                 config.AppSettings.Settings["IsRemember"].Value = IsRemember.ToString();
-                config.Save(ConfigurationSaveMode.Full);
+                config.Save(ConfigurationSaveMode.Minimal);
                 ConfigurationManager.RefreshSection("appSettings");
             }
             catch (Exception e)
@@ -55,8 +55,6 @@ namespace MyShopProject.Utilities
 
         public static void removeAllConfig()
         {
-            if (ConfigurationManager.AppSettings["appSettings"] == null)
-                return;
             var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             config.AppSettings.Settings["UserName"].Value = "";
             config.AppSettings.Settings["Password"].Value = "";
@@ -64,7 +62,7 @@ namespace MyShopProject.Utilities
             config.AppSettings.Settings["DatabaseName"].Value = "";
             config.AppSettings.Settings["Entropy"].Value = "";
             config.AppSettings.Settings["IsRemember"].Value = "";
-            config.Save(ConfigurationSaveMode.Full);
+            config.Save(ConfigurationSaveMode.Minimal);
             ConfigurationManager.RefreshSection("appSettings");
         }
     }

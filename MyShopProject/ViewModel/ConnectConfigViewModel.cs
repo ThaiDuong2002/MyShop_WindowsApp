@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using MyShopProject.Utilities;
+using System.Windows;
 using System.Windows.Input;
 
 namespace MyShopProject.ViewModel
@@ -25,6 +26,14 @@ namespace MyShopProject.ViewModel
         {
             _DatabaseName = "";
             _ServerName = "";
+            var isRemember = SecurityConfig.getValueFromConfig("IsRemember") == "True";
+            if (isRemember)
+            {
+                var serverName = SecurityConfig.getValueFromConfig("ServerName");
+                var databaseName = SecurityConfig.getValueFromConfig("DatabaseName");
+                ServerName = serverName;
+                DatabaseName = databaseName;
+            }
             AcceptConfigCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { Accept(p); });
             CloseConfigCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { p.Close(); });
         }
