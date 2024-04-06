@@ -121,6 +121,16 @@ namespace MyShopProject.ViewModel
 
         private void UpdatePromotion(Window p)
         {
+            if (string.IsNullOrEmpty(Name))
+            {
+                System.Windows.MessageBox.Show("Vui lòng nhập tên khuyến mãi");
+                return;
+            }
+            if (ByPercent == 0 && ByCash == 0 && string.IsNullOrEmpty(ByProduct))
+            {
+                System.Windows.MessageBox.Show("Vui lòng nhập giá trị khuyến mãi");
+                return;
+            }
             var promotion = new Promotion()
             {
                 Name = Name,

@@ -35,6 +35,11 @@ namespace MyShopProject.ViewModel
 
         public void AddBrand(Window p)
         {
+            if(string.IsNullOrEmpty(Name))
+            {
+                System.Windows.MessageBox.Show("Vui lòng nhập tên thương hiệu");
+                return;
+            }
             Brand brand = new Brand()
             {
                 Name = Name,

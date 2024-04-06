@@ -129,8 +129,39 @@ namespace MyShopProject.ViewModel
         private string imageProduct;
         public void AddProduct(Window p)
         {
-            if (string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(SelectedCategory))
+            if (string.IsNullOrEmpty(Name) )
             {
+                System.Windows.MessageBox.Show("Vui lòng nhập tên sản phẩm");
+                return;
+            }
+            if (string.IsNullOrEmpty(SelectedCategory))
+            {
+                System.Windows.MessageBox.Show("Vui lòng chọn loại sản phẩm");
+                return;
+            }
+            if (Price == 0)
+            {
+                System.Windows.MessageBox.Show("Vui lòng nhập giá bán sản phẩm");
+                return;
+            }
+            if (PriceOriginal == 0)
+            {
+                System.Windows.MessageBox.Show("Vui lòng nhập giá gốc sản phẩm");
+                return;
+            }
+            if (Quantity == 0)
+            {
+                System.Windows.MessageBox.Show("Vui lòng nhập số lượng sản phẩm");
+                return;
+            }
+            if (Weight == 0)
+            {
+                System.Windows.MessageBox.Show("Vui lòng nhập trọng lượng sản phẩm");
+                return;
+            }
+            if (string.IsNullOrEmpty(imageProduct))
+            {
+                System.Windows.MessageBox.Show("Vui lòng chọn ảnh sản phẩm");
                 return;
             }
             var product = new Model.Product()

@@ -8,6 +8,7 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="ChinhSuaKHView"
+    xmlns:validate="clr-namespace:MyShopProject.Validation"
     Width="800"
     Height="450"
     DataContext="{StaticResource ChinhSuaKHVM}"
@@ -73,42 +74,61 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <TextBox
-                    Grid.Row="0"
-                    Width="300"
-                    Margin="0,0,0,30"
-                    VerticalAlignment="Center"
-                    materialDesign:HintAssist.Hint="Họ và tên"
-                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                    Text="{Binding Name}" />
+     Grid.Row="0"
+     Width="300"
+     Margin="0,0,0,30"
+     VerticalAlignment="Center"
+     materialDesign:HintAssist.Hint="Họ và tên"
+     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+      >
+                    <Binding
+          Path="Name"
+          UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validate:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                        </Binding.ValidationRules>
+                    </Binding>
+
+                </TextBox>
                 <DatePicker
-                    Name="date"
-                    Grid.Row="1"
-                    Width="300"
-                    Margin="10,0,10,30"
-                    VerticalAlignment="Center"
-                    materialDesign:HintAssist.Hint="Ngày sinh"
-                    SelectedDate="{Binding Birthday}"
-                    Style="{StaticResource MaterialDesignDatePicker}" />
+     Grid.Row="1"
+     Width="300"
+     Margin="10,0,10,30"
+     VerticalAlignment="Center"
+     materialDesign:HintAssist.Hint="Ngày sinh"
+     SelectedDate="{Binding Birthday}"
+     Style="{StaticResource MaterialDesignDatePicker}" />
 
                 <TextBox
-                    Grid.Row="2"
-                    Width="300"
-                    Margin="0,0,0,30"
-                    VerticalAlignment="Center"
-                    materialDesign:HintAssist.Hint="Số điện thoại"
-                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                    Text="{Binding Phone}" />
+     Grid.Row="2"
+     Width="300"
+     Margin="0,0,0,30"
+     VerticalAlignment="Center"
+     materialDesign:HintAssist.Hint="Số điện thoại"
+     Style="{StaticResource MaterialDesignOutlinedTextBox}">
+                    <Binding
+          Path="Phone"
+          UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validate:NumberOnlyValidationRule ValidatesOnTargetUpdated="True" />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
                 <TextBox
-                    Grid.Row="3"
-                    Width="300"
-                    Margin="0,0,0,30"
-                    VerticalAlignment="Center"
-                    materialDesign:HintAssist.Hint="Địa chỉ"
-                    Style="{StaticResource MaterialDesignOutlinedTextBox}">
+     Grid.Row="3"
+     Width="300"
+     Margin="0,0,0,30"
+     VerticalAlignment="Center"
+     materialDesign:HintAssist.Hint="Địa chỉ"
+     Style="{StaticResource MaterialDesignOutlinedTextBox}">
                     <TextBox.Text>
                         <Binding
-                            Path="Address"
-                            UpdateSourceTrigger="PropertyChanged" />
+             Path="Address"
+             UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <validate:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                            </Binding.ValidationRules>
+                        </Binding>
                     </TextBox.Text>
                 </TextBox>
             </Grid>

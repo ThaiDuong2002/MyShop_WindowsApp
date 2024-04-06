@@ -142,7 +142,7 @@ namespace MyShopProject.ViewModel
             if (themKHView.ShowDialog() == true)
             {
                 LoadData();
-            }
+            }          
         }
 
         public void EditUser(User user)

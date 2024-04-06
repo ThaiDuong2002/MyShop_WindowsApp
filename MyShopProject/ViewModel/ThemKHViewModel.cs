@@ -14,7 +14,13 @@ namespace MyShopProject.ViewModel
         private string _name;
         public string Name { get => _name; set { _name = value; OnPropertyChanged(); } }
         private string _phone;
-        public string Phone { get => _phone; set { _phone = value; OnPropertyChanged(); } }
+        public string Phone 
+        { get => _phone; 
+          set 
+          {
+                _phone = value; OnPropertyChanged();
+          } 
+        }
         private string _address;
         public string Address { get => _address; set { _address = value; OnPropertyChanged(); } }
         private DateTime _birthday = DateTime.Now;
@@ -60,7 +66,12 @@ namespace MyShopProject.ViewModel
                 System.Windows.MessageBox.Show("Vui lòng nhập đủ thông tin");
                 return;
             }
-            var path = new Uri(openFileDialog.FileName).ToString();
+            var path = "";
+            if(openFileDialog != null)
+            {
+                
+            path = new Uri(openFileDialog.FileName).ToString();
+            }
             var user = new User()
             {
                 Name = Name,
