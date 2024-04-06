@@ -200,6 +200,7 @@ namespace MyShopProject.Repositories
 
             using (var _context = new MyShopContext())
             {
+                endDate = endDate.Date.AddHours(23).AddMinutes(59).AddSeconds(59);
                 var orders = _context.Orders
                     .Where(o => o.Status == 2 && o.UpdatedAt >= startDate && o.UpdatedAt <= endDate)
                     .Include(o => o.OrderProducts)
@@ -238,6 +239,7 @@ namespace MyShopProject.Repositories
             var revenues = new List<int>();
             var profits = new List<int>();
             var labels = new List<string>();
+            CultureInfo cultureInfo = new CultureInfo("vi-VN");
             using (var _context = new MyShopContext())
             {
                 var orders = _context.Orders
@@ -267,7 +269,7 @@ namespace MyShopProject.Repositories
                     }));
                     profits.Add(monthlyProfit);
 
-                    labels.Add(CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(month));
+                    labels.Add(cultureInfo.DateTimeFormat.GetMonthName(month));
                 }
             }
             return (revenues, profits, labels);
@@ -358,5 +360,134 @@ namespace MyShopProject.Repositories
             }
             return (revenues, profits, labels);
         }
+        public (List<Tuple<string, List<int>>>, List<string>) GetNumberOfProductsSoldByDateToDate(DateTime startDate, DateTime endDate)
+        {
+            var hashMap = new List<Tuple<string, List<int>>>();
+            var labels = new List<string>();
+
+            using (var _context = new MyShopContext())
+            {
+                endDate = endDate.Date.AddHours(23).AddMinutes(59).AddSeconds(59);
+                var orders = _context.Orders
+                    .Where(o => o.Status == 2 && o.UpdatedAt >= startDate && o.UpdatedAt <= endDate)
+                    .Include(o => o.OrderProducts)
+                    .ThenInclude(op => op.Product)
+                    .ToList();
+
+                var products = _context.Products.ToList();
+
+                foreach (var product in products)
+                {
+                    var productSales = new List<int>();
+                    for (var day = startDate; day.Date <= endDate; day = day.AddDays(1))
+                    {
+                        var dailyOrders = orders.Where(o => o.UpdatedAt.Date == day.Date).ToList();
+                        var dailySales = dailyOrders.Sum(o => o.OrderProducts.Where(op => op.ProductId == product.Id).Sum(op => op.Amount));
+                        productSales.Add(dailySales);
+                        labels.Add(day.ToString("dd/MM/yyyy"));
+                    }
+                    hashMap.Add(new Tuple<string, List<int>>(product.Name, productSales));
+                }
+            }
+
+            return (hashMap, labels);
+        }
+        public (List<Tuple<string, List<int>>>, List<string>) GetNumberOfProductsSoldByYear(int Year)
+        {
+            var hashMap = new List<Tuple<string, List<int>>>();
+            var labels = new List<string>();
+            CultureInfo cultureInfo = new CultureInfo("vi-VN");
+            using (var _context = new MyShopContext())
+            {
+                var orders = _context.Orders
+                        .Where(o => o.Status == 2 && o.UpdatedAt.Year == Year)
+                        .Include(o => o.OrderProducts)
+                        .ThenInclude(op => op.Product)
+                        .ToList();
+
+                var products = _context.Products.ToList();
+
+                foreach (var product in products)
+                {
+                    var productSales = new List<int>();
+                    for (var month = 1; month <= 12; month++)
+                    {
+                        var monthlyOrders = orders.Where(o => o.UpdatedAt.Month == month).ToList();
+                        var monthlySales = monthlyOrders.Sum(o => o.OrderProducts.Where(op => op.ProductId == product.Id).Sum(op => op.Amount));
+                        productSales.Add(monthlySales);
+                        labels.Add(cultureInfo.DateTimeFormat.GetMonthName(month));
+                    }
+                    hashMap.Add(new Tuple<string, List<int>>(product.Name, productSales));
+                }
+            }
+            return (hashMap, labels);
+        }
+        public (List<Tuple<string, List<int>>>, List<string>) GetNumberOfProductsSoldByMonth(int Year, int Month)
+        {
+            var hashMap = new List<Tuple<string, List<int>>>();
+            var labels = new List<string>();
+            using (var _context = new MyShopContext())
+            {
+                var orders = _context.Orders
+                        .Where(o => o.Status == 2 && o.UpdatedAt.Year == Year && o.UpdatedAt.Month == Month)
+                        .Include(o => o.OrderProducts)
+                        .ThenInclude(op => op.Product)
+                        .ToList();
+                var products = _context.Products.ToList();
+
+                var startDate = new DateTime(Year, Month, 1);
+                var endDate = startDate.AddMonths(1).AddDays(-1);
+
+                foreach (var product in products)
+                {
+                    var productSales = new List<int>();
+                    for (var day = startDate; day.Date <= endDate.Date; day = day.AddDays(7))
+                    {
+                        var weekEnd = day.AddDays(6) > endDate ? endDate : day.AddDays(6);
+                        var weeklyOrders = orders.Where(o => o.UpdatedAt.Date >= day.Date && o.UpdatedAt.Date <= weekEnd.Date).ToList();
+                        var weeklySales = weeklyOrders.Sum(o => o.OrderProducts.Where(op => op.ProductId == product.Id).Sum(op => op.Amount));
+                        productSales.Add(weeklySales);
+
+                        labels.Add($"{day:dd/MM/yyyy} - {weekEnd:dd/MM/yyyy}");
+                    }
+                    hashMap.Add(new Tuple<string, List<int>>(product.Name, productSales));
+                }
+            }
+            return (hashMap, labels);
+        }
+        public (List<Tuple<string, List<int>>>, List<string>) GetNumberOfProductsSoldByWeek(int Year, int Month, int Week)
+        {
+            var hashMap = new List<Tuple<string, List<int>>>();
+            var labels = new List<string>();
+            using (var _context = new MyShopContext())
+            {
+                var firstDayOfMonth = new DateTime(Year, Month, 1);
+                var firstDayOfWeek = firstDayOfMonth.AddDays((Week - 1) * 7);
+                var lastDayOfWeek = firstDayOfWeek.AddDays(6);
+
+                var orders = _context.Orders
+                    .Where(o => o.Status == 2 && o.UpdatedAt >= firstDayOfWeek && o.UpdatedAt <= lastDayOfWeek)
+                    .Include(o => o.OrderProducts)
+                    .ThenInclude(op => op.Product)
+                    .ToList();
+
+                var products = _context.Products.ToList();
+
+                foreach (var product in products)
+                {
+                    var productSales = new List<int>();
+                    for (var day = firstDayOfWeek; day.Date <= lastDayOfWeek.Date; day = day.AddDays(1))
+                    {
+                        var dailyOrders = orders.Where(o => o.UpdatedAt.Date == day.Date).ToList();
+                        var dailySales = dailyOrders.Sum(o => o.OrderProducts.Where(op => op.ProductId == product.Id).Sum(op => op.Amount));
+                        productSales.Add(dailySales);
+                        labels.Add(day.ToString("dd/MM/yyyy"));
+                    }
+                    hashMap.Add(new Tuple<string, List<int>>(product.Name, productSales));
+                }
+            }
+            return (hashMap, labels);
+        }
     }
+
 }

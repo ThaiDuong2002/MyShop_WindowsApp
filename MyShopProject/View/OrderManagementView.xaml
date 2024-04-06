@@ -146,15 +146,15 @@
                         Binding="{Binding Id}"
                         Header="ID" />
                     <DataGridTextColumn
-                        Width="2*"
+                        Width="*"
                         Binding="{Binding UserName}"
                         Header="Tên khách hàng" />
                     <DataGridTextColumn
-                        Width="2*"
+                        Width="*"
                         Binding="{Binding CreatedAt, Converter={StaticResource DateFormatConverter}}"
                         Header="Ngày đặt" />
                     <DataGridTextColumn
-                        Width="2*"
+                        Width="*"
                         Binding="{Binding UpdatedAt, Converter={StaticResource DateFormatConverter}}"
                         Header="Ngày cập nhật" />
                     <DataGridTextColumn

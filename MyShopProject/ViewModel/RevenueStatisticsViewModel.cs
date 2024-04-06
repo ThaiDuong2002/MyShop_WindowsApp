@@ -98,8 +98,8 @@ namespace MyShopProject.ViewModel
                 OnPropertyChanged();
             }
         }
-        private DateTime _startDate;
-        public DateTime StartDate
+        private DateTime? _startDate;
+        public DateTime? StartDate
         {
             get => _startDate;
             set
@@ -108,8 +108,8 @@ namespace MyShopProject.ViewModel
                 OnPropertyChanged();
             }
         }
-        private DateTime _endDate;
-        public DateTime EndDate
+        private DateTime? _endDate;
+        public DateTime? EndDate
         {
             get => _endDate;
             set
@@ -126,8 +126,8 @@ namespace MyShopProject.ViewModel
             _selectedYear = Years[4];
             _selectedMonth = Months[0];
             _selectedWeek = Weeks[0];
-            _startDate = DateTime.Now;
-            _endDate = DateTime.Now;
+            _startDate = null;
+            _endDate = null;
             _labels = new string[] { };
             _seriesCollection = new SeriesCollection();
             FilterByDateToDateCommand = new RelayCommand<object>((p) => true, (p) => { FilterByDateToDate(); });
@@ -196,7 +196,7 @@ namespace MyShopProject.ViewModel
             }
             if (startDate.HasValue && endDate.HasValue)
             {
-                result = _orderRepository.GetRevenueAndProfitByDateToDate(StartDate, EndDate);
+                result = _orderRepository.GetRevenueAndProfitByDateToDate(StartDate!.Value, EndDate!.Value);
                 SeriesCollection.Clear();
                 SeriesCollection.Add(new ColumnSeries
                 {

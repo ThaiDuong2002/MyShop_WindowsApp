@@ -1,15 +1,141 @@
-﻿<Page x:Class="MyShopProject.View.ProductStatisticsView"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:MyShopProject.View"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      DataContext="{StaticResource ProductStatisticsVM}"
-      Title="ProductStatisticsView">
-
-    <Grid>
-        
+﻿<Page
+    x:Class="MyShopProject.View.ProductStatisticsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Converter="clr-namespace:MyShopProject.Converters"
+    xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:MyShopProject.View"
+    xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodel="clr-namespace:MyShopProject.ViewModel"
+    Title="ProductStatisticsView"
+    d:DataContext="{d:DesignInstance Type=viewmodel:ProductStatisticsViewModel}"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    DataContext="{StaticResource ProductStatisticsVM}"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <Converter:DateFormatConverter x:Key="DateFormatConverter" />
+        <Converter:PriceConverter x:Key="PriceConverter" />
+    </Page.Resources>
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <materialDesign:Card
+        Grid.Row="0"
+        Margin="10"
+        Style="{StaticResource MaterialDesignOutlinedCard}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <StackPanel
+                Grid.Column="0"
+                Margin="5"
+                Orientation="Vertical">
+                    <TextBlock
+                    FontSize="14"
+                    Text="Lọc theo ngày" />
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock
+                        Margin="10,10,10,0"
+                        VerticalAlignment="Center"
+                        FontSize="14"
+                        Text="Từ" />
+                        <DatePicker
+                        Width="100"
+                        materialDesign:HintAssist.Hint="Chọn ngày"
+                        materialDesign:TextFieldAssist.HasClearButton="True"
+                        SelectedDate="{Binding StartDate}"
+                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                        <TextBlock
+                        Margin="10,10,10,0"
+                        VerticalAlignment="Center"
+                        FontSize="14"
+                        Text="đến" />
+                        <DatePicker
+                        Width="100"
+                        materialDesign:HintAssist.Hint="Chọn ngày"
+                        materialDesign:TextFieldAssist.HasClearButton="True"
+                        SelectedDate="{Binding EndDate}"
+                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                        <Button
+                        Margin="20,5,10,5"
+                        Background="BlueViolet"
+                        Command="{Binding FilterByDateToDateCommand}"
+                        CommandParameter="{Binding ElementName=orderView}"
+                        Content="Lọc" />
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel
+                Grid.Column="1"
+                Margin="5"
+                Orientation="Vertical">
+                    <TextBlock
+                    FontSize="14"
+                    Text="Lọc tuần, tháng, năm" />
+                    <StackPanel Orientation="Horizontal">
+                        <ComboBox
+                        Width="100"
+                        Margin="10,0,10,0"
+                        materialDesign:HintAssist.Hint="Năm"
+                        ItemsSource="{Binding Years}"
+                        MaxDropDownHeight="200"
+                        SelectedItem="{Binding SelectedYear}"
+                        Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
+                        <ComboBox
+                        Width="100"
+                        Margin="10,0,10,0"
+                        materialDesign:HintAssist.Hint="Tháng"
+                        ItemsSource="{Binding Months}"
+                        MaxDropDownHeight="200"
+                        SelectedItem="{Binding SelectedMonth}"
+                        Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
+                        <ComboBox
+                        Width="100"
+                        Margin="10,0,10,0"
+                        materialDesign:HintAssist.Hint="Tuần"
+                        ItemsSource="{Binding Weeks}"
+                        MaxDropDownHeight="200"
+                        SelectedItem="{Binding SelectedWeek}"
+                        Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
+                        <Button
+                        Margin="10,5,10,5"
+                        Background="BlueViolet"
+                        Command="{Binding FilterByYearMonthWeekCommand}"
+                        CommandParameter="{Binding ElementName=orderView}"
+                        Content="Lọc" />
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </materialDesign:Card>
+        <materialDesign:Card
+        Grid.Row="1"
+        Margin="10,0,10,10">
+            <lvc:CartesianChart
+            LegendLocation="None"
+            Margin="10"
+            Series="{Binding SeriesCollection}">
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis
+                    Title="Thời gian"
+                    FontSize="14"
+                    Foreground="Black"
+                    Labels="{Binding Labels}" />
+                </lvc:CartesianChart.AxisX>
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis
+                    Title="Số lượng bán (Sản phẩm)"
+                    FontSize="14"
+                    Foreground="Black"
+                    Labels="{Binding Formatter}" />
+                </lvc:CartesianChart.AxisY>
+            </lvc:CartesianChart>
+        </materialDesign:Card>
     </Grid>
 </Page>
