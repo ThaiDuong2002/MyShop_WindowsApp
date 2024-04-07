@@ -128,7 +128,7 @@
                             Loaded="MenuButton_Loaded"
                             NameView="TKSP" />
                         <uc:MenuButton
-                            Title="Bán hàng"
+                            Title="Sản phẩm bán chạy nhất"
                             Height="40"
                             Margin="30,12,0,0"
                             Loaded="MenuButton_Loaded"
