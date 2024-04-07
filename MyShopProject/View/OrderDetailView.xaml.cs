@@ -86,6 +86,15 @@ namespace MyShopProject.View
                 OrderStatusText.Text = "Đã hoàn thành";
                 OrderStatusText.Foreground = System.Windows.Media.Brushes.Green;
                 ObservableCollection<OrderProduct> orderProducts = _orderProductRepository.GetOrderProductsByOrderId(_orderDetail.Id);
+                foreach (OrderProduct product in orderProducts)
+                {
+                    bool IsAvailable = _productRepository.CheckProductQuantity(product.ProductId, product.Amount);
+                    if (!IsAvailable)
+                    {
+                        MessageBox.Show("Sản phẩm " + product.Product.Name + " không đủ số lượng!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        return;
+                    }
+                }
                 foreach (var orderProduct in orderProducts)
                 {
                     _productRepository.UpdateQuantityAfterOrder(orderProduct.ProductId, orderProduct.Amount);
