@@ -1,17 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using MyShopProject.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace MyShopProject.ViewModel
 {
-    public class BackupRestoreDBViewModel :BaseViewModel
+    public class BackupRestoreDBViewModel : BaseViewModel
     {
 
         private string _backupPath;
@@ -37,7 +32,7 @@ namespace MyShopProject.ViewModel
             }
         }
 
-        private string _progressBackupText="0%";
+        private string _progressBackupText = "0%";
         public string ProgressBackupText
         {
             get { return _progressBackupText; }
@@ -48,7 +43,7 @@ namespace MyShopProject.ViewModel
             }
         }
 
-        private string _progressRestoreText="0%";
+        private string _progressRestoreText = "0%";
         public string ProgressRestoreText
         {
             get { return _progressRestoreText; }
@@ -99,7 +94,7 @@ namespace MyShopProject.ViewModel
         public void BrowseBackup()
         {
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
-            if(folderBrowserDialog.ShowDialog() == DialogResult.OK)
+            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
             {
                 string path = folderBrowserDialog.SelectedPath;
                 BackupPath = path;
@@ -122,15 +117,28 @@ namespace MyShopProject.ViewModel
         {
             try
             {
-                string Database = "MyShopContext.DatabaseName";
+                string Database = MyShopContext.DatabaseName;
+                string Server = MyShopContext.ServerName;
+                string User = MyShopContext.UserName;
+                string Password = MyShopContext.Password;
                 if (BackupPath == null)
                 {
                     MessageBox.Show("Vui lòng chọn đường dẫn để sao lưu dữ liệu");
                     return;
                 }
+                string connectionString = $"Server={Server};Database={Database};User Id={User};Password={Password};";
+
                 string sql = $"BACKUP DATABASE {Database} TO DISK = '{BackupPath}\\{Database}_{DateTime.Now.ToString("ddMMyyyyHHmmss")}.bak'";
-                MyShopContext context = new MyShopContext();
-                context.Database.ExecuteSqlRaw(sql);
+                // Thực hiện sao lưu
+                using (var connection = new System.Data.SqlClient.SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (var command = new System.Data.SqlClient.SqlCommand(sql, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                }
+
                 MessageBox.Show("Sao lưu dữ liệu thành công");
             }
             catch (Exception ex)
