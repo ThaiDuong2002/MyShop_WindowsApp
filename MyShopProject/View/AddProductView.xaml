@@ -6,7 +6,7 @@
     xmlns:local="clr-namespace:MyShopProject.UserControls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Name="AddProductWindow"
-    Title="AddProductView"
+    Title="Thêm sản phẩm"
     Width="700"
     Height="500"
     DataContext="{StaticResource AddProductVM}"

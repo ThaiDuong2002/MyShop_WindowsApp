@@ -6,7 +6,7 @@
     xmlns:local="clr-namespace:MyShopProject.UserControls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Name="EditPromotionWindow"
-    Title="EditPromotionView"
+    Title="Chỉnh sửa khuyến mãi"
     Width="600"
     Height="380"
     DataContext="{StaticResource EditProductVM}"

@@ -11,7 +11,7 @@
     xmlns:validate="clr-namespace:MyShopProject.Validation"
     xmlns:viewmodel="clr-namespace:MyShopProject.ViewModel"
     Name="addOrderView"
-    Title="AddOrderView"
+    Title="Thêm đơn hàng"
     Width="1350"
     Height="750"
     d:DataContext="{d:DesignInstance Type=viewmodel:AddOrderViewModel}"

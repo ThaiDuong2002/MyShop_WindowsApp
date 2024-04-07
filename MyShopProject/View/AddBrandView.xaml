@@ -6,7 +6,7 @@
     xmlns:local="clr-namespace:MyShopProject.UserControls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Name="AddBrandWindow"
-    Title="AddBrandView"
+    Title="Thêm nhãn hàng"
     Width="500"
     Height="450"
     DataContext="{StaticResource AddBrandVM}"
