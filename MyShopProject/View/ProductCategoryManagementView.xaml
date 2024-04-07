@@ -52,7 +52,7 @@
                     Kind="FileImportOutline" />
                 <TextBlock
                     VerticalAlignment="Center"
-                    Text="Nhập sản phẩm" />
+                    Text="Nhập loại sản phẩm" />
             </StackPanel>
         </Button>
         <TextBlock

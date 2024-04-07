@@ -57,10 +57,10 @@
                                 Foreground="White"
                                 Text="Tổng sản phẩm đang bán" />
                             <TextBlock
-                                x:Name="quantityProductAvailable"
+                                Text="{Binding quantityProductAvailable}"
                                 FontSize="50"
                                 Foreground="White"
-                                Text="100" />
+                                 />
                             <materialDesign:PackIcon
                                 Width="80"
                                 Height="80"
@@ -84,7 +84,8 @@
                             <TextBlock
                                 FontSize="50"
                                 Foreground="White"
-                                Text="100" />
+                                Text="{Binding quantityNewPurchaseInWeek}"
+                                 />
                             <materialDesign:PackIcon
                                 Width="80"
                                 Height="80"
@@ -108,7 +109,8 @@
                             <TextBlock
                                 FontSize="50"
                                 Foreground="White"
-                                Text="100" />
+                                Text="{Binding quantityNewPurchaseInMonth}"
+                                 />
                             <materialDesign:PackIcon
                                 Width="80"
                                 Height="80"
@@ -137,7 +139,7 @@
                         x:Name="top5Product"
                         AutoGenerateColumns="False"
                         CanUserAddRows="False"
-                        ItemsSource="{Binding Products}">
+                        ItemsSource="{Binding top5ProductSoldList}">
                         <DataGrid.Columns>
                             <DataGridTextColumn
                                 Binding="{Binding Id}"

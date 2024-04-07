@@ -573,6 +573,72 @@ namespace MyShopProject.Repositories
             }
             return (hashMap, date);
         }
+
+        static List<DateTime> GetWeekDays(DateTime givenDate)
+        {
+
+            // Xác định ngày đầu tuần (Thứ Hai)
+            int delta = DayOfWeek.Monday - givenDate.DayOfWeek;
+            DateTime monday = givenDate.AddDays(delta);
+
+            // Trường hợp ngày đã cho là Chủ Nhật
+            if (givenDate.DayOfWeek == DayOfWeek.Sunday)
+            {
+                monday = givenDate.AddDays(-6);
+            }
+
+            // Tạo danh sách các ngày trong tuần
+            List<DateTime> weekDays = new List<DateTime>();
+            for (int i = 0; i < 7; i++)
+            {
+                weekDays.Add(monday.AddDays(i).Date);
+            }
+
+            return weekDays;
+        }
+
+        public int getNumOfNewPurchaseInWeek(DateTime dateTime)
+        {
+            using (var context = new MyShopContext())
+            {
+                var orders = context.Orders
+                    .Include(o => o.OrderProducts)
+                    .ThenInclude(op => op.Product)
+                    .ToList();
+
+                var weekDays = GetWeekDays(dateTime);
+
+                var weeklyOrders = orders
+                    .Where(o => o.Status ==1)
+                    .Where(o => weekDays.Contains(o.UpdatedAt.Date))
+                    .ToList();
+
+                return weeklyOrders.Count;
+            }
+            
+        }
+
+        public int getNumOfNewPurchaseInMonth(DateTime dateTime)
+        {
+            using (var context = new MyShopContext())
+            {
+                var orders = context.Orders
+                    .Include(o => o.OrderProducts)
+                    .ThenInclude(op => op.Product)
+                    .ToList();
+
+                var firstDayOfMonth = new DateTime(dateTime.Year, dateTime.Month, 1);
+                var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+
+                var monthlyOrders = orders
+                    .Where(o => o.Status == 1)
+                    .Where(o => o.UpdatedAt.Date >= firstDayOfMonth.Date && o.UpdatedAt.Date <= lastDayOfMonth.Date)
+                    .ToList();
+
+                return monthlyOrders.Count;
+            }
+        }
+
     }
 
 }
