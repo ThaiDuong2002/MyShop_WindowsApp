@@ -548,7 +548,7 @@ namespace MyShopProject.Repositories
             {
                 var firstDayOfMonth = new DateTime(Year, Month, 1);
                 var firstDayOfWeek = firstDayOfMonth.AddDays((Week - 1) * 7);
-                var lastDayOfWeek = firstDayOfWeek.AddDays(6);
+                var lastDayOfWeek = firstDayOfWeek.AddDays(6).AddHours(23).AddMinutes(59).AddSeconds(59);
 
                 var orders = _context.Orders
                     .Where(o => o.Status == 2 && o.UpdatedAt >= firstDayOfWeek && o.UpdatedAt <= lastDayOfWeek)
