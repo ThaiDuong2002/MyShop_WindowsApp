@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.SqlServer.Management.Common;
+using Microsoft.SqlServer.Management.Smo;
 using MyShopProject.Model;
 using System.Windows.Forms;
 using System.Windows.Input;
@@ -118,32 +120,54 @@ namespace MyShopProject.ViewModel
             try
             {
                 string Database = MyShopContext.DatabaseName;
-                string Server = MyShopContext.ServerName;
-                string User = MyShopContext.UserName;
-                string Password = MyShopContext.Password;
+                string serverName = MyShopContext.ServerName;
+                string userName = MyShopContext.UserName;
+                string password = MyShopContext.Password;
+                string backupPath = BackupPath + $"\\{Database}_{DateTime.Now.ToString("ddMMyyyyHHmmss")}.bak";
                 if (BackupPath == null)
                 {
                     MessageBox.Show("Vui lòng chọn đường dẫn để sao lưu dữ liệu");
                     return;
                 }
-                string connectionString = $"Server={Server};Database={Database};User Id={User};Password={Password};";
+                BackupDatabase(serverName, Database, userName, password, backupPath);
 
-                string sql = $"BACKUP DATABASE {Database} TO DISK = '{BackupPath}\\{Database}_{DateTime.Now.ToString("ddMMyyyyHHmmss")}.bak'";
-                // Thực hiện sao lưu
-                using (var connection = new System.Data.SqlClient.SqlConnection(connectionString))
-                {
-                    connection.Open();
-                    using (var command = new System.Data.SqlClient.SqlCommand(sql, connection))
-                    {
-                        command.ExecuteNonQuery();
-                    }
-                }
-
-                MessageBox.Show("Sao lưu dữ liệu thành công");
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Sao lưu dữ liệu thất bại");
+            }
+        }
+
+        public void BackupDatabase(string serverName, string databaseName, string userName, string password, string backupPath)
+        {
+            // Tạo kết nối đến máy chủ SQL Server
+            ServerConnection connection = new ServerConnection(serverName, userName, password);
+            Server server = new Server(connection);
+
+            // Tạo một đối tượng sao lưu mới
+            Backup backup = new Backup();
+            backup.Action = BackupActionType.Database;
+            backup.Database = databaseName;
+
+            // Thiết lập đường dẫn và tên file cho bản sao lưu
+            backup.Devices.AddDevice(backupPath, DeviceType.File);
+            backup.Incremental = false;
+            backup.LogTruncation = BackupTruncateLogType.Truncate;
+
+            try
+            {
+                // Thực hiện sao lưu
+                backup.SqlBackup(server);
+                MessageBox.Show("Database backup completed successfully.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}");
+            }
+            finally
+            {
+                // Đóng kết nối
+                connection.Disconnect();
             }
         }
 
