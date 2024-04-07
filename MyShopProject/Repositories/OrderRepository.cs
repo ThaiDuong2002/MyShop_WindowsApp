@@ -58,6 +58,8 @@ namespace MyShopProject.Repositories
             ObservableCollection<OrderDetail> orderDetails = new ObservableCollection<OrderDetail>();
             int totalCount = 0;
 
+            endDate = endDate?.AddHours(23).AddMinutes(59).AddSeconds(59);
+
             using (var context = new MyShopContext())
             {
                 var orders = context.Orders

@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34701.34
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyShopProject", "MyShopProject\MyShopProject.csproj", "{A320FD55-9809-4D59-B2EA-B61A920A20A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyShopProject", "MyShopProject\MyShopProject.csproj", "{A320FD55-9809-4D59-B2EA-B61A920A20A9}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MyShopProjectSetup", "MyShopProjectSetup\MyShopProjectSetup.vdproj", "{216749D5-92B2-425E-852D-92C48C60C989}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,8 @@ Global
 		{A320FD55-9809-4D59-B2EA-B61A920A20A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A320FD55-9809-4D59-B2EA-B61A920A20A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A320FD55-9809-4D59-B2EA-B61A920A20A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{216749D5-92B2-425E-852D-92C48C60C989}.Debug|Any CPU.ActiveCfg = Debug
+		{216749D5-92B2-425E-852D-92C48C60C989}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
