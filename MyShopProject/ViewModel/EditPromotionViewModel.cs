@@ -31,8 +31,8 @@ namespace MyShopProject.ViewModel
             }
         }
 
-        private int _byPercent;
-        public int ByPercent
+        private int? _byPercent;
+        public int? ByPercent
         {
             get { return _byPercent; }
             set
@@ -42,8 +42,8 @@ namespace MyShopProject.ViewModel
             }
         }
 
-        private int _byCash;
-        public int ByCash
+        private int? _byCash;
+        public int? ByCash
         {
             get { return _byCash; }
             set
@@ -53,9 +53,9 @@ namespace MyShopProject.ViewModel
             }
         }
 
-        private string _byProduct;
+        private string? _byProduct;
 
-        public string ByProduct
+        public string? ByProduct
         {
             get { return _byProduct; }
             set
@@ -130,6 +130,21 @@ namespace MyShopProject.ViewModel
             {
                 System.Windows.MessageBox.Show("Vui lòng nhập giá trị khuyến mãi");
                 return;
+            }
+            if(SelectedCategory == Categories[0])
+            {
+                ByCash = null;
+                ByProduct = null;
+            }
+            else if(SelectedCategory == Categories[1])
+            {
+                ByPercent = null;
+                ByProduct = null;
+            }
+            else
+            {
+                ByPercent = null;
+                ByCash = null;
             }
             var promotion = new Promotion()
             {
