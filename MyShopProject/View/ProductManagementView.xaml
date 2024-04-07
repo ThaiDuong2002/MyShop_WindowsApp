@@ -16,6 +16,7 @@
     mc:Ignorable="d">
     <Page.Resources>
         <Converter:PriceConverter x:Key="PriceConverter" />
+        <Converter:BrandNameConverter x:Key="BrandNameConverter"/>
     </Page.Resources>
 
     <Grid Background="#F8F8FC">
@@ -263,7 +264,7 @@
                                     FontSize="16"
                                     FontWeight="Bold"
                                     Foreground="BLUE"
-                                    Text="{Binding Brand.Name}" />
+                                    Text="{Binding Brand.Name, Converter={StaticResource BrandNameConverter}}" />
                                 <TextBlock
                                     Width="200"
                                     FontSize="14"

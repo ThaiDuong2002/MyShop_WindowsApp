@@ -2,13 +2,13 @@
 
 namespace MyShopProject.Converters
 {
-    public class ImgBrandConverter : IValueConverter
+    public class BrandNameConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (value == null)
+            if (value == null || value == "")
             {
-                return "/Images/laptop/default.jpg";
+                return "CHƯA PHÂN LOẠI";
             }
             return value;
 

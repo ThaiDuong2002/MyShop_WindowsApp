@@ -1,19 +1,12 @@
-﻿using MyShopProject.Model;
+﻿using Microsoft.Win32;
+using MyShopProject.Model;
 using MyShopProject.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
-using Microsoft.Win32;
 
 namespace MyShopProject.ViewModel
 {
-    public class EditProductViewModel:BaseViewModel
+    public class EditProductViewModel : BaseViewModel
     {
         public ProductRepository _productRepository;
 
@@ -134,7 +127,7 @@ namespace MyShopProject.ViewModel
             {
                 ChooseImage();
             });
-          
+
         }
         public ProductCatgoryRepository _productCatgoryRepository { get; set; }
         public int Id;
@@ -142,7 +135,10 @@ namespace MyShopProject.ViewModel
         {
             Id = editProduct.Id;
             Name = editProduct.Name;
-            SelectedCategory =editProduct.Brand.Name;
+            if (editProduct.Brand != null)
+            {
+                SelectedCategory = editProduct.Brand.Name;
+            }
             Price = editProduct.Price;
             PriceOriginal = editProduct.PriceOriginal;
             Weight = (float)editProduct.Weight;
@@ -198,10 +194,10 @@ namespace MyShopProject.ViewModel
                 Weight = Weight,
                 Image = Image
             };
-            if(_productRepository.UpdateProduct(product,Id))
+            if (_productRepository.UpdateProduct(product, Id))
             {
-               System.Windows.MessageBox.Show("Cập nhật sản phẩm thành công");
-               p.DialogResult = true;                          
+                System.Windows.MessageBox.Show("Cập nhật sản phẩm thành công");
+                p.DialogResult = true;
             }
             else
             {
@@ -216,7 +212,7 @@ namespace MyShopProject.ViewModel
             if (openFileDialog.ShowDialog() == true)
             {
                 Image = new Uri(openFileDialog.FileName).ToString();
-                
+
             }
         }
     }
